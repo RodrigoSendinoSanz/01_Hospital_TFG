@@ -10,7 +10,7 @@ import es.tfg.hospital.modelo.beans.Usuario;
 
 public interface IntUsuarioDao {
 	
-	Usuario buscarUsuario(String idUsuario);
+	Usuario buscarUsuario(String DNI);
 	List<Usuario>buscarTodos();
 	int insertUno(Usuario usuario);
 

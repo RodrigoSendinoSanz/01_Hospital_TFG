@@ -16,9 +16,9 @@ public class UsuarioDaoImplMy8 implements IntUsuarioDao{
 	private UsuarioRepo urepo;
 	
 	@Override
-	public Usuario buscarUsuario(String idUsuario) {
+	public Usuario buscarUsuario(String DNI) {
 		// TODO Auto-generated method stub
-		return urepo.getById(idUsuario);
+		return urepo.getById(DNI);
 	}
 
 	@Override

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.tfg.hospital.modelo.beans.Perfil;
 import es.tfg.hospital.modelo.beans.Usuario;
+import es.tfg.hospital.modelo.dao.IntUsuarioDao;
 
 @Controller
 //@RequestMapping("/pruebas")
@@ -32,22 +33,28 @@ public class HomeController {
 
 	//@Autowired
 	//private IntLibroDao ldao;
+	
+	@Autowired
+	private IntUsuarioDao udao;
 
 
 	// Mostrar el login. Se puede personalizar el login en formInicio
 	@GetMapping("/login")
 	public String mostrarFormInicio() {
+		System.out.println("getmatpin login");
+		System.out.println(udao.buscarTodos());
+		System.out.println(udao.buscarUsuario("34728920w").toString());
 		return "login";
 	}
 
 	// Procesamos el login obteniendo el usuario
-	@GetMapping("/")
+	@GetMapping("/")//no funciona!
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion) {
-
+		System.out.println("procesar login");
 		if (aut != null) {
 			System.out.println("usuario : " + aut.getName());
 			model.addAttribute("usuario", aut.getName());
-
+			System.out.println("procesar login");
 			/*
 			 * for (GrantedAuthority ele: aut.getAuthorities()) System.out.println("ROL : "
 			 * + ele.getAuthority());

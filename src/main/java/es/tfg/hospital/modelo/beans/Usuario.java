@@ -217,4 +217,14 @@ public class Usuario implements Serializable {
 		this.perfils = perfils;
 	}
 
+	@Override
+	public String toString() {
+		return "Usuario [dni=" + dni + ", apellido=" + apellido + ", direccion=" + direccion + ", email=" + email
+				+ ", enabled=" + enabled + ", imgurl=" + imgurl + ", nombre=" + nombre + ", onlineusu=" + onlineusu
+				+ ", password=" + password + ", telefono=" + telefono + ", citas=" + citas + ", diagnosticos="
+				+ diagnosticos + ", informacions=" + informacions + ", perfils=" + perfils + "]";
+	}
+	
+	
+
 }
