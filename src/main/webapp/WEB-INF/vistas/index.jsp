@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
@@ -95,7 +94,7 @@
             </a>
           </li>
           <li>
-            <a href="./contraseña.html">
+            <a href="./contrasenÌa.html">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
@@ -250,7 +249,7 @@
               <thead>
                 <tr>
                   <td>Fecha</td>
-                  <td>Dirección</td>
+                  <td>DirecciÃ³n</td>
                   <td>Estado</td>
                   <td>Modificar</td>
                 </tr>
@@ -258,7 +257,7 @@
               <tbody>
                 <tr>
                   <td>2022-04-28</td>
-                  <td>Calle 2º</td>
+                  <td>Calle 2Âº</td>
                   <td><span class="status realizado">Realizado</span></td>
                   <td><a href="#" class="btnMas">Editar</a></td>
                 </tr>
@@ -325,7 +324,7 @@
                     <div class="imgBx"><img src="./img/img6.jpg" alt="" /></div>
                   </td>
                   <td>
-                    <h4>Andersen <br /><span>Medico</span></h4>
+                    <h4>Andersen <br /><span>Médico</span></h4>
                   </td>
                 </tr>
                 <tr>
@@ -333,7 +332,7 @@
                     <div class="imgBx"><img src="./img/img7.jpg" alt="" /></div>
                   </td>
                   <td>
-                    <h4>Maria <br /><span>Medico</span></h4>
+                    <h4>Maria <br /><span>Médico</span></h4>
                   </td>
                 </tr>
                 <tr>
@@ -341,7 +340,7 @@
                     <div class="imgBx"><img src="./img/img8.jpg" alt="" /></div>
                   </td>
                   <td>
-                    <h4>Juan <br /><span>Medico</span></h4>
+                    <h4>Juan <br /><span>Médico</span></h4>
                   </td>
                 </tr>
                 <tr>
@@ -349,7 +348,7 @@
                     <div class="imgBx"><img src="./img/img9.jpg" alt="" /></div>
                   </td>
                   <td>
-                    <h4>Sara <br /><span>Medico</span></h4>
+                    <h4>Sara <br /><span>Médico</span></h4>
                   </td>
                 </tr>
               </tbody>
@@ -385,7 +384,7 @@
             addEventButton: {
               text: "Pide tu cita",
               click: function () {
-                //Idea : añadir la funcion como externa (SE DERIVARA A UN JSP)
+                //Idea : aÃ±adir la funcion como externa (SE DERIVARA A UN JSP)
                 //Resvisar poner opciones
                 var dateStr = prompt("Enter a date in YYYY-MM-DD format");
                 var titleStr = prompt("Enter a titulo");

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
@@ -100,7 +99,7 @@
             </a>
           </li>
           <li>
-            <a href="./contraseña.html">
+            <a href="./contrasenÌa.html">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
@@ -267,7 +266,7 @@
               <thead>
                 <tr>
                   <td>Fecha</td>
-                  <td>Dirección</td>
+                  <td>DirecciÃ³n</td>
                   <td>Estado</td>
                   <td>Modificar</td>
                 </tr>
@@ -275,7 +274,7 @@
               <tbody>
                 <tr>
                   <td>2022-04-28</td>
-                  <td>Calle 2º</td>
+                  <td>Calle 2Âº</td>
                   <td><span class="status realizado">Realizado</span></td>
                   <td><a href="#" class="btnMas">Editar</a></td>
                 </tr>
@@ -310,7 +309,7 @@
                     <div class="imgBx"><img src="./img/img2.jpg" alt="" /></div>
                   </td>
                   <td>
-                    <h4>Jose <br /><span>Medico</span></h4>
+                    <h4>Jose <br /><span>Médico</span></h4>
                   </td>
                 </tr>
                 <tr>
@@ -318,7 +317,7 @@
                     <div class="imgBx"><img src="./img/img3.jpg" alt="" /></div>
                   </td>
                   <td>
-                    <h4>Xian <br /><span>Medico</span></h4>
+                    <h4>Xian <br /><span>Médico</span></h4>
                   </td>
                 </tr>
                 <tr>
@@ -326,7 +325,7 @@
                     <div class="imgBx"><img src="./img/img4.jpg" alt="" /></div>
                   </td>
                   <td>
-                    <h4>Marcos <br /><span>Medico</span></h4>
+                    <h4>Marcos <br /><span>Médico</span></h4>
                   </td>
                 </tr>
                 <tr>
@@ -334,7 +333,7 @@
                     <div class="imgBx"><img src="./img/img5.jpg" alt="" /></div>
                   </td>
                   <td>
-                    <h4>Giorgina <br /><span>Medico</span></h4>
+                    <h4>Giorgina <br /><span>Médico</span></h4>
                   </td>
                 </tr>
                 <tr>
@@ -342,7 +341,7 @@
                     <div class="imgBx"><img src="./img/img6.jpg" alt="" /></div>
                   </td>
                   <td>
-                    <h4>Andersen <br /><span>Medico</span></h4>
+                    <h4>Andersen <br /><span>Médico</span></h4>
                   </td>
                 </tr>
                 <tr>
@@ -452,7 +451,7 @@
 
       //----------- Revisar BOTON Mostrar solo cuando no haya datos de informacion de usuario -------------------
       Swal.fire({
-        title: "<strong>¿Quieres rellenar tus datos de <u>perfil</u>?</strong>",
+        title: "<strong>Â¿Quieres rellenar tus datos de <u>perfil</u>?</strong>",
         icon: "info",
         html:
           "Rellene estos <b>datos</b>, " + "para mejorar nuestros analisis.",

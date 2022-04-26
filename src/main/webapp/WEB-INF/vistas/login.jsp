@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
@@ -25,7 +24,7 @@
         <input type="Submit" value="Entrar">
       </div>
       <div class="text">
-        <h3>¿Se te ha olvidado la constaseña?<br><a href="./recuperarcontraseña.html">Recuperar constraseña</a></h3>
+        <h3>¿Se te ha olvidado la contraseña?<br><a href="./recuperarcontraseña.html">Recuperar contraseña</a></h3>
         <h3>¿No tienes una cuenta?<br><a href="/registro">Registrate ahora</a></h3>
     </form>
   </div>

@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import es.tfg.hospital.modelos.beans.Perfil;
-import es.tfg.hospital.modelos.beans.Usuario;
+import es.tfg.hospital.modelo.beans.Perfil;
+import es.tfg.hospital.modelo.beans.Usuario;
 
 @Controller
 //@RequestMapping("/pruebas")

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
@@ -19,7 +18,7 @@
         <input type="text" placeholder="Introduce el DNI" required name="dni">
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Introduce una constraseña" required name="password">
+        <input type="password" placeholder="Introduce una contraseÃ±a" required name="password">
       </div>
       <div class="input-box">
         <input type="email" placeholder="Introduce tu email" required name="email">
@@ -31,10 +30,10 @@
         <input type="text" placeholder="Introduce tu apellido" required name="apellidos">
       </div>
       <div class="input-box">
-        <input type="text" placeholder="Introduce tu dirección" required name="direccion">
+        <input type="text" placeholder="Introduce tu direcciÃ³n" required name="direccion">
       </div>
       <div class="input-box">
-        <input type="text" placeholder="Introduce tu teléfono" required name="telefono">
+        <input type="text" placeholder="Introduce tu telÃ©fono" required name="telefono">
       </div>
       <div class="policy">
         <input type="checkbox" required>

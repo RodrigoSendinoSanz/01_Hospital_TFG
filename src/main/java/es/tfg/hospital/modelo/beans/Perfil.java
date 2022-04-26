@@ -1,4 +1,4 @@
-package es.tfg.hospital.modelos.beans;
+package es.tfg.hospital.modelo.beans;
 
 import java.io.Serializable;
 import javax.persistence.*;

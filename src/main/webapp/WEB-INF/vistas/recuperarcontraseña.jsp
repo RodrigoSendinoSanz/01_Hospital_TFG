@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
@@ -16,13 +15,13 @@
     <h2>Registro</h2>
     <form action="./login.html">
       <div class="input-box">
-        <input type="password" placeholder="Tu antingua contraseña" required name="password">
+        <input type="password" placeholder="Tu antingua contraseÃ±a" required name="password">
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Introduce una nueva constraseña" required name="password">
+        <input type="password" placeholder="Introduce una nueva constraseÃ±a" required name="password">
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Vuelve a introducir la nueva constraseña" required name="password">
+        <input type="password" placeholder="Vuelve a introducir la nueva constraseÃ±a" required name="password">
       </div>
       <div class="input-box button">
         <input type="submit" value="Registarse ahora" >

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
@@ -157,7 +156,7 @@
             </a>
           </li>
           <li>
-            <a href="./contraseña.html">
+            <a href="./contrasenÌa.html">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
@@ -204,7 +203,7 @@
             </div>
             <table>
               <tbody>
-                <h2>¿Como contactar con un medico?</h2>
+                <h2>¿Como contactar con un médico?</h2>
                   <ol>
                     <li>Paso 1 
                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas nam id molestiae!</p>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
@@ -93,7 +92,7 @@
             </a>
           </li>
           <li class="hovered">
-            <a href="./contraseña.html">
+            <a href="./contrasenÌa.html">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
@@ -132,7 +131,7 @@
         <div class="details">
           <div class="tablaDetalle">
             <div class="cardHeader">
-              <h2>Cambiar constraseña</h2>
+              <h2>Cambiar contraseña</h2>
             </div>
             <table>
               <thead>
@@ -145,7 +144,7 @@
                         type="text"
                         name="dni"
                         id="dni"
-                        placeholder="Contraseña actual"
+                        placeholder="ContraseÃ±a actual"
                        />
                     </td>
                     <td>
@@ -153,7 +152,7 @@
                         type="text"
                         name="email"
                         id="email"
-                        placeholder="Nueva contraseña"
+                        placeholder="Nueva contraseÃ±a"
                       />
                     </td>
                     <td>
@@ -161,7 +160,7 @@
                         type="text"
                         name="nombre"
                         id="nombre"
-                        placeholder="Respite la nueva contraseña"
+                        placeholder="Respite la nueva contraseÃ±a"
                       />
                     </td>
                     <td>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
@@ -83,7 +82,7 @@
             </a>
           </li>
           <li>
-            <a href="./contraseña.html">
+            <a href="./contrasenÌa.html">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
@@ -183,11 +182,11 @@
                         </label>
                       </td>
                       <td>
-                        <label for="nombre_medico">Medico
+                        <label for="nombre_medico">Médico
                           <select name="nombre_medico" required>
-                            <option value="med123">Medico bien</option>
-                            <option value="Medico1">Medico 2</option>
-                            <option value="Medico2">Medico 3</option>
+                            <option value="med123">Médico bien</option>
+                            <option value="Medico1">Médico 2</option>
+                            <option value="Medico2">Médico 3</option>
                           </select>
                         </label>
                       </td>
@@ -247,14 +246,14 @@
         e.preventDefault();
 
         Swal.fire({
-          title: "¿Estas seguro de querer pedir esta cita?",
+          title: "Â¿Estas seguro de querer pedir esta cita?",
           showDenyButton: true,
           confirmButtonText: "Si",
           denyButtonText: `No`,
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            Swal.fire("¡Cita realizada!", "", "success");
+            Swal.fire("Â¡Cita realizada!", "", "success");
             window.location.assign("./index.html");
           } else if (result.isDenied) {
             Swal.fire("No se han realizado la cita", "", "info");
