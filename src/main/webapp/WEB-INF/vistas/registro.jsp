@@ -13,7 +13,7 @@
 <body>
   <div class="wrapper">
     <h2>Registro</h2>
-    <form action="./login.html" onsubmit="validar()">
+    <form action="/registro" onsubmit="validar()" method="post">
       <div class="input-box">
         <input type="text" placeholder="Introduce el DNI" required name="dni">
       </div>
@@ -27,7 +27,7 @@
         <input type="text" placeholder="Introduce tu nombre" required name="nombre">
       </div>
       <div class="input-box">
-        <input type="text" placeholder="Introduce tu apellido" required name="apellidos">
+        <input type="text" placeholder="Introduce tu apellido" required name="apellido">
       </div>
       <div class="input-box">
         <input type="text" placeholder="Introduce tu dirección" required name="direccion">
@@ -52,7 +52,7 @@
         var password = document.getElementById("password").value;
         var email = document.getElementById("email").value;
         var nombre = document.getElementById("nombre").value;
-        var apellidos = document.getElementById("apellidos").value;
+        var apellidos = document.getElementById("apellido").value;
         var direccion = document.getElementById("direccion").value;
         var telefono = document.getElementById("telefono").value;
         var check = document.getElementById("check").checked;

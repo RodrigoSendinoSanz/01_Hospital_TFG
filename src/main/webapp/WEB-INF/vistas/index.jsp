@@ -86,7 +86,7 @@
             </a>
           </li>
           <li>
-            <a href="./usuario.html">
+            <a href="/usuario">
               <span class="icon">
                 <ion-icon name="settings-outline"></ion-icon>
               </span>
@@ -102,7 +102,7 @@
             </a>
           </li>
           <li>
-            <a href="./login.html">
+            <a href="/logout">
               <span class="icon">
                 <ion-icon name="log-out-outline"></ion-icon>
               </span>
@@ -128,7 +128,7 @@
             </label>
           </div>
           <div class="user">
-            <a href="./usuario.html">
+            <a href="/usuario">
               <img src="./img/user.jpg" />
             </a>
           </div>
@@ -238,34 +238,6 @@
             </table>
           </div>
 
-          <!-- 
-        <div class="details">
-        
-          <div class="recentCitas">
-            <div class="cardHeader">
-              <h2>Citas</h2>
-            </div>
-            <table>
-              <thead>
-                <tr>
-                  <td>Fecha</td>
-                  <td>DirecciÃ³n</td>
-                  <td>Estado</td>
-                  <td>Modificar</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>2022-04-28</td>
-                  <td>Calle 2Âº</td>
-                  <td><span class="status realizado">Realizado</span></td>
-                  <td><a href="#" class="btnMas">Editar</a></td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-        -->
           <div class="recentUsuarios">
             <div class="cardHeader">
               <h2>Conectados</h2>
@@ -529,19 +501,24 @@
         this.classList.add("hovered");
       }
       list.forEach((item) => item.addEventListener("mouseover", activeLink));
-
+		</script>
       //----------- Revisar BOTON Mostrar solo cuando no haya datos de informacion de usuario -------------------
-      Swal.fire({
-        title: "<strong>¿Quieres rellenar tus datos de <u>perfil</u>?</strong>",
-        icon: "info",
-        html:
-          "Rellene estos <b>datos</b>, " + "para mejorar nuestros analisis.",
-        showCloseButton: true,
-        focusConfirm: false,
-        confirmButtonText:
-          '<a href="./usuario.html" class="btn">Rellenar datos personales</a> ',
-      });
-
+      
+      <c:if test="${datosUsuario == null}">//Crear model datosUsuario datos usuario(!= para que no salga)
+         <script>
+	      Swal.fire({
+	        title: "<strong>¿Quieres rellenar tus datos de <u>perfil</u>?</strong>",
+	        icon: "info",
+	        html:
+	          "Rellene estos <b>datos</b>, " + "para mejorar nuestros analisis.",
+	        showCloseButton: true,
+	        focusConfirm: false,
+	        confirmButtonText:
+	          '<a href="/usuario" class="btn">Rellenar datos personales</a> ',
+	      });
+	      </script>
+      </c:if>
+      <script>
       //https://api.covid19api.com/summaryc6b3b3b47e703164d1f6c7e95be2364a
 
       const options = {

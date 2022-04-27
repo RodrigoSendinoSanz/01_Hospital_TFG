@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/img/logo.png" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/styleusuario.css" />
     <style>
       .search label ion-icon {
           position: absolute;
@@ -73,7 +73,7 @@
             </a>
           </li>
           <li class="hovered">
-            <a href="./usuario.html">
+            <a href="/usuario">
               <span class="icon">
                 <ion-icon name="settings-outline"></ion-icon>
               </span>
@@ -89,7 +89,7 @@
             </a>
           </li>
           <li>
-            <a href="./login.html">
+            <a href="/logout">
               <span class="icon">
                 <ion-icon name="log-out-outline"></ion-icon>
               </span>
@@ -115,7 +115,7 @@
             </label>
           </div>
           <div class="user">
-            <a href="./usuario.html">
+            <a href="/usuario">
               <img src="./img/user.jpg" />
             </a>
           </div>

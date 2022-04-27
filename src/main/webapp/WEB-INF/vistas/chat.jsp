@@ -161,7 +161,7 @@
             </a>
           </li>
           <li>
-            <a href="./usuario.html">
+            <a href="usuario">
               <span class="icon">
                 <ion-icon name="settings-outline"></ion-icon>
               </span>
@@ -177,7 +177,7 @@
             </a>
           </li>
           <li>
-            <a href="./login.html">
+            <a href="/logout">
               <span class="icon">
                 <ion-icon name="log-out-outline"></ion-icon>
               </span>

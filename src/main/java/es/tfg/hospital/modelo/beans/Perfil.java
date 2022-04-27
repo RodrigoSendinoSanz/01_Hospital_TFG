@@ -3,6 +3,7 @@ package es.tfg.hospital.modelo.beans;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -50,6 +51,28 @@ public class Perfil implements Serializable {
 
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
+	}
+
+	@Override
+	public String toString() {
+		return "Perfil [idPerfil=" + idPerfil + ", descPer=" + descPer + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idPerfil);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Perfil other = (Perfil) obj;
+		return idPerfil == other.idPerfil;
 	}
 
 

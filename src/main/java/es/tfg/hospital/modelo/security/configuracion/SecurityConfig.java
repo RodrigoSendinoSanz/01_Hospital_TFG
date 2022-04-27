@@ -27,10 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery("select username,password,enabled from Usuarios where username=?")
-		.authoritiesByUsernameQuery("select u.username, p.descripcion from Usuario_Perfil up" +
-		" inner join Usuarios u on u.username = up.username " +
-		" inner join Perfiles p on p.id_perfil = up.id_Perfil where u.username=?");
+		.usersByUsernameQuery("select dni,password,enabled from Usuario where dni=?")
+		.authoritiesByUsernameQuery("select u.DNI, p.desc_per from Usuario_Perfil up" +
+		" inner join Usuario u on u.dni = up.dni " +
+		" inner join Perfil p on p.id_perfil = up.id_perfil where u.dni=?");
 
 	}
 	@Override
@@ -38,8 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http
 		.csrf().disable()
-		.authorizeRequests()
-		.antMatchers("/","/pwd","/registro","/login","/logout","/css/**","/cal/**","/img/**","/js/**").permitAll()
+		.authorizeRequests()									//borrar usuario
+		.antMatchers("/","/pwd","/registro","/login","/index","/usuario","/logout","/css/**","/cal/**","/img/**","/js/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()

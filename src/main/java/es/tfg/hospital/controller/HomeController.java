@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.tfg.hospital.modelo.beans.Perfil;
 import es.tfg.hospital.modelo.beans.Usuario;
+import es.tfg.hospital.modelo.dao.IntPerfilDao;
 import es.tfg.hospital.modelo.dao.IntUsuarioDao;
 
 @Controller
@@ -36,19 +37,25 @@ public class HomeController {
 	
 	@Autowired
 	private IntUsuarioDao udao;
+	
+	@Autowired
+	private IntPerfilDao pdao;
 
 
 	// Mostrar el login. Se puede personalizar el login en formInicio
-	@GetMapping("/login")
+	@GetMapping(value={"/","/login"})
 	public String mostrarFormInicio() {
 		System.out.println("getmatpin login");
 		System.out.println(udao.buscarTodos());
 		System.out.println(udao.buscarUsuario("34728920w").toString());
+		System.out.println(pdao.buscarTodos());
+		System.out.println(pdao.buscarPerfil(1).toString());
 		return "login";
 	}
 
 	// Procesamos el login obteniendo el usuario
-	@GetMapping("/")//no funciona!
+
+	@PostMapping("/index")//no funciona!
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion) {
 		System.out.println("procesar login");
 		if (aut != null) {
@@ -61,7 +68,12 @@ public class HomeController {
 			 */
 			model.addAttribute("autorizaciones", aut.getAuthorities());
 			misesion.setAttribute("autorizaciones", aut.getAuthorities());
-
+			System.out.println("procesar if");
+			
+			udao.buscarUsuario("ponerAquiDNI").setOnlineusu(1);
+			
+			
+			
 			// Generamos la lista con las novedades respecto a los libros
 			//List<Libro> lista = ldao.buscarNovedades();
 			//model.addAttribute("listaNovedades", lista);
@@ -71,12 +83,15 @@ public class HomeController {
 
 			//misesion.setAttribute("listaCarrito", listaCarrito);
 			//misesion.setAttribute("nombreusuario", aut.getName());
+			return "index";
 		} else {
+			System.out.println("procesar else");
 			//List<Libro> lista = ldao.buscarNovedades();
 			//model.addAttribute("listaNovedades", lista);
+			model.addAttribute("error", true);
+			return "index";//IMPORTANTE ***** cambiar a login***
 		}
 
-		return "index";//IMPORTANTE ***** cambiar a login***
 	}
 
 //	Ver detalles del libro
@@ -90,14 +105,14 @@ public class HomeController {
 	}
 
 //Mostrando todos los libros	
-	@GetMapping("/libros")
-	public String mostrarLibros(Model model) {
+	@GetMapping("/usuario")
+	public String mostrarUsuario(Model model) {
 
 		//List<Libro> lista = ldao.buscarTodos();
 
 		//model.addAttribute("listaLibros", lista);
 
-		return "librosTodos";
+		return "usuario";
 	}
 
 	// Mostrando todos los Temas
@@ -373,7 +388,7 @@ public class HomeController {
 
 	@PostMapping("/registro")
 	public String procesarRegistro(Model model, Usuario usuario) {
-/*
+
 		// Crear usuario con contra cifrada
 		usuario.setEnabled(1);
 		String usuariocontra = usuario.getPassword();
@@ -381,7 +396,7 @@ public class HomeController {
 		usuario.setPassword(encriptado);
 
 		List<Perfil> listaPerfiles = new ArrayList<Perfil>();
-		Perfil rol = pdao.buscarPerfile(3);
+		Perfil rol = pdao.buscarPerfil(1);
 		listaPerfiles.add(rol);
 		usuario.setPerfils(listaPerfiles);
 
@@ -399,7 +414,7 @@ public class HomeController {
 
 			System.out.println(usuario.getPerfils());
 			System.out.println(new Date());
-		}*/
+		}
 		return "redirect:/";
 
 	}
@@ -414,8 +429,10 @@ public class HomeController {
 
 	}
 
-	@GetMapping("/logout")
+	@GetMapping("/logout")//Aun que pongas la URL no pasa por aqui al salir
 	public String logout(HttpServletRequest request) {
+		System.out.println("Adios");
+		udao.buscarUsuario("ponerAquiDNI").setOnlineusu(0);
 		SecurityContextLogoutHandler logoutfandler = new SecurityContextLogoutHandler();
 		logoutfandler.logout(request, null, null);
 		return "redirect:/login";

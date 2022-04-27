@@ -13,7 +13,7 @@
 <body>
   <div class="wrapper">
     <h2>Login</h2>
-     <form action="./index.html">
+     <form action="/index" method="post">
       <div class="input-box">
         <input type="text" placeholder="Introduce tu DNI" required name="dni">
       </div>
@@ -27,6 +27,16 @@
         <h3>¿Se te ha olvidado la contraseña?<br><a href="./recuperarcontraseña.html">Recuperar contraseña</a></h3>
         <h3>¿No tienes una cuenta?<br><a href="/registro">Registrate ahora</a></h3>
     </form>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+    <c:if test="${error == true}">
+	    <script>
+	    Swal.fire({
+	    	  icon: 'error',
+	    	  title: 'Oops...',
+	    	  text: 'Algo ha fallado!'
+	    })
+	    </script>
+    </c:if>
   </div>
 </body>
 </html>
