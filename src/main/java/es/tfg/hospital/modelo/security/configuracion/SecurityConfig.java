@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 		.csrf().disable()
 		.authorizeRequests()									//borrar usuario
-		.antMatchers("/","/pwd","/registro","/login","/index","/usuario","/logout","/css/**","/cal/**","/img/**","/js/**").permitAll()
+		.antMatchers("/","/pwd","/registro","/login","/index","/usuario","/verUna","/logout","/css/**","/cal/**","/img/**","/js/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()

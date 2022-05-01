@@ -472,15 +472,6 @@ a{
     background: none;
 }
 
-.swal2-styled.swal2-confirm {
-    border: 0;
-    border-radius: 0.25em;
-    background: initial;
-    background-color: #ffffff  !important;
-    color: #fff;
-    font-size: 1em;
-}
-
 #fc-dom-1{
     margin: 8px;
 }

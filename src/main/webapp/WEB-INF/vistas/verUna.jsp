@@ -9,6 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/img/logo.png" />
     <link rel="stylesheet" href="/css/style.css" />
+    <script
+      type="text/javascript"
+      src="/js/html2pdf.bundle.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/js/script.js"
+    ></script>
+    <style type="text/css">
+    .swal2-styled.swal2-confirm {
+	    border: 0;
+	    border-radius: 0.25em;
+	    background: initial;
+	    background-color: #7066e0;
+	    color: #fff;
+	    font-size: 1em;
+	}
+    </style>
     <title>Hospital</title>
     <style>
       .details .tablaDetalle table tbody tr:hover {
@@ -29,6 +47,21 @@
       }
       button[type=submit]{
         visibility: hidden;
+      }
+      button{
+      display: flex;
+	    justify-content: center;
+	    width: 80%;
+	    margin: 1em;
+	    padding: 1em 1em;
+	    background: var(--blue);
+	    color: var(--white);
+	    text-decoration: none;
+	    border-radius: 6px;
+	    font-size: xx-large;
+	    font-weight: 400;
+	    text-align: center;
+	    border: none;
       }
     </style>
   </head>
@@ -160,6 +193,7 @@
                           class="btnMas"
                           value="Cancelar"
                         />
+
                       </td>
                     </form>
                   </tr>
@@ -167,7 +201,7 @@
               </table>
             </div>
           </div>
-
+  		 <button id="btnCrearPdf">Guardar como PDF</button>
         </div>
       </div>
     </div>
@@ -207,7 +241,7 @@
         e.preventDefault();
 
         Swal.fire({
-          title: "Â¿Seguro que quieres cancelar esta cita?",
+          title: "¿Seguro que quieres cancelar esta cita?",
           showDenyButton: true,
           confirmButtonText: "Cancelar",
           denyButtonText: `No cancelar`,
@@ -222,20 +256,6 @@
         });
       });
 
-      /*Cambiar el atributo del nombre segun el valor de select*/
-      let select = document.querySelector("#select");
-      let icono = document.querySelector("#icono");
-      let option = document.querySelector("option");
-
-      select.onchange = function () {
-        if (this.value == "masculino") {
-          icono.setAttribute("name", "male-outline");
-        } else if (this.value == "femenino") {
-          icono.setAttribute("name", "female-outline");
-        } else if (this.value == "intersex") {
-          icono.setAttribute("name", "male-female-outline");
-        }
-      };
     </script>
   </body>
 </html>

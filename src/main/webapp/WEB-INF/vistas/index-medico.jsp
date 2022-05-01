@@ -461,57 +461,67 @@
           '<a href="./usuario.html" class="btn">Rellenar datos personales</a> ',
       });
 
-      //https://api.covid19api.com/summaryc6b3b3b47e703164d1f6c7e95be2364a
-
-      const options = {
-        method: "GET",
-        headers: {
-          "X-API-KEY": "YVOwOnUbZGiF-D6dy9orPA7blkmI8qMKi2YWOy7tSYo",
-        },
-      };
-
-      var noticias = document.querySelector("#noticias");
-      var noticiasTitulo = document.querySelector(".titulonoticas");
-
-      fetch(
-        'https://api.newscatcherapi.com//v2/search?q="Salud"&lang=es&page_size=8&page=1',
-        options
-      )
-        .then((response) => response.json())
-        .then((response) => {
-          console.log(response.status);
-          if(response.status == "error"){
-            noticiasTitulo.innerHTML = " ";
-            const tituloError = document.createElement("h2");
-            const titulo = document.createTextNode("No hay noticias disponibles");
-            tituloError.appendChild(titulo);
-            noticiasTitulo.appendChild(tituloError);
-          }else{
-            var noticiasinfo = response.articles;
-            for (let res in noticiasinfo) {
-              console.log(noticiasinfo[res].excerpt);
-              const paratitulo = document.createElement("p");
-              const paratsubtitulo = document.createElement("p");
-              const titulo = document.createTextNode(noticiasinfo[res].title);
-              const subtitulo = document.createTextNode(
-              noticiasinfo[res].excerpt
-              );
-              paratitulo.classList.add("titulonoticia");
-              paratitulo.appendChild(titulo);
-              paratsubtitulo.classList.add("subtitulonoticia");
-              paratsubtitulo.appendChild(subtitulo);
-              const small = document.createElement("small");
-              const autor = document.createTextNode(noticiasinfo[res].clean_url);
-              small.appendChild(autor);
-              const bloqueNoticia = document.createElement("article");
-              bloqueNoticia.appendChild(paratitulo);
-              bloqueNoticia.appendChild(paratsubtitulo);
-              bloqueNoticia.appendChild(small);
-              noticias.appendChild(bloqueNoticia);
+      </script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script>
+      
+            var noticias = document.querySelector("#noticias");
+            var noticiasTitulo = document.querySelector(".titulonoticas");
+      
+            const options = {
+              method: 'GET',
+              url: 'https://free-news.p.rapidapi.com/v1/search',
+              params: {q: 'Salud', lang: 'es', page: '1', page_size: '6'},
+              headers: {
+                'x-rapidapi-key': '90cad11506mshd20305fc7490e71p12fb87jsn442317af3e7f',
+                'x-rapidapi-host': 'free-news.p.rapidapi.com'
+              }
+            };
+      
+            axios.request(options).then(function (response) {
+            console.log(response.data.articles);
+            if(response.status == "error"){
+              noticiasTitulo.innerHTML = " ";
+              const tituloError = document.createElement("h2");
+              const titulo = document.createTextNode("No hay noticias disponibles");
+              tituloError.appendChild(titulo);
+              noticiasTitulo.appendChild(tituloError);
+            }else{
+              var noticiasinfo = response.data.articles;
+              for (let res in noticiasinfo) {
+                console.log(noticiasinfo[res].author);
+                const paratitulo = document.createElement("p");
+                const paratsubtitulo = document.createElement("p");
+                const titulo = document.createTextNode(noticiasinfo[res].title);
+                const subtitulo = document.createTextNode(
+                noticiasinfo[res].author
+                );
+                paratitulo.classList.add("titulonoticia");
+                paratitulo.appendChild(titulo);
+                paratsubtitulo.classList.add("subtitulonoticia");
+                paratsubtitulo.appendChild(subtitulo);
+                const small = document.createElement("small");
+                const autor = document.createTextNode(noticiasinfo[res].clean_url);
+                small.appendChild(autor);
+                const bloqueNoticia = document.createElement("article");
+                bloqueNoticia.appendChild(paratitulo);
+                bloqueNoticia.appendChild(paratsubtitulo);
+                bloqueNoticia.appendChild(small);
+                noticias.appendChild(bloqueNoticia);
+              }
             }
-          }
-        })
-        .catch((err) => console.error(err));
-    </script>
-  </body>
+          }).catch(function (error) {
+                console.error(error);
+            });
+      /*
+            //https://api.covid19api.com/summaryc6b3b3b47e703164d1f6c7e95be2364a
+            const options = {
+            method: "GET",
+            headers: {
+              "X-API-KEY": "YVOwOnUbZGiF-D6dy9orPA7blkmI8qMKi2YWOy7tSYo",
+            },
+          };
+      */
+      </script>
+</body>
 </html>

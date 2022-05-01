@@ -380,6 +380,11 @@ public class HomeController {
 		//}
 
 	}
+	@GetMapping("/verUna")
+	public String mostrarCita(Model model) {
+		return "verUna";
+	}
+
 
 	@GetMapping("/registro")
 	public String mostrarRegistro(Model model) {
