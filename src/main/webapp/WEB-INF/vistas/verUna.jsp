@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/img/logo.png" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/styleusuario.css" />
     <script
       type="text/javascript"
       src="/js/html2pdf.bundle.min.js"
@@ -32,6 +32,10 @@
       .details .tablaDetalle table tbody tr:hover {
           color: var(--black);
       }
+      .btnMas{
+      	margin-left: 60px;
+    	padding: 14px;
+      }
       h3{
         margin: 2em;
         border-bottom: 2px solid #287bff;
@@ -42,6 +46,16 @@
           left: 10px;
           font-size: 1.2em;
       }
+      .btnMas:hover {
+		    position: relative;
+	      	margin-left: 60px;
+	    	padding: 14px;
+		    background: var(--blue);
+		    color: var(--white);
+		    border: 1px solid var(--blue);
+		    text-decoration: none;
+		    border-radius: 6px;
+	  }
       .invisible{
         visibility: hidden;
       }
@@ -187,19 +201,17 @@
                       <td>
                         <h3>Nombre médico</h3>
                       </td>
-                      <td>
-                        <input
-                          type="submit"
-                          class="btnMas"
-                          value="Cancelar"
-                        />
-
-                      </td>
-                    </form>
+                    
                   </tr>
                 </tbody>
               </table>
             </div>
+            <input
+             type="submit"
+             class="btnMas"
+             value="Cancelar"
+            />
+            </form>
           </div>
   		 <button id="btnCrearPdf">Guardar como PDF</button>
         </div>
