@@ -66,7 +66,7 @@
       display: flex;
 	    justify-content: center;
 	    width: 80%;
-	    margin: 1em;
+    	margin: 1em 2em;
 	    padding: 1em 1em;
 	    background: var(--blue);
 	    color: var(--white);
