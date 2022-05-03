@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,15 +13,15 @@
 <body>
   <div class="wrapper">
     <h2>Login</h2>
-     <form action="/index" method="post">
+     <form action="/login" method="post">
       <div class="input-box">
-        <input type="text" placeholder="Introduce tu DNI" required name="dni">
+        <input type="text" placeholder="Introduce tu DNI" required name="username">
       </div>
       <div class="input-box">
         <input type="password" placeholder="Introduce tu contraseña" required name="password">
       </div>
       <div class="input-box button">
-        <input type="Submit" value="Entrar">
+        <sec:csrfInput /><input type="Submit" value="Entrar">
       </div>
       <div class="text">
         <h3>¿Se te ha olvidado la contraseña?<br><a href="./recuperarcontraseña.html">Recuperar contraseña</a></h3>

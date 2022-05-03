@@ -55,7 +55,7 @@ public class HomeController {
 
 	// Procesamos el login obteniendo el usuario
 
-	@PostMapping("/index")//no funciona!
+	@GetMapping("/index")//no funciona!
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion) {
 		System.out.println("procesar login");
 		if (aut != null) {
@@ -70,7 +70,7 @@ public class HomeController {
 			misesion.setAttribute("autorizaciones", aut.getAuthorities());
 			System.out.println("procesar if");
 			
-			udao.buscarUsuario("ponerAquiDNI").setOnlineusu(1);
+			udao.buscarUsuario(aut.getName()).setOnlineusu(1);
 			
 			
 			
@@ -89,7 +89,7 @@ public class HomeController {
 			//List<Libro> lista = ldao.buscarNovedades();
 			//model.addAttribute("listaNovedades", lista);
 			model.addAttribute("error", true);
-			return "index";//IMPORTANTE ***** cambiar a login***
+			return "login";//IMPORTANTE ***** cambiar a login***
 		}
 
 	}

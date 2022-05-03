@@ -27,10 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery("select dni,password,enabled from Usuario where dni=?")
-		.authoritiesByUsernameQuery("select u.DNI, p.desc_per from Usuario_Perfil up" +
-		" inner join Usuario u on u.dni = up.dni " +
-		" inner join Perfil p on p.id_perfil = up.id_perfil where u.dni=?");
+		.usersByUsernameQuery("select usuario.dni as username,password,enabled from usuario where dni=?")
+		.authoritiesByUsernameQuery("select u.dni as username, p.desc_per from Usuario_Perfil up" +
+				" inner join Usuario u on u.dni = up.dni " +
+				" inner join Perfil p on p.id_perfil = up.id_perfil where u.dni= ?");
 
 	}
 	@Override
@@ -43,6 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
-		.loginPage("/login").permitAll();
+		.loginPage("/login").permitAll().defaultSuccessUrl("/index",true);
 	}
 }
+	
+	
+	
