@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -63,9 +64,10 @@ public class HomeController {
 			model.addAttribute("usuario", aut.getName());
 			System.out.println("procesar login");
 			/*
-			 * for (GrantedAuthority ele: aut.getAuthorities()) System.out.println("ROL : "
-			 * + ele.getAuthority());
-			 */
+			 for (GrantedAuthority ele: aut.getAuthorities()) System.out.println("ROL : "
+			 + ele.getAuthority());
+			*/ 
+			System.out.println(aut.getAuthorities());
 			model.addAttribute("autorizaciones", aut.getAuthorities());
 			misesion.setAttribute("autorizaciones", aut.getAuthorities());
 			System.out.println("procesar if");

@@ -194,6 +194,7 @@
 
         <div class="details">
           <!-- 14 citas -->
+        <sec:authorize access="hasAuthority('Paciente')">
           <div class="recentCitas">
             <div class="cardHeader">
               <h2>Ultimas citas</h2>
@@ -237,6 +238,65 @@
               </tbody>
             </table>
           </div>
+         </sec:authorize>
+          
+		<sec:authorize access="hasAuthority('Medico')">
+           <div class="recentCitas">
+            <div class="cardHeader">
+              <h2>Ultimas citas</h2>
+              <a href="./todas.html" class="btnblue">Ver todas</a>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Fecha</td>
+                  <td>Dirección</td>
+                  <td>Estado</td>
+                  <td>Información</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2022-10-28</td>
+                  <td>Calle 2º</td>
+                  <td><span class="status realizado">Realizado</span></td>
+                  <td>
+                    <a href="#" class="btnMas cancelar">Cancelar</a> 
+                    <a href="./editarUna.html" class="btnMas">Editar</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2023-04-28</td>
+                  <td>Calle 2º</td>
+                  <td><span class="status cancelado">Cancelado</span></td>
+                  <td>
+                    <a href="#" class="btnMas cancelar">Cancelar</a> 
+                    <a href="./editarUna.html" class="btnMas">Editar</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2024-04-28</td>
+                  <td>Calle 23º</td>
+                  <td><span class="status pendiente">Pendiente</span></td>
+                  <td>
+                    <a href="#" class="btnMas cancelar">Cancelar</a> 
+                    <a href="./editarUna.html" class="btnMas">Editar</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2022-04-28</td>
+                  <td>Calle 42º</td>
+                  <td><span class="status enprogreso">En progreso</span></td>
+                  <td>
+                    <a href="#" class="btnMas cancelar">Cancelar</a> 
+                    <a href="./editarUna.html" class="btnMas">Editar</a>
+                  </td>
+                </tr>  
+              </tbody>
+            </table>
+          </div>
+         </sec:authorize>
+          
 
           <div class="recentUsuarios">
             <div class="cardHeader">
