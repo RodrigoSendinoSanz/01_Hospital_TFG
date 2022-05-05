@@ -86,12 +86,12 @@ public class HomeController {
 			System.out.println(ddao.buscarDiagnostico(aut.getName()));
 			System.out.println(idao.buscarInformacion(aut.getName()));
 			
-			if(ddao.buscarDiagnostico(aut.getName()) == null || idao.buscarInformacion(aut.getName()) == null) {
+			if(idao.buscarInformacion(aut.getName()) == null) {
 				model.addAttribute("infousu", "rellenar");
-				System.out.println("Diagnostico Infos Rellenar");
+				System.out.println(" Infos Rellenar");
 			}else {
 				model.addAttribute("infousu", "norellenar");
-				System.out.println("Diagnostico Infos Completos");
+				System.out.println("Infos Completos");
 			}
 			
 			// Generamos la lista con las novedades respecto a los libros
