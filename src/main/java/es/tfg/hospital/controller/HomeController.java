@@ -81,7 +81,9 @@ public class HomeController {
 			misesion.setAttribute("autorizaciones", aut.getAuthorities());
 			model.addAttribute("dni", aut.getName());
 			System.out.println("procesar if");
-			
+			misesion.setAttribute("usuario", udao.buscarUsuario(aut.getName()));
+			misesion.setAttribute("usuarioInfo", idao.buscarInformacion(aut.getName()));
+			misesion.setAttribute("usuarioDia", ddao.buscarDiagnostico(aut.getName()));
 			udao.buscarUsuario(aut.getName()).setOnlineusu(1);
 			System.out.println(ddao.buscarDiagnostico(aut.getName()));
 			System.out.println(idao.buscarInformacion(aut.getName()));

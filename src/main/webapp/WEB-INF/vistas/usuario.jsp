@@ -136,7 +136,7 @@
                           type="text"
                           name="dni"
                           id="dni"
-                          placeholder="dni"
+                          placeholder="${usuario.dni }"
                         />
                       </td>
                       <td>
@@ -144,7 +144,7 @@
                           type="email"
                           name="email"
                           id="email"
-                          placeholder="email"
+                          placeholder="${usuario.email }"
                         />
                       </td>
                       <td>
@@ -152,7 +152,7 @@
                           type="text"
                           name="nombre"
                           id="nombre"
-                          placeholder="Nombre"
+                          placeholder="${usuario.nombre }"
                         />
                       </td>
                       <td>
@@ -160,7 +160,7 @@
                           type="text"
                           name="apellido"
                           id="apaellido"
-                          placeholder="apellido"
+                          placeholder="${usuario.apellido }"
                         />
                       </td>
                       <td>
@@ -168,7 +168,7 @@
                           type="text"
                           name="domicilio"
                           id="domicilio"
-                          placeholder="domicilio"
+                          placeholder="${usuario.direccion }"
                         />
                       </td>
                       <td>
@@ -176,7 +176,7 @@
                           type="number"
                           name="telefono"
                           id="telefono"
-                          placeholder="telefono"
+                          placeholder="${usuario.telefono }"
                         />
                       </td>
                       <td>
@@ -184,7 +184,7 @@
                           type="url"
                           name="imagen"
                           id="imagen"
-                          placeholder="imagen"
+                          placeholder="${usuario.imgurl }"
                         />
                       </td>
                       <td>
@@ -217,7 +217,7 @@
                           name="peso"
                           id="peso"
                           min="15"
-                          placeholder="peso"
+                          placeholder="${usuarioInfo.peso }"
                         />
                       </td>
                       <td>
@@ -225,7 +225,7 @@
                           type="number"
                           name="altura"
                           id="altura"
-                          placeholder="altura"
+                          placeholder="${usuarioInfo.altura }"
                           
                         />
                       </td>
@@ -235,15 +235,27 @@
                           name="edad"
                           id="edad"
                           min="18"
-                          placeholder="edad"
+                          placeholder="${usuarioInfo.edad }"
                         />
                       </td>
                       <td>
                         <ion-icon name="male-outline" id="icono"></ion-icon>
                         <select name="sexo" id="select">
-                          <option value="masculino">Masculino</option>
-                          <option value="femenino">Femenino</option>
-                          <option value="intersex">Intersexual</option>
+                          <option value="m"
+                          <c:if test = "${usuarioInfo.sexo == 'm'}">
+                          selected="selected"
+                          </c:if>
+                          >Masculino</option>
+                          <option value="f"
+                          <c:if test = "${usuarioInfo.sexo == 'f'}">
+                          selected="selected"
+                          </c:if>
+                          >Femenino</option>
+                          <option value="x"
+                          <c:if test = "${usuarioInfo.sexo == 'x'}">
+                          selected="selected"
+                          </c:if>
+                          >Intersexual</option>
                         </select>
                       </td>
                       <td>
@@ -274,7 +286,7 @@
                           type="text"
                           name="alergias"
                           id="diagnostico"
-                          placeholder="alergias"
+                          placeholder="${usuarioDia.alergias }"
                           disabled
                         />
                       </td>
@@ -283,7 +295,7 @@
                           type="text"
                           name="tratamientos"
                           id="diagnostico"
-                          placeholder="tratamientos"
+                          placeholder="${usuarioDia.tratamiento }"
                           disabled
                         />
                       </td>
@@ -292,7 +304,7 @@
                           type="text"
                           name="operaciones"
                           id="diagnostico"
-                          placeholder="operaciones"
+                          placeholder="${usuarioDia.operaciones }"
                           disabled
                         />
                       </td>
@@ -301,17 +313,28 @@
                           type="text"
                           name="enfermedades"
                           id="diagnostico"
-                          placeholder="enfermedades"
+                          placeholder="${usuarioDia.enfermedades }"
                           disabled
                         />
                       </td>
                       <td>
+                      <sec:authorize access="hasAuthority('Paciente')">
                         <input
                           type="submit"
                           class="btnMas"
-                          value="Editar"
-                           disabled
-                        /> <!-- Mostrar  solo si viene siendo un medico (quitar el disabled) -->
+                          value="No puedes editar estos campos solo lo puede rellenar un medico"
+                          disabled
+                        />
+                       </sec:authorize>
+                      
+                      <sec:authorize access="hasAuthority('Medico')">
+                        <input
+                          type="submit"
+                          class="btnMas"
+                          value="Actualizar"             
+                        />
+                        </sec:authorize>
+                         <!-- Mostrar  solo si viene siendo un medico (quitar el disabled) -->
                       </td>
                     </form>
                   </tr>
