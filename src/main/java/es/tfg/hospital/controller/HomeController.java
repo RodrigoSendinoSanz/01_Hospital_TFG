@@ -23,6 +23,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.tfg.hospital.modelo.beans.Perfil;
 import es.tfg.hospital.modelo.beans.Usuario;
+import es.tfg.hospital.modelo.dao.IntDiagnosticoDao;
+import es.tfg.hospital.modelo.dao.IntInformacionDao;
 import es.tfg.hospital.modelo.dao.IntPerfilDao;
 import es.tfg.hospital.modelo.dao.IntUsuarioDao;
 
@@ -42,15 +44,22 @@ public class HomeController {
 	@Autowired
 	private IntPerfilDao pdao;
 
+	@Autowired
+	private IntDiagnosticoDao ddao;
+	
+	@Autowired
+	private IntInformacionDao idao;
 
 	// Mostrar el login. Se puede personalizar el login en formInicio
 	@GetMapping(value={"/","/login"})
-	public String mostrarFormInicio() {
-		System.out.println("getmatpin login");
+	public String mostrarFormInicio(Model model) {
+		System.out.println(model.getAttribute("error"));
+		/*System.out.println("getmatpin login");
 		System.out.println(udao.buscarTodos());
 		System.out.println(udao.buscarUsuario("34728920w").toString());
-		System.out.println(pdao.buscarTodos());
+		System.out.println(pdao.buscarTodos());*/
 		System.out.println(pdao.buscarPerfil(1).toString());
+		
 		return "login";
 	}
 
@@ -70,11 +79,20 @@ public class HomeController {
 			System.out.println(aut.getAuthorities());
 			model.addAttribute("autorizaciones", aut.getAuthorities());
 			misesion.setAttribute("autorizaciones", aut.getAuthorities());
+			model.addAttribute("dni", aut.getName());
 			System.out.println("procesar if");
 			
 			udao.buscarUsuario(aut.getName()).setOnlineusu(1);
+			System.out.println(ddao.buscarDiagnostico(aut.getName()));
+			System.out.println(idao.buscarInformacion(aut.getName()));
 			
-			
+			if(ddao.buscarDiagnostico(aut.getName()) == null || idao.buscarInformacion(aut.getName()) == null) {
+				model.addAttribute("infousu", "rellenar");
+				System.out.println("Diagnostico Infos Rellenar");
+			}else {
+				model.addAttribute("infousu", "norellenar");
+				System.out.println("Diagnostico Infos Completos");
+			}
 			
 			// Generamos la lista con las novedades respecto a los libros
 			//List<Libro> lista = ldao.buscarNovedades();
@@ -90,8 +108,8 @@ public class HomeController {
 			System.out.println("procesar else");
 			//List<Libro> lista = ldao.buscarNovedades();
 			//model.addAttribute("listaNovedades", lista);
-			model.addAttribute("error", true);
-			return "login";//IMPORTANTE ***** cambiar a login***
+			model.addAttribute("error", "error");//NO LE LLEGA EL ERROR
+			return "/login";//IMPORTANTE NO MUESTAR LA ALETRA DEL EL ERROR
 		}
 
 	}
@@ -426,7 +444,7 @@ public class HomeController {
 
 	}
 
-//Para encriptar el password de usuario en la base de datos
+	//Para encriptar el password de usuario en la base de datos
 	@GetMapping("/pwd")
 	@ResponseBody
 	public String generarEncriptado() {
@@ -437,9 +455,10 @@ public class HomeController {
 	}
 
 	@GetMapping("/logout")//Aun que pongas la URL no pasa por aqui al salir
-	public String logout(HttpServletRequest request) {
+	public String logout(HttpServletRequest request,HttpSession misesion) {
 		System.out.println("Adios");
-		udao.buscarUsuario("ponerAquiDNI").setOnlineusu(0);
+
+		udao.buscarUsuario((String) misesion.getAttribute("dni")).setOnlineusu(0);
 		SecurityContextLogoutHandler logoutfandler = new SecurityContextLogoutHandler();
 		logoutfandler.logout(request, null, null);
 		return "redirect:/login";

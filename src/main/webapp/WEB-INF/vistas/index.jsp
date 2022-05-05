@@ -564,7 +564,7 @@
 		</script>
       //----------- Revisar BOTON Mostrar solo cuando no haya datos de informacion de usuario -------------------
       
-      <c:if test="${datosUsuario == null}">//Crear model datosUsuario datos usuario(!= para que no salga)
+      <c:if test="${infousu == 'rellenar'}">//Crear model datosUsuario datos usuario(!= para que no salga)
          <script>
 	      Swal.fire({
 	        title: "<strong>¿Quieres rellenar tus datos de <u>perfil</u>?</strong>",

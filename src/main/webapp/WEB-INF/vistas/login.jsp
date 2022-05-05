@@ -28,7 +28,7 @@
         <h3>¿No tienes una cuenta?<br><a href="/registro">Registrate ahora</a></h3>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
-    <c:if test="${error == true}">
+    <c:if test="${error == 'error' }">
 	    <script>
 	    Swal.fire({
 	    	  icon: 'error',
