@@ -60,6 +60,7 @@
               <span class="title">Dasboard</span>
             </a>
           </li>
+          <sec:authorize access="hasAuthority('Medico')">
           <li>
             <a href="./pacientes.html">
               <!-- mostrar solo a medico -->
@@ -69,6 +70,7 @@
               <span class="title">Pacientes</span>
             </a>
           </li>
+          </sec:authorize>
           <li>
             <a href="./todos chat.html">
               <span class="icon">
