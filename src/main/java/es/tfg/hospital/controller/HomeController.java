@@ -390,23 +390,43 @@ public class HomeController {
 	@GetMapping("/datos/{usuario}")
 	public String mostrarVerDetalleLibro(Model model, @PathVariable("usuario") String usuario, HttpSession misesion) {
 		/*
-		Usuario usuarioDatos = udao.buscarUsuario(usuario);
-		if (misesion.getAttribute("pedidoCarrito") == null) {
-			model.addAttribute("usuarioDatos", usuarioDatos);
-			return "verUsuario";
-		} else {
-			model.addAttribute("listaPedido", lpdao.buscarIdPedido((int) misesion.getAttribute("pedidoCarrito")));
-			model.addAttribute("usuarioDatos", usuarioDatos);
+		 * Usuario usuarioDatos = udao.buscarUsuario(usuario); if
+		 * (misesion.getAttribute("pedidoCarrito") == null) {
+		 * model.addAttribute("usuarioDatos", usuarioDatos); return "verUsuario"; } else
+		 * { model.addAttribute("listaPedido", lpdao.buscarIdPedido((int)
+		 * misesion.getAttribute("pedidoCarrito"))); model.addAttribute("usuarioDatos",
+		 * usuarioDatos);
 		 */
-			return "verUsuario";
-		//}
+		return "verUsuario";
+		// }
 
 	}
+
 	@GetMapping("/verUna")
 	public String mostrarCita(Model model) {
 		return "verUna";
 	}
 
+	@GetMapping("/pacientes")
+	public String mostrarPacientes(Model model) {
+		System.out.println("accede a pacientes");
+		System.out.println("accede a pacientess");
+		return "pacientes";
+	}
+
+	@GetMapping("/ayuda")
+	public String mostrarAyuda(Model model) {
+		System.out.println("accede a ayuda");
+		System.out.println("accede a ayuda");
+		return "ayuda";
+	}
+
+	@GetMapping("/contrasena")
+	public String mostrarContrasena(Model model) {
+		System.out.println("accede a contrasena");
+		System.out.println("accede a contrasena");
+		return "contrasena";
+	}
 
 	@GetMapping("/registro")
 	public String mostrarRegistro(Model model) {

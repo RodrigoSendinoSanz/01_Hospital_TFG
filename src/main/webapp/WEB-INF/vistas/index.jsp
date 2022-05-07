@@ -45,7 +45,7 @@
       <div class="navegation">
         <ul>
           <li>
-            <a href="#">
+            <a href="/index">
               <span class="icon"><img src="./img/logo.png" /></span>
               <span class="title">
                 <h2>Hospital</h2>
@@ -53,16 +53,16 @@
             </a>
           </li>
           <li class="hovered">
-            <a href="./index.html">
+            <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
               </span>
-              <span class="title">Dasboard</span>
+              <span class="title">Dasboardo</span>
             </a>
           </li>
           <sec:authorize access="hasAuthority('Medico')">
           <li>
-            <a href="./pacientes.html">
+            <a href="/pacientes">
               <!-- mostrar solo a medico -->
               <span class="icon">
                 <ion-icon name="people-outline"></ion-icon>
@@ -80,11 +80,11 @@
             </a>
           </li>
           <li>
-            <a href="./ayuda.html">
+            <a href="/ayuda">
               <span class="icon">
                 <ion-icon name="help-circle-outline"></ion-icon>
               </span>
-              <span class="title">Ayuda</span>
+              <span class="title">Ayudaa</span>
             </a>
           </li>
           <li>
@@ -96,7 +96,7 @@
             </a>
           </li>
           <li>
-            <a href="./contrasenÌa.html">
+            <a href="/contrasena">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
@@ -121,7 +121,7 @@
           </div>
           <div class="search">
             <label>
-              <form action="./verUna.html">
+              <form action="/verUna">
                   <input type="text" placeholder="Busca tu cita aqui" />
                   <ion-icon name="search-outline"></ion-icon>
                   <button type="submit" class="buscar">
@@ -137,7 +137,7 @@
         </div>
 
         <div class="cardBox">
-          <a href="./medicinas.html">
+          <a href="/medicinas">
             <div class="card">
               <div>
                 <div class="numbers">Medicinas</div>
@@ -148,7 +148,7 @@
               </div>
             </div>
           </a>
-          <a href="./todas.html">
+          <a href="/todas">
             <div class="card">
               <div>
                 <div class="numbers">Citas</div>
@@ -170,7 +170,7 @@
               </div>
             </div>
           </a>
-          <a href="./medicos.html">
+          <a href="/medicos">
             <div class="card">
               <div>
                 <div class="numbers">120</div>
