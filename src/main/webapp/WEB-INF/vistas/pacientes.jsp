@@ -72,7 +72,7 @@
             </a>
           </li>
           <li>
-            <a href="./index.html">
+            <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
               </span>
@@ -80,7 +80,7 @@
             </a>
           </li>
           <li class="hovered">
-            <a href="./pacientes.html">
+            <a href="/pacientes">
               <!-- mostrar solo a medico -->
               <span class="icon">
                 <ion-icon name="people-outline"></ion-icon>
@@ -97,7 +97,7 @@
             </a>
           </li>
           <li>
-            <a href="./ayuda.html">
+            <a href="/ayuda">
               <span class="icon">
                 <ion-icon name="help-circle-outline"></ion-icon>
               </span>
@@ -113,7 +113,7 @@
             </a>
           </li>
           <li>
-            <a href="./contrasenÌa.html">
+            <a href="/contrasena">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
