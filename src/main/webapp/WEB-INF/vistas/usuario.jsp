@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/img/logo.png" />
     <link rel="stylesheet" href="/css/styleusuario.css" />
+    <title>Hospital</title>
     <style>
       .search label ion-icon {
           position: absolute;
@@ -47,6 +48,7 @@
               <span class="title">Dasboard</span>
             </a>
           </li>
+          <sec:authorize access="hasAuthority('Medico')">
           <li>
             <a href="/pacientes">
               <!-- mostrar solo a medico -->
@@ -56,28 +58,13 @@
               <span class="title">Pacientes</span>
             </a>
           </li>
+          </sec:authorize>
           <li>
-            <a href="./todos chat.html">
+            <a href="/todoschat">
               <span class="icon">
                 <ion-icon name="chatbox-outline"></ion-icon>
               </span>
               <span class="title">Mensajes</span>
-            </a>
-          </li>
-          <li>
-            <a href="/ayuda">
-              <span class="icon">
-                <ion-icon name="help-circle-outline"></ion-icon>
-              </span>
-              <span class="title">Ayuda</span>
-            </a>
-          </li>
-          <li class="hovered">
-            <a href="/usuario">
-              <span class="icon">
-                <ion-icon name="settings-outline"></ion-icon>
-              </span>
-              <span class="title">Opciones</span>
             </a>
           </li>
           <li>
@@ -86,6 +73,14 @@
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
               <span class="title">Contraseña</span>
+            </a>
+          </li>
+          <li>
+            <a href="/ayuda">
+              <span class="icon">
+                <ion-icon name="help-circle-outline"></ion-icon>
+              </span>
+              <span class="title">Ayuda</span>
             </a>
           </li>
           <li>
@@ -106,7 +101,7 @@
           </div>
           <div class="search">
             <label>
-              <form action="./verUna.html">
+              <form action="/verUna">
                   <input type="text" placeholder="Busca tu cita aqui" />
                   <ion-icon name="search-outline"></ion-icon>
                   <button type="submit" class="buscar">

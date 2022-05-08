@@ -72,7 +72,7 @@
           </li>
           </sec:authorize>
           <li>
-            <a href="./todos chat.html">
+            <a href="/todoschat">
               <span class="icon">
                 <ion-icon name="chatbox-outline"></ion-icon>
               </span>
@@ -80,11 +80,11 @@
             </a>
           </li>
           <li>
-            <a href="/ayuda">
+            <a href="/contrasena">
               <span class="icon">
-                <ion-icon name="help-circle-outline"></ion-icon>
+                <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
-              <span class="title">Ayudaa</span>
+              <span class="title">Contraseña</span>
             </a>
           </li>
           <li>
@@ -96,11 +96,11 @@
             </a>
           </li>
           <li>
-            <a href="/contrasena">
+            <a href="/ayuda">
               <span class="icon">
-                <ion-icon name="lock-closed-outline"></ion-icon>
+                <ion-icon name="help-circle-outline"></ion-icon>
               </span>
-              <span class="title">Contraseña</span>
+              <span class="title">Ayuda</span>
             </a>
           </li>
           <li>
@@ -159,7 +159,7 @@
               </div>
             </div>
           </a>
-          <a href="./todos chat.html">
+          <a href="/todoschat">
             <div class="card">
               <div>
                 <div class="numbers">Consultas</div>
@@ -186,7 +186,7 @@
         <div class="infoheader">
           <div class="caja">
             <div id="calendar"></div>
-            <a href="./cita.html" class="btnCita">Pedir cita</a>
+            <a href="/cita" class="btnCita">Pedir cita</a>
           </div>
           <div class="caja">
             <p class="titulonoticas">Noticias:<br /></p>
@@ -200,7 +200,7 @@
           <div class="recentCitas">
             <div class="cardHeader">
               <h2>Ultimas citas</h2>
-              <a href="./todas.html" class="btnblue">Ver todas</a>
+              <a href="/todas" class="btnblue">Ver todas</a>
             </div>
             <table>
               <thead>
@@ -228,13 +228,13 @@
                   <td>2024-04-28</td>
                   <td>Calle 23º</td>
                   <td><span class="status pendiente">Pendiente</span></td>
-                  <td><a href="./verUna.html" class="btnMas">Ver mas</a></td>
+                  <td><a href="/verUna" class="btnMas">Ver mas</a></td>
                 </tr>
                 <tr>
                   <td>2022-04-28</td>
                   <td>Calle 42º</td>
                   <td><span class="status enprogreso">En progreso</span></td>
-                  <td><a href="./verUna.html" class="btnMas">Ver mas</a></td>
+                  <td><a href="/verUna" class="btnMas">Ver mas</a></td>
                 </tr>
                 
               </tbody>
@@ -246,7 +246,7 @@
            <div class="recentCitas">
             <div class="cardHeader">
               <h2>Ultimas citas</h2>
-              <a href="./todas.html" class="btnblue">Ver todas</a>
+              <a href="/todas" class="btnblue">Ver todas</a>
             </div>
             <table>
               <thead>
@@ -264,7 +264,7 @@
                   <td><span class="status realizado">Realizado</span></td>
                   <td>
                     <a href="#" class="btnMas cancelar">Cancelar</a> 
-                    <a href="./editarUna.html" class="btnMas">Editar</a>
+                    <a href="/editarUna" class="btnMas">Editar</a>
                   </td>
                 </tr>
                 <tr>
@@ -273,7 +273,7 @@
                   <td><span class="status cancelado">Cancelado</span></td>
                   <td>
                     <a href="#" class="btnMas cancelar">Cancelar</a> 
-                    <a href="./editarUna.html" class="btnMas">Editar</a>
+                    <a href="/editarUna" class="btnMas">Editar</a>
                   </td>
                 </tr>
                 <tr>
@@ -282,7 +282,7 @@
                   <td><span class="status pendiente">Pendiente</span></td>
                   <td>
                     <a href="#" class="btnMas cancelar">Cancelar</a> 
-                    <a href="./editarUna.html" class="btnMas">Editar</a>
+                    <a href="/editarUna" class="btnMas">Editar</a>
                   </td>
                 </tr>
                 <tr>
@@ -291,7 +291,7 @@
                   <td><span class="status enprogreso">En progreso</span></td>
                   <td>
                     <a href="#" class="btnMas cancelar">Cancelar</a> 
-                    <a href="./editarUna.html" class="btnMas">Editar</a>
+                    <a href="/editarUna" class="btnMas">Editar</a>
                   </td>
                 </tr>  
               </tbody>
@@ -308,7 +308,7 @@
               <tbody>
                 <tr>
                       <td width="60px">
-                        <a href="./chat.html">
+                        <a href="/chat">
                           <div class="imgBx">
                             <img
                               src="https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?w=800"
