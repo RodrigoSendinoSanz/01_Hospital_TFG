@@ -56,7 +56,7 @@
       <div class="navegation">
         <ul>
           <li>
-            <a href="#">
+            <a href="/index">
               <span class="icon"><img src="./img/logo.png" /></span>
               <span class="title">
                 <h2>Hospital</h2>
@@ -73,7 +73,7 @@
           </li>
           <sec:authorize access="hasAuthority('Medico')">
           <li>
-            <a href="./pacientes.html">
+            <a href="/pacientes">
               <!-- mostrar solo a medico -->
               <span class="icon">
                 <ion-icon name="people-outline"></ion-icon>
@@ -83,7 +83,7 @@
           </li>
           </sec:authorize>
           <li>
-            <a href="./todos chat.html">
+            <a href="/todoschat">
               <span class="icon">
                 <ion-icon name="chatbox-outline"></ion-icon>
               </span>
@@ -91,7 +91,7 @@
             </a>
           </li>
           <li>
-            <a href="./ayuda.html">
+            <a href="/ayuda">
               <span class="icon">
                 <ion-icon name="help-circle-outline"></ion-icon>
               </span>
@@ -107,7 +107,7 @@
             </a>
           </li>
           <li>
-            <a href="./contrasenÌa.html">
+            <a href="/contrasena">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
@@ -132,7 +132,7 @@
           </div>
           <div class="search">
             <label>
-              <form action="./verUna.html">
+              <form action="/verUna">
                   <input type="text" placeholder="Busca tu cita aqui" />
                   <ion-icon name="search-outline"></ion-icon>
                   <button type="submit" class="buscar">
@@ -148,7 +148,7 @@
         </div>
 
         <div class="cardBox">
-          <a href="./medicinas.html">
+          <a href="/medicinas">
             <div class="card">
               <div>
                 <div class="numbers">Medicinas</div>
@@ -159,7 +159,7 @@
               </div>
             </div>
           </a>
-          <a href="./todas.html">
+          <a href="/todas">
             <div class="card">
               <div>
                 <div class="numbers">Citas</div>
@@ -170,7 +170,7 @@
               </div>
             </div>
           </a>
-          <a href="./todos chat.html">
+          <a href="/todoschat">
             <div class="card">
               <div>
                 <div class="numbers">Consultas</div>
@@ -181,7 +181,7 @@
               </div>
             </div>
           </a>
-          <a href="./medicos.html">
+          <a href="/medicos">
             <div class="card">
               <div>
                 <div class="numbers">120</div>
@@ -197,7 +197,7 @@
         <div class="infoheader">
           <div class="caja">
             <div id="calendar"></div>
-            <a href="./cita.html" class="btnCita">Pedir cita</a>
+            <a href="/cita" class="btnCita">Pedir cita</a>
           </div>
           <div class="caja">
             <p class="titulonoticas">Noticias:<br /></p>
@@ -210,7 +210,7 @@
           <div class="recentCitas">
             <div class="cardHeader">
               <h2>Ultimas citas</h2>
-              <a href="./todas.html" class="btnblue">Ver todas</a>
+              <a href="/todas" class="btnblue">Ver todas</a>
             </div>
             <table>
               <thead>
@@ -277,7 +277,7 @@
                  <c:forEach var="usu" items="${ListUsuCone }">
 						 <tr>
 			                  <td width="60px">
-			                    <div class="imgBx"><a href="./chat.html"><img src="${usu.imgurl}" alt="icono" /></a></div>
+			                    <div class="imgBx"><a href="/chat"><img src="${usu.imgurl}" alt="icono" /></a></div>
 			                  </td>
 			                  <td>
 			                    <h4>${usu.nombre} <br /><span>${usu.apellido}</span></h4>

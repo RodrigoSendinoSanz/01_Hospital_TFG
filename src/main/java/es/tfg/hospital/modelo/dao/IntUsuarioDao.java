@@ -14,4 +14,5 @@ public interface IntUsuarioDao {
 	List<Usuario>buscarTodos();
 	int insertUno(Usuario usuario);
 	List<Usuario>buscarConectados();
+	public void cambioContraseña(String nuevaContraseña, String id);
 }

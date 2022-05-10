@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -55,6 +56,14 @@ public class HomeController {
 	@Autowired
 	private IntCitaDao cdao;
 
+//	@GetMapping("")
+//	public String acceso(HttpSession sess){
+//		if(sess.getAttribute("idSessCuent") == null) {//comprobamos si la session esta guardada el idSessCuent se crea en la linea 57
+//			return "redirect:/login";//si da nulo significa q no y lo metemos en el login
+//		}else {
+//			return"index";//de ser asi iniciamos 
+//		}
+//	}
 	// Mostrar el login. Se puede personalizar el login en formInicio
 	@GetMapping(value={"/","/login"})
 	public String mostrarFormInicio(Model model) {
@@ -91,6 +100,7 @@ public class HomeController {
 			misesion.setAttribute("icono", udao.buscarUsuario(aut.getName()).getImgurl());
 			misesion.setAttribute("password", udao.buscarUsuario(aut.getName()).getPassword());
 			model.addAttribute("dni", aut.getName());
+			model.addAttribute("dniCont", udao.buscarUsuario(aut.getName()).getDni());//dni para cambiarcont
 			System.out.println("procesar if");
 			misesion.setAttribute("usuario", udao.buscarUsuario(aut.getName()));
 			misesion.setAttribute("usuarioInfo", idao.buscarInformacion(aut.getName()));
@@ -480,6 +490,78 @@ public class HomeController {
 
 	}
 
+	@GetMapping("/ayuda")
+	public String mostrarAyuda(Model model) {
+		return "ayuda";
+	}
+	
+	@GetMapping("/pacientes")
+	public String mostrarPacientes(Model model) {
+		return "pacientes";
+	}
+	
+	@GetMapping("/medicinas")
+	public String mostrarMedicinas(Model model) {
+		return "medicinas";
+	}
+	
+	@GetMapping("/todas")
+	public String mostrarTodas(Model model) {
+		return "todas";
+	}
+	
+	@GetMapping("/todoschat")
+	public String mostrarTodoschat(Model model) {
+		return "todoschat";
+	}
+
+	@GetMapping("/recuperarcontrasena")
+	public String mostrarRecuperarContrasena(Model model) {
+		return "recuperarcontrasena";
+	}
+
+	@GetMapping("/contrasena")
+	public String mostrarContrasena(Model model) {
+		System.out.println("accede a contrasena");
+		System.out.println("accede a contrasena");
+		return "contrasena";
+	}
+	
+	@PostMapping("/cambioContraseña")
+	public String cambioContraseña(Model model, HttpSession misesion, @RequestParam("contraseñaActual") String contraseñaActual, @RequestParam("nuevaContraseña") String nuevaContraseña, @RequestParam("contraseñaVerificada") String contraseñaVerificada, Usuario usario) {
+//	    String aaaaa = pwenco.encode("a");
+//	    String aa = pwenco.encode("a");
+//	    Boolean desf  = pwenco.matches(contraseñaActual, misesion.getAttribute("password").toString());
+//		System.out.println("----aaaaa-----" + aaaaa);
+//		System.out.println("----aa-----" + aa);
+//		System.out.println("----decode-----" + desf);
+//		System.out.println("-----Accede para cambiar la contraseña-----");
+//		System.out.println("-----Session -----"+ misesion.getAttribute("password"));
+//		System.out.println("-----cifrada actual-----" + contraseñaActualCifrada);
+		if(Boolean.TRUE.equals(pwenco.matches(contraseñaActual, misesion.getAttribute("password").toString()))){
+
+			if(Boolean.TRUE.equals(nuevaContraseña.equals(contraseñaVerificada))){
+				System.out.println("accede");
+				String contraseñaVerificadaCifrada = pwenco.encode(contraseñaVerificada);
+				System.out.println("accedeasdadasd");
+				System.out.println("dnidnidnidndi "+ misesion.getAttribute("dniCont"));
+				udao.cambioContraseña(contraseñaVerificadaCifrada, misesion.getAttribute("dniCont").toString());
+				System.out.println("------------------------");
+				System.out.println("accede para cambiar la contraseña a " + contraseñaVerificadaCifrada);
+			}
+		}
+//		String usuariocontra = misesion.
+//		String encriptado = pwenco.encode(usuariocontra);
+//		//recibir la contraseñaActual y comprobar que es correcta
+//		if(misesion.get)
+//		Comprobar que las nuevas contraseñas son correctas
+//		cambiar contraseñas
+//
+//		usuario.setPassword(encriptado);
+		
+		return "contrasena";
+	}
+	
 	//Para encriptar el password de usuario en la base de datos
 	@GetMapping("/pwd")
 	@ResponseBody

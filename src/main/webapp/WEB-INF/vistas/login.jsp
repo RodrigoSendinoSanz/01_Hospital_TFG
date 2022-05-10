@@ -24,7 +24,7 @@
         <sec:csrfInput /><input type="Submit" value="Entrar">
       </div>
       <div class="text">
-        <h3>¿Se te ha olvidado la contraseña?<br><a href="./recuperarcontraseña.html">Recuperar contraseña</a></h3>
+        <h3>¿Se te ha olvidado la contraseña?<br><a href="/recuperarcontrasena">Recuperar contraseña</a></h3>
         <h3>¿No tienes una cuenta?<br><a href="/registro">Registrate ahora</a></h3>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>

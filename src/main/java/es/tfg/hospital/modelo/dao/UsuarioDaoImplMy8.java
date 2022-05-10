@@ -15,6 +15,9 @@ public class UsuarioDaoImplMy8 implements IntUsuarioDao{
 	@Autowired
 	private UsuarioRepo urepo;
 	
+	@Autowired
+	UsuarioRepo uR;
+	
 	@Override
 	public Usuario buscarUsuario(String DNI) {
 		// TODO Auto-generated method stub
@@ -27,6 +30,14 @@ public class UsuarioDaoImplMy8 implements IntUsuarioDao{
 		return urepo.findAll();
 	}
 
+	@Override
+	public void cambioContraseña(String nuevaContraseña, String id) {
+		System.out.println(id);
+		Usuario usuario = buscarUsuario(id);
+		usuario.setPassword(nuevaContraseña);
+		uR.save(usuario);
+	}
+	
 	@Override
 	public int insertUno(Usuario usuario) {
 		int filas = 0;

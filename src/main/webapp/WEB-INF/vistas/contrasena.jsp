@@ -43,7 +43,7 @@
       <div class="navegation">
         <ul>
           <li>
-            <a href="#">
+            <a href="/index">
               <span class="icon"><img src="./img/logo.png" /></span>
               <span class="title">
                 <h2>Hospital</h2>
@@ -51,15 +51,16 @@
             </a>
           </li>
           <li>
-            <a href="./index.html">
+            <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
               </span>
               <span class="title">Dasboard</span>
             </a>
           </li>
+          <sec:authorize access="hasAuthority('Medico')">
           <li>
-            <a href="./pacientes.html">
+            <a href="/pacientes">
               <!-- mostrar solo a medico -->
               <span class="icon">
                 <ion-icon name="people-outline"></ion-icon>
@@ -67,20 +68,13 @@
               <span class="title">Pacientes</span>
             </a>
           </li>
+          </sec:authorize>
           <li>
-            <a href="./todos chat.html">
+            <a href="/todoschat">
               <span class="icon">
                 <ion-icon name="chatbox-outline"></ion-icon>
               </span>
               <span class="title">Mensajes</span>
-            </a>
-          </li>
-          <li>
-            <a href="./ayuda.html">
-              <span class="icon">
-                <ion-icon name="help-circle-outline"></ion-icon>
-              </span>
-              <span class="title">Ayuda</span>
             </a>
           </li>
           <li>
@@ -91,12 +85,12 @@
               <span class="title">Opciones</span>
             </a>
           </li>
-          <li class="hovered">
-            <a href="./contrasenÌa.html">
+          <li>
+            <a href="/ayuda">
               <span class="icon">
-                <ion-icon name="lock-closed-outline"></ion-icon>
+                <ion-icon name="help-circle-outline"></ion-icon>
               </span>
-              <span class="title">Contraseña</span>
+              <span class="title">Ayuda</span>
             </a>
           </li>
           <li>
@@ -122,7 +116,7 @@
             </label>
           </div>
           <div class="user">
-            <a href="./usuario.html">
+            <a href="/usuario">
               <img src="./img/user.jpg" />
             </a>
           </div>
@@ -138,34 +132,26 @@
               </thead>
               <tbody>
                 <tr>
-                  <form action="./index.html">
-                    <td>
+                  <form action="/cambioContraseña" method="post">
                       <input
                         type="text"
-                        name="dni"
-                        id="dni"
-                        placeholder="ContraseÃ±a actual"
+                        name="contraseñaActual"
+                        id="contraseñaActual"
+                        placeholder="Contraseña actual"
                        />
-                    </td>
-                    <td>
                       <input
                         type="text"
-                        name="email"
-                        id="email"
-                        placeholder="Nueva contraseÃ±a"
+                        name="nuevaContraseña"
+                        id="nuevaContraseña"
+                        placeholder="Nueva contraseña"
                       />
-                    </td>
-                    <td>
                       <input
                         type="text"
-                        name="nombre"
-                        id="nombre"
-                        placeholder="Respite la nueva contraseÃ±a"
+                        name="contraseñaVerificada"
+                        id="contraseñaVerificada"
+                        placeholder="Respite la nueva contraseña"
                       />
-                    </td>
-                    <td>
-                      <input type="submit" class="btnMas" value="Actualizar">
-                    </td>
+                      <input type="submit" class="btnMas" value="Cambiar Contraseña">
                   </form>
                 </tr>
               </tbody>
