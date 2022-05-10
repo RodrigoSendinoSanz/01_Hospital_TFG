@@ -45,5 +45,11 @@ public class UsuarioDaoImplMy8 implements IntUsuarioDao{
 		return filas;
 	}
 
+	@Override
+	public List<Usuario> buscarConectados() {
+		// TODO Auto-generated method stub
+		return urepo.mostrarConectados();
+	}
+
 
 }

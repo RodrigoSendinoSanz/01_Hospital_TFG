@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import es.tfg.hospital.modelo.beans.Cita;
 import es.tfg.hospital.modelo.beans.Perfil;
 import es.tfg.hospital.modelo.beans.Usuario;
+import es.tfg.hospital.modelo.dao.IntCitaDao;
 import es.tfg.hospital.modelo.dao.IntDiagnosticoDao;
 import es.tfg.hospital.modelo.dao.IntInformacionDao;
 import es.tfg.hospital.modelo.dao.IntPerfilDao;
@@ -49,6 +51,9 @@ public class HomeController {
 	
 	@Autowired
 	private IntInformacionDao idao;
+	
+	@Autowired
+	private IntCitaDao cdao;
 
 	// Mostrar el login. Se puede personalizar el login en formInicio
 	@GetMapping(value={"/","/login"})
@@ -67,18 +72,24 @@ public class HomeController {
 
 	@GetMapping("/index")//no funciona!
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion) {
+		String rol =null;
+		
 		System.out.println("procesar login");
 		if (aut != null) {
 			System.out.println("usuario : " + aut.getName());
 			model.addAttribute("usuario", aut.getName());
 			System.out.println("procesar login");
-			/*
-			 for (GrantedAuthority ele: aut.getAuthorities()) System.out.println("ROL : "
-			 + ele.getAuthority());
-			*/ 
+			
+			for (GrantedAuthority ele: aut.getAuthorities()) {
+				
+				rol=ele.getAuthority();
+			}
+		
 			System.out.println(aut.getAuthorities());
 			model.addAttribute("autorizaciones", aut.getAuthorities());
 			misesion.setAttribute("autorizaciones", aut.getAuthorities());
+			misesion.setAttribute("icono", udao.buscarUsuario(aut.getName()).getImgurl());
+			misesion.setAttribute("password", udao.buscarUsuario(aut.getName()).getPassword());
 			model.addAttribute("dni", aut.getName());
 			System.out.println("procesar if");
 			misesion.setAttribute("usuario", udao.buscarUsuario(aut.getName()));
@@ -87,6 +98,23 @@ public class HomeController {
 			udao.buscarUsuario(aut.getName()).setOnlineusu(1);
 			System.out.println(ddao.buscarDiagnostico(aut.getName()));
 			System.out.println(idao.buscarInformacion(aut.getName()));
+			
+			List<Usuario> ListUsuCone= udao.buscarConectados();
+			model.addAttribute("ListUsuCone",ListUsuCone);
+			
+
+			if(rol.equalsIgnoreCase("Paciente")){
+				List<Cita> citasLista= cdao.buscarCitas((String) model.getAttribute("dni"));
+				model.addAttribute("citasLista",citasLista);
+				System.out.println("INFO:       /// "+aut.getAuthorities().toString());
+			}else if (rol.equalsIgnoreCase("Medico")){
+				List<Cita> citasListaMedico= cdao.buscarCitasPorMedico((String) model.getAttribute("usuario"));
+				model.addAttribute("citasListaMedico",citasListaMedico);
+				System.out.println(citasListaMedico.toString());
+				System.out.println("INFO:       /// "+aut.getAuthorities().toString());
+			}else {
+				return "redirect:/";
+			}
 			
 			if(idao.buscarInformacion(aut.getName()) == null) {
 				model.addAttribute("infousu", "rellenar");
@@ -412,6 +440,11 @@ public class HomeController {
 	public String mostrarRegistro(Model model) {
 		return "registro";
 	}
+	
+	@PostMapping("/modificarUsuario")
+	public String modificarUsuario(Model model) {
+		return "redirect:/usuario";
+	}
 
 	@PostMapping("/registro")
 	public String procesarRegistro(Model model, Usuario usuario) {
@@ -429,6 +462,7 @@ public class HomeController {
 
 		System.out.println("=========================================" + usuario
 				+ "==================================================");
+		usuario.setImgurl("https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png");
 		int usu = udao.insertUno(usuario);
 
 		if (usu == 0)

@@ -40,7 +40,7 @@
             </a>
           </li>
           <li>
-            <a href="./index.html">
+            <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
               </span>
@@ -116,7 +116,7 @@
           </div>
           <div class="user">
             <a href="/usuario">
-              <img src="./img/user.jpg" />
+              <img src="${icono}" />
             </a>
           </div>
         </div>
@@ -130,70 +130,63 @@
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <form action="" id="from1">
-                      <td>
+                    <form action="/modificarUsuario" id="from1" method="post">
+
                         <input
                           type="text"
                           name="dni"
                           id="dni"
                           placeholder="${usuario.dni }"
+                          value="${usuario.dni }"
                         />
-                      </td>
-                      <td>
+
                         <input
                           type="email"
                           name="email"
                           id="email"
                           placeholder="${usuario.email }"
                         />
-                      </td>
-                      <td>
+
                         <input
                           type="text"
                           name="nombre"
                           id="nombre"
                           placeholder="${usuario.nombre }"
                         />
-                      </td>
-                      <td>
+
                         <input
                           type="text"
                           name="apellido"
                           id="apaellido"
                           placeholder="${usuario.apellido }"
                         />
-                      </td>
-                      <td>
+
                         <input
                           type="text"
                           name="domicilio"
                           id="domicilio"
                           placeholder="${usuario.direccion }"
                         />
-                      </td>
-                      <td>
+
                         <input
                           type="number"
                           name="telefono"
                           id="telefono"
                           placeholder="${usuario.telefono }"
                         />
-                      </td>
-                      <td>
+
                         <input
                           type="url"
                           name="imagen"
                           id="imagen"
                           placeholder="${usuario.imgurl }"
                         />
-                      </td>
-                      <td>
+
                         <input
                           type="submit"
                           class="btnMas"
                           value="Actualizar"
                         />
-                      </td>
                     </form>
                   </tr>
                 </tbody>

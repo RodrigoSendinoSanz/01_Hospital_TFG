@@ -38,6 +38,17 @@
         color: white;
         border:none;
       }
+      .botones {
+      		position: relative;
+		    padding: 5px 10px;
+		    background: var(--white);
+		    color: var(--blue);
+		    border: 1px solid var(--blue);
+		    text-decoration: none;
+		    border-radius: 6px;
+		    display: inline-block;
+		    margin: 3px;
+      }
     </style>
   </head>
   <body>
@@ -53,7 +64,7 @@
             </a>
           </li>
           <li class="hovered">
-            <a href="./index.html">
+            <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
               </span>
@@ -131,7 +142,7 @@
           </div>
           <div class="user">
             <a href="/usuario">
-              <img src="./img/user.jpg" />
+              <img src="${icono}" />
             </a>
           </div>
         </div>
@@ -195,7 +206,6 @@
         </div>
 
         <div class="details">
-          <!-- 14 citas -->
         <sec:authorize access="hasAuthority('Paciente')">
           <div class="recentCitas">
             <div class="cardHeader">
@@ -212,31 +222,14 @@
                 </tr>
               </thead>
               <tbody>
+              <c:forEach var="ele" items="${citasLista }">
                 <tr>
-                  <td>2022-10-28</td>
-                  <td>Calle 2º</td>
-                  <td><span class="status realizado">Realizado</span></td>
-                  <td><a href="/verUna" class="btnMas">Ver mas</a></td>
+                  <td>${ele.fechaCita}</td>
+                  <td>${ele.direccionCentrosalud}</td>
+                  <td><span class="status ${ele.estado}">${ele.estado}</span></td>
+                  <td><a href="/verUna/${ele.idCita}" class="btnMas">Ver mas</a></td>
                 </tr>
-                <tr>
-                  <td>2023-04-28</td>
-                  <td>Calle 2º</td>
-                  <td><span class="status cancelado">Cancelado</span></td>
-                  <td><a href="/verUna" class="btnMas">Ver mas</a></td>
-                </tr>
-                <tr>
-                  <td>2024-04-28</td>
-                  <td>Calle 23º</td>
-                  <td><span class="status pendiente">Pendiente</span></td>
-                  <td><a href="./verUna.html" class="btnMas">Ver mas</a></td>
-                </tr>
-                <tr>
-                  <td>2022-04-28</td>
-                  <td>Calle 42º</td>
-                  <td><span class="status enprogreso">En progreso</span></td>
-                  <td><a href="./verUna.html" class="btnMas">Ver mas</a></td>
-                </tr>
-                
+               </c:forEach>  
               </tbody>
             </table>
           </div>
@@ -254,46 +247,21 @@
                   <td>Fecha</td>
                   <td>Dirección</td>
                   <td>Estado</td>
-                  <td>Información</td>
+                  <td>Opciones</td>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>2022-10-28</td>
-                  <td>Calle 2º</td>
-                  <td><span class="status realizado">Realizado</span></td>
-                  <td>
-                    <a href="#" class="btnMas cancelar">Cancelar</a> 
-                    <a href="./editarUna.html" class="btnMas">Editar</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2023-04-28</td>
-                  <td>Calle 2º</td>
-                  <td><span class="status cancelado">Cancelado</span></td>
-                  <td>
-                    <a href="#" class="btnMas cancelar">Cancelar</a> 
-                    <a href="./editarUna.html" class="btnMas">Editar</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2024-04-28</td>
-                  <td>Calle 23º</td>
-                  <td><span class="status pendiente">Pendiente</span></td>
-                  <td>
-                    <a href="#" class="btnMas cancelar">Cancelar</a> 
-                    <a href="./editarUna.html" class="btnMas">Editar</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2022-04-28</td>
-                  <td>Calle 42º</td>
-                  <td><span class="status enprogreso">En progreso</span></td>
-                  <td>
-                    <a href="#" class="btnMas cancelar">Cancelar</a> 
-                    <a href="./editarUna.html" class="btnMas">Editar</a>
-                  </td>
-                </tr>  
+               <c:forEach var="ele" items="${citasListaMedico }">
+	                <tr>
+	                  <td>${ele.fechaCita}</td>
+	                  <td>${ele.direccionCentrosalud}</td>
+	                  <td><span class="status ${ele.estado}">${ele.estado}</span></td>
+	                  <td>
+	                    <a href="/borraUna/${ele.idCita}" class="botones cancelar">Cancelar</a> 
+	                    <a href="/editarUna/${ele.idCita}" class="botones">Editar</a>
+	                  </td>
+	                </tr>
+                </c:forEach> 
               </tbody>
             </table>
           </div>
@@ -306,85 +274,17 @@
             </div>
             <table>
               <tbody>
-                <tr>
-                      <td width="60px">
-                        <a href="./chat.html">
-                          <div class="imgBx">
-                            <img
-                              src="https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?w=800"
-                              alt=""
-                            />
-                          </div>
-                        </a>
-                      </td>
-                  <td>
-                      <h4>[Nombre] <br /><span>[Tipo de usuario]</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img2.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Jose <br /><span>Paciente</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img3.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Xian <br /><span>Paciente</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img4.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Marcos <br /><span>Paciente</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img5.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Giorgina <br /><span>Paciente</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img6.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Andersen <br /><span>Médico</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img7.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Maria <br /><span>Médico</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img8.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Juan <br /><span>Médico</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img9.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Sara <br /><span>Médico</span></h4>
-                  </td>
-                </tr>
+                 <c:forEach var="usu" items="${ListUsuCone }">
+						 <tr>
+			                  <td width="60px">
+			                    <div class="imgBx"><a href="./chat.html"><img src="${usu.imgurl}" alt="icono" /></a></div>
+			                  </td>
+			                  <td>
+			                    <h4>${usu.nombre} <br /><span>${usu.apellido}</span></h4>
+			                  </td>
+		                </tr>
+				</c:forEach>
+                
               </tbody>
             </table>
           </div>
@@ -477,56 +377,28 @@
           selectable: true,
           events: [
             // borrar todo menos el primero y hacer un for de las citas de cada Usuario
+			<sec:authorize access="hasAuthority('Paciente')">
+	            <c:forEach var="ele" items="${citasLista }">
+	            {
+	                title: `Cita en : ${ele.direccionCentrosalud}, Fecha:${ele.fechaCita}/${ele.horaCita}, Medico:${ele.nombreMedico}`,
+	                start: `${ele.fechaCita}T${ele.horaCita}:00`,
+	                constraint: "availableForMeeting", // defined below
+	                color: "#257e4a",
+	              },
+	
+	           </c:forEach>
+	        </sec:authorize>
+			<sec:authorize access="hasAuthority('Medico')">
+            <c:forEach var="ele" items="${citasListaMedico }">
             {
-              title: "Business Lunch",
-              start: "2022-04-03T13:00:00",
-              constraint: "businessHours",
-            },
-            {
-              title: "Meeting",
-              start: "2022-04-13T11:00:00",
-              constraint: "availableForMeeting", // defined below
-              color: "#257e4a",
-            },
-            {
-              title: "Conference",
-              start: "2022-04-18",
-              end: "2022-04-20",
-            },
-            {
-              title: "Party",
-              start: "2022-04-29T20:00:00",
-            },
+                title: `Cita en : ${ele.direccionCentrosalud}, Fecha:${ele.fechaCita}/${ele.horaCita}, Paciente:${ele.nombrePaciente}`,
+                start: `${ele.fechaCita}T${ele.horaCita}:00`,
+                constraint: "availableForMeeting", // defined below
+                color: "#257e4a",
+              },
 
-            // areas where "Meeting" must be dropped
-            {
-              groupId: "availableForMeeting",
-              start: "2022-04-11T10:00:00",
-              end: "2022-04-11T16:00:00",
-              display: "background",
-            },
-            {
-              groupId: "availableForMeeting",
-              start: "2022-04-13T10:00:00",
-              end: "2022-04-13T16:00:00",
-              display: "background",
-            },
-
-            // red areas where no events can be dropped
-            {
-              start: "2022-04-24",
-              end: "2022-04-28",
-              overlap: false,
-              display: "background",
-              color: "#ff9f89",
-            },
-            {
-              start: "2022-04-06",
-              end: "2022-04-08",
-              overlap: false,
-              display: "background",
-              color: "#ff9f89",
-            },
+           </c:forEach>
+        </sec:authorize>
           ],
         });
 
@@ -564,9 +436,9 @@
       }
       list.forEach((item) => item.addEventListener("mouseover", activeLink));
 		</script>
-      //----------- Revisar BOTON Mostrar solo cuando no haya datos de informacion de usuario -------------------
       
-      <c:if test="${infousu == 'rellenar'}">//Crear model datosUsuario datos usuario(!= para que no salga)
+      
+      <c:if test="${infousu == 'rellenar'}">
          <script>
 	      Swal.fire({
 	        title: "<strong>¿Quieres rellenar tus datos de <u>perfil</u>?</strong>",

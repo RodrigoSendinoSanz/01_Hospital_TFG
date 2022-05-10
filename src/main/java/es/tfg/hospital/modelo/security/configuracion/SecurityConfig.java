@@ -38,8 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http
 		.csrf().disable()
-		.authorizeRequests()									//borrar usuario
-		.antMatchers("/","/pwd","/registro","/login","/index","/usuario","/verUna","/logout","/css/**","/cal/**","/img/**","/js/**").permitAll()
+		.authorizeRequests()									
+		.antMatchers("/","/pwd","/registro","/login","/index","/logout","/css/**","/cal/**","/img/**","/js/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()

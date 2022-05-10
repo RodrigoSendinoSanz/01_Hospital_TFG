@@ -13,5 +13,5 @@ public interface IntUsuarioDao {
 	Usuario buscarUsuario(String DNI);
 	List<Usuario>buscarTodos();
 	int insertUno(Usuario usuario);
-
+	List<Usuario>buscarConectados();
 }

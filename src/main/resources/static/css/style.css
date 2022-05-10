@@ -402,16 +402,16 @@ a{
     font-weight: 300;
     letter-spacing: 1px;
 }
-.realizado{
+.Realizado{
     background: #8de02c;
 }
-.pendiente{
+.Pendiente{
     background: #f9ca3f;
 }
-.cancelado{
+.Cancelado{
     background: #f00;
 }
-.enprogreso{
+.Enprogreso{
     background: #1795c9;
 }
 .details .recentUsuarios{

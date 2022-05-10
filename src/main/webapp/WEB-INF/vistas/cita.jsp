@@ -124,7 +124,7 @@
           <div class="details">
             <div class="tablaDetalle">
               <div class="cardHeader">
-                <h2>Crea tu cita</h2>
+                <h2>Pide tu cita</h2>
               </div>
               <table>
                 <thead></thead>
@@ -246,14 +246,14 @@
         e.preventDefault();
 
         Swal.fire({
-          title: "Â¿Estas seguro de querer pedir esta cita?",
+          title: "¿Estas seguro de querer pedir esta cita?",
           showDenyButton: true,
           confirmButtonText: "Si",
           denyButtonText: `No`,
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            Swal.fire("Â¡Cita realizada!", "", "success");
+            Swal.fire("¡Cita realizada!", "", "success");
             window.location.assign("./index.html");
           } else if (result.isDenied) {
             Swal.fire("No se han realizado la cita", "", "info");
