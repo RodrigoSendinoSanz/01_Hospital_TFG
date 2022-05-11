@@ -71,7 +71,7 @@
               </span>
             </a>
           </li>
-          <li class="hovered">
+          <li>
             <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
@@ -80,7 +80,7 @@
             </a>
           </li>
           <sec:authorize access="hasAuthority('Medico')">
-          <li>
+          <li class="hovered">
             <a href="/pacientes">
               <!-- mostrar solo a medico -->
               <span class="icon">

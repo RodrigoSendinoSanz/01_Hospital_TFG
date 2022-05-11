@@ -581,7 +581,7 @@ public class HomeController {
 		return "contrasena";
 	}
 	
-	@PostMapping("/cambioContraseña")
+	@PostMapping("/cambioContrasena")
 	public String cambioContraseña(Model model, HttpSession misesion, @RequestParam("contraseñaActual") String contraseñaActual, @RequestParam("nuevaContraseña") String nuevaContraseña, @RequestParam("contraseñaVerificada") String contraseñaVerificada, Usuario usario) {
 //	    String aaaaa = pwenco.encode("a");
 //	    String aa = pwenco.encode("a");

@@ -114,7 +114,7 @@
               </span>
             </a>
           </li>
-          <li class="hovered">
+          <li>
             <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
@@ -141,7 +141,7 @@
               <span class="title">Mensajes</span>
             </a>
           </li>
-          <li>
+          <li class="hovered">
             <a href="/ayuda">
               <span class="icon">
                 <ion-icon name="help-circle-outline"></ion-icon>

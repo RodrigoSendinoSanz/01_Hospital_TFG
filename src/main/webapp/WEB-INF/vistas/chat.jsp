@@ -127,7 +127,7 @@
               </span>
             </a>
           </li>
-          <li class="hovered">
+          <li>
             <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
@@ -146,7 +146,7 @@
             </a>
           </li>
           </sec:authorize>
-          <li>
+          <li class="hovered">
             <a href="/todoschat">
               <span class="icon">
                 <ion-icon name="chatbox-outline"></ion-icon>
