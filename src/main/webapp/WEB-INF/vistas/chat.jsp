@@ -127,7 +127,7 @@
               </span>
             </a>
           </li>
-          <li>
+          <li class="hovered">
             <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
@@ -135,7 +135,7 @@
               <span class="title">Dasboard</span>
             </a>
           </li>
-         <sec:authorize access="hasAuthority('Medico')">
+          <sec:authorize access="hasAuthority('Medico')">
           <li>
             <a href="/pacientes">
               <!-- mostrar solo a medico -->
@@ -146,7 +146,7 @@
             </a>
           </li>
           </sec:authorize>
-          <li class="hovered">
+          <li>
             <a href="/todoschat">
               <span class="icon">
                 <ion-icon name="chatbox-outline"></ion-icon>
@@ -163,7 +163,7 @@
             </a>
           </li>
           <li>
-            <a href="usuario">
+            <a href="/usuario">
               <span class="icon">
                 <ion-icon name="settings-outline"></ion-icon>
               </span>

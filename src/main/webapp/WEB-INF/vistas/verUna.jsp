@@ -52,7 +52,6 @@
       }
       .btnMas:hover {
 		    position: relative;
-	      	margin-left: 60px;
 	    	padding: 14px;
 		    background: var(--blue);
 		    color: var(--white);
@@ -90,14 +89,14 @@
       <div class="navegation">
         <ul>
           <li>
-            <a href="#">
-              <span class="icon"><img src="./img/logo.png" /></span>
+            <a href="/index">
+              <span class="icon"><img src="/img/logo.png" /></span>
               <span class="title">
                 <h2>Hospital</h2>
               </span>
             </a>
           </li>
-          <li>
+          <li class="hovered">
             <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
@@ -105,8 +104,9 @@
               <span class="title">Dasboard</span>
             </a>
           </li>
+          <sec:authorize access="hasAuthority('Medico')">
           <li>
-            <a href="./pacientes.html">
+            <a href="/pacientes">
               <!-- mostrar solo a medico -->
               <span class="icon">
                 <ion-icon name="people-outline"></ion-icon>
@@ -114,8 +114,9 @@
               <span class="title">Pacientes</span>
             </a>
           </li>
-          <li class="hovered">
-            <a href="./todos chat.html">
+          </sec:authorize>
+          <li>
+            <a href="/todoschat">
               <span class="icon">
                 <ion-icon name="chatbox-outline"></ion-icon>
               </span>
@@ -123,7 +124,7 @@
             </a>
           </li>
           <li>
-            <a href="./ayuda.html">
+            <a href="/ayuda">
               <span class="icon">
                 <ion-icon name="help-circle-outline"></ion-icon>
               </span>
@@ -139,7 +140,7 @@
             </a>
           </li>
           <li>
-            <a href="./contrasenÌa.html">
+            <a href="/contrasena">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
@@ -188,26 +189,22 @@
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <form action="./index.html" id="form1">
-                      <td>
-                        <h3>Fecha</h3>
-                      </td>
-                      <td>
-                        <h3>Hora</h3>
-                      </td>
-                      <td>
-                        <h3>Dirección</h3>
-                      </td>
-                      <td>
-                        <h3>Sintomas</h3>
-                      </td>
-                      <td>
-                        <h3>Estado</h3>
-                      </td>
-                      <td>
-                        <h3>Nombre médico</h3>
-                      </td>
-                    
+                    <form action="/verUna" id="form1" method ="post">
+
+                        <h3>${cita.fechaCita }</h3>
+
+                        <h3>${cita.horaCita }</h3>
+
+                        <h3>${cita.direccionCentrosalud }</h3>
+
+                        <h3>${cita.sintomas }</h3>
+
+                        <h3>${cita.estado }</h3>
+
+	                    <h3>${cita.nombreMedico }</h3>
+
+	                    <h3>${cita.nombrePaciente }</h3>
+
                   </tr>
                 </tbody>
               </table>

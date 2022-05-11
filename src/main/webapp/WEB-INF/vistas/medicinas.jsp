@@ -81,7 +81,7 @@
               </span>
             </a>
           </li>
-          <li>
+          <li class="hovered">
             <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>

@@ -38,13 +38,13 @@
         <ul>
           <li>
             <a href="/index">
-              <span class="icon"><img src="./img/logo.png" /></span>
+              <span class="icon"><img src="/img/logo.png" /></span>
               <span class="title">
                 <h2>Hospital</h2>
               </span>
             </a>
           </li>
-          <li>
+          <li class="hovered">
             <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
@@ -63,7 +63,7 @@
             </a>
           </li>
           </sec:authorize>
-          <li class="hovered">
+          <li>
             <a href="/todoschat">
               <span class="icon">
                 <ion-icon name="chatbox-outline"></ion-icon>
@@ -123,7 +123,7 @@
           </div>
           <div class="user">
             <a href="/usuario">
-              <img src="./img/user.jpg" />
+               <img src="${icono}" />
             </a>
           </div>
         </div>
@@ -131,19 +131,20 @@
           <div class="details">
             <div class="tablaDetalle">
               <div class="cardHeader">
-                <h2>Datos de cita <a href="/usuario">Paciente</a> </h2>
+                <h2>Datos de cita <a href="/verUsuario/${cita.nombrePaciente }">${cita.nombrePaciente }</a> </h2>
               </div>
               <table>
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <form action="/index" id="form1">
+                    <form action="/editarUna" id="form1">
                       <td>
                         <input
                         type="text"
                         name="fecha"
                         id="fecha"
-                        placeholder="Fecha"
+                        placeholder="${cita.fechaCita }"
+                        value="${cita.fechaCita }"
                         />
                       </td>
                       <td>
@@ -151,7 +152,8 @@
                         type="text"
                         name="hora"
                         id="hora"
-                        placeholder="Hora"
+                        placeholder="${cita.horaCita }"
+                        value="${cita.horaCita }"
                         />
                       </td>
                       <td>
@@ -159,7 +161,8 @@
                         type="text"
                         name="direccion"
                         id="direccion"
-                        placeholder="Direccion"
+                        placeholder="${cita.direccionCentrosalud }"
+                        value="${cita.direccionCentrosalud }"
                         />
                       </td>
                       <td>
@@ -167,11 +170,11 @@
                         type="text"
                         name="sintomas"
                         id="sintomas"
-                        placeholder="Sintomas"
+                        placeholder="${cita.sintomas }"
+                        value="${cita.sintomas }"
                         />
                       </td>
                       <td>
-
                         <select name="estado" id="select">
                           <option value="realizado">Realizado</option>
                           <option value="cancelado">Cancelado</option>
@@ -183,7 +186,7 @@
                         <input
                           type="submit"
                           class="btnMas"
-                          value="Cancelar"
+                          value="Actualizar"
                         />
                       </td>
                     </form>

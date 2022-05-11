@@ -180,27 +180,30 @@
           <!-- 14 citas -->
           <div class="recentCitas">
             <div class="cardHeader">
-              <h2>Todas las citas</h2>
+              <h2>Historial clinico</h2>
             </div>
             <table>
               <thead>
                 <tr>
                   <td>Fecha</td>
-                  <td>Dirección</td>
-                  <td>Estado</td>
-                  <td>Información</td>
+                  <td>Direccion</td>
+                  <td>Sintomas</td>
+                  <td>Descripcion</td>
+                  <td>Nombre</td>
+                  <td>Tipo</td>
+                  <td>Instrucciones</td>
                 </tr>
               </thead>
               <tbody>
-              <c:forEach var="ele" items="${citas }">
+              <c:forEach var="ele" items="${historial }">
                 <tr>
-                  <td>${ele.fechaCita}</td>
-                  <td>${ele.direccionCentrosalud}</td>
-                  <td><span class="status ${ele.estado}">${ele.estado}</span></td>
-                  <td><a href="/verUna/${ele.idCita}" class="botones">Ver mas</a></td>
-                  <sec:authorize access="hasAuthority('Medico')">
-                  <td><a href="/editarUna/${ele.idCita}" class="botones">Editar</a></td>
-                  </sec:authorize>
+                  <td>${ele.cita.fechaCita }</td>
+                  <td>${ele.cita.direccionCentrosalud }</td>
+                  <td>${ele.cita.sintomas }</td>
+                  <td>${ele.desCitahis }</td>
+                  <td>${ele.medicina.nombreMed }</td>
+                  <td>${ele.medicina.tipo.descripcion }</td>
+                  <td>${ele.instrucciones }</td>
                 </tr>
                </c:forEach> 
               </tbody>

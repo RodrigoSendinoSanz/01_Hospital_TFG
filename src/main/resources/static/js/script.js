@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         html2pdf()
             .set({
                 margin: 1,
-                filename: 'documento.pdf',
+                filename: 'citamedica.pdf',
                 image: {
                     type: 'jpeg',
                     quality: 0.98

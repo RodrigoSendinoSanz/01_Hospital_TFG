@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.tfg.hospital.modelo.beans.Diagnostico;
 import es.tfg.hospital.modelo.beans.Informacion;
 import es.tfg.hospital.modelo.repository.InformacionRepo;
 

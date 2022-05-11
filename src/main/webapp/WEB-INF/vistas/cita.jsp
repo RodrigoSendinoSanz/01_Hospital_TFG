@@ -76,7 +76,7 @@
             </a>
           </li>
           <li>
-            <a href="usuario">
+            <a href="/usuario">
               <span class="icon">
                 <ion-icon name="settings-outline"></ion-icon>
               </span>

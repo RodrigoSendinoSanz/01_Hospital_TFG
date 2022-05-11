@@ -50,7 +50,7 @@
               </span>
             </a>
           </li>
-          <li>
+          <li class="hovered">
             <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
@@ -78,6 +78,14 @@
             </a>
           </li>
           <li>
+            <a href="/ayuda">
+              <span class="icon">
+                <ion-icon name="help-circle-outline"></ion-icon>
+              </span>
+              <span class="title">Ayuda</span>
+            </a>
+          </li>
+          <li>
             <a href="/usuario">
               <span class="icon">
                 <ion-icon name="settings-outline"></ion-icon>
@@ -86,11 +94,11 @@
             </a>
           </li>
           <li>
-            <a href="/ayuda">
+            <a href="/contrasena">
               <span class="icon">
-                <ion-icon name="help-circle-outline"></ion-icon>
+                <ion-icon name="lock-closed-outline"></ion-icon>
               </span>
-              <span class="title">Ayuda</span>
+              <span class="title">Contraseña</span>
             </a>
           </li>
           <li>

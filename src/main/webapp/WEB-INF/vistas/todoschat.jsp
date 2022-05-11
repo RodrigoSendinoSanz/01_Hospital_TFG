@@ -64,23 +64,24 @@
       <div class="navegation">
         <ul>
           <li>
-            <a href="#">
+            <a href="/index">
               <span class="icon"><img src="./img/logo.png" /></span>
               <span class="title">
                 <h2>Hospital</h2>
               </span>
             </a>
           </li>
-          <li>
-            <a href="./index.html">
+          <li class="hovered">
+            <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
               </span>
               <span class="title">Dasboard</span>
             </a>
           </li>
+          <sec:authorize access="hasAuthority('Medico')">
           <li>
-            <a href="./pacientes.html">
+            <a href="/pacientes">
               <!-- mostrar solo a medico -->
               <span class="icon">
                 <ion-icon name="people-outline"></ion-icon>
@@ -88,8 +89,9 @@
               <span class="title">Pacientes</span>
             </a>
           </li>
-          <li class="hovered">
-            <a href="./todos chat.html">
+          </sec:authorize>
+          <li>
+            <a href="/todoschat">
               <span class="icon">
                 <ion-icon name="chatbox-outline"></ion-icon>
               </span>
@@ -97,7 +99,7 @@
             </a>
           </li>
           <li>
-            <a href="./ayuda.html">
+            <a href="/ayuda">
               <span class="icon">
                 <ion-icon name="help-circle-outline"></ion-icon>
               </span>
@@ -113,7 +115,7 @@
             </a>
           </li>
           <li>
-            <a href="./contrasenÌa.html">
+            <a href="/contrasena">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </span>

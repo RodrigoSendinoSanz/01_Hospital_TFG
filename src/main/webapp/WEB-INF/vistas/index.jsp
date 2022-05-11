@@ -159,11 +159,11 @@
               </div>
             </div>
           </a>
-          <a href="/todas">
+          <a href="/historialclinico">
             <div class="card">
               <div>
-                <div class="numbers">Citas</div>
-                <div class="cardName">Citas realizadas</div>
+                <div class="numbers">Historial</div>
+                <div class="cardName">Tu historial clinico</div>
               </div>
               <div class="iconBox">
                 <ion-icon name="pulse-outline"></ion-icon>
@@ -197,7 +197,7 @@
         <div class="infoheader">
           <div class="caja">
             <div id="calendar"></div>
-            <a href="/cita" class="btnCita">Pedir cita</a>
+            <sec:authorize access="hasAuthority('Paciente')"><a href="/cita" class="btnCita">Pedir cita</a></sec:authorize>
           </div>
           <div class="caja">
             <p class="titulonoticas">Noticias:<br /></p>
@@ -239,7 +239,7 @@
            <div class="recentCitas">
             <div class="cardHeader">
               <h2>Ultimas citas</h2>
-              <a href="./todas.html" class="btnblue">Ver todas</a>
+              <a href="/todasMed" class="btnblue">Ver todas</a>
             </div>
             <table>
               <thead>
@@ -457,7 +457,7 @@
       
             var noticias = document.querySelector("#noticias");
             var noticiasTitulo = document.querySelector(".titulonoticas");
-      
+      /*---------- Descomentar para las noticias*/
             const options = {
               method: 'GET',
               url: 'https://free-news.p.rapidapi.com/v1/search',
@@ -467,7 +467,7 @@
                 'x-rapidapi-host': 'free-news.p.rapidapi.com'
               }
             };
-      
+      /*----------- Descomentar para las noticias */
             axios.request(options).then(function (response) {
             console.log(response.data.articles);
             if(response.status == "error"){
@@ -503,15 +503,7 @@
           }).catch(function (error) {
                 console.error(error);
             });
-      /*
-            //https://api.covid19api.com/summaryc6b3b3b47e703164d1f6c7e95be2364a
-            const options = {
-            method: "GET",
-            headers: {
-              "X-API-KEY": "YVOwOnUbZGiF-D6dy9orPA7blkmI8qMKi2YWOy7tSYo",
-            },
-          };
-      */
+
       </script>
 </body>
 </html>

@@ -9,7 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/img/logo.png" />
     <link rel="stylesheet" href="/css/styleusuario.css" />
+    <title>Hospital</title>
     <style>
+      .details .tablaDetalle table tbody tr:hover {
+          color: var(--black);
+      }
+      h3{
+        margin: 2em;
+        border-bottom: 2px solid #287bff;
+      }
       .search label ion-icon {
           position: absolute;
           top: 12px;
@@ -22,17 +30,15 @@
       button[type=submit]{
         visibility: hidden;
       }
-      label input::placeholder{
-            color: grey;
-        }
     </style>
   </head>
   <body>
+    <div class="container">
       <div class="navegation">
         <ul>
           <li>
             <a href="/index">
-              <span class="icon"><img src="./img/logo.png" /></span>
+              <span class="icon"><img src="/img/logo.png" /></span>
               <span class="title">
                 <h2>Hospital</h2>
               </span>
@@ -107,7 +113,7 @@
           </div>
           <div class="search">
             <label>
-              <form action="./verUna.html">
+              <form action="/verUna">
                   <input type="text" placeholder="Busca tu cita aqui" />
                   <ion-icon name="search-outline"></ion-icon>
                   <button type="submit" class="buscar">
@@ -117,7 +123,7 @@
           </div>
           <div class="user">
             <a href="/usuario">
-              <img src="${icono}" />
+               <img src="${icono}" />
             </a>
           </div>
         </div>
@@ -137,50 +143,50 @@
                           type="text"
                           name="dni"
                           id="dni"
-                          placeholder="${usuario.dni }"
-                          value="${usuario.dni }"
+                          placeholder="${usuariover.dni }"
+                          value="${usuariover.dni }"
                         />
 
                         <input
                           type="email"
                           name="email"
                           id="email"
-                          placeholder="${usuario.email }"
+                          placeholder="${usuariover.email }"
                         />
 
                         <input
                           type="text"
                           name="nombre"
                           id="nombre"
-                          placeholder="${usuario.nombre }"
+                          placeholder="${usuariover.nombre }"
                         />
 
                         <input
                           type="text"
                           name="apellido"
                           id="apaellido"
-                          placeholder="${usuario.apellido }"
+                          placeholder="${usuariover.apellido }"
                         />
 
                         <input
                           type="text"
                           name="domicilio"
                           id="domicilio"
-                          placeholder="${usuario.direccion }"
+                          placeholder="${usuariover.direccion }"
                         />
 
                         <input
                           type="number"
                           name="telefono"
                           id="telefono"
-                          placeholder="${usuario.telefono }"
+                          placeholder="${usuariover.telefono }"
                         />
 
                         <input
                           type="url"
                           name="imagen"
                           id="imagen"
-                          placeholder="${usuario.imgurl }"
+                          placeholder="${usuariover.imgurl }"
                         />
 
                         <input
@@ -211,7 +217,7 @@
                           name="peso"
                           id="peso"
                           min="15"
-                          placeholder="${usuarioInfo.peso }"
+                          placeholder="${infover.peso }"
                         />
                       </td>
                       <td>
@@ -219,7 +225,7 @@
                           type="number"
                           name="altura"
                           id="altura"
-                          placeholder="${usuarioInfo.altura }"
+                          placeholder="${infover.altura }"
                           
                         />
                       </td>
@@ -229,24 +235,24 @@
                           name="edad"
                           id="edad"
                           min="18"
-                          placeholder="${usuarioInfo.edad }"
+                          placeholder="${infover.edad }"
                         />
                       </td>
                       <td>
                         <ion-icon name="male-outline" id="icono"></ion-icon>
                         <select name="sexo" id="select">
                           <option value="m"
-                          <c:if test = "${usuarioInfo.sexo == 'm'}">
+                          <c:if test = "${infover.sexo == 'm'}">
                           selected="selected"
                           </c:if>
                           >Masculino</option>
                           <option value="f"
-                          <c:if test = "${usuarioInfo.sexo == 'f'}">
+                          <c:if test = "${infover.sexo == 'f'}">
                           selected="selected"
                           </c:if>
                           >Femenino</option>
                           <option value="x"
-                          <c:if test = "${usuarioInfo.sexo == 'x'}">
+                          <c:if test = "${infover.sexo == 'x'}">
                           selected="selected"
                           </c:if>
                           >Intersexual</option>
@@ -280,8 +286,8 @@
                           type="text"
                           name="alergias"
                           id="diagnostico"
-                          placeholder="${usuarioDia.alergias }"
-                          disabled
+                          placeholder="${diagnosticonver.alergias }"
+                          
                         />
                       </td>
                       <td>
@@ -289,8 +295,8 @@
                           type="text"
                           name="tratamientos"
                           id="diagnostico"
-                          placeholder="${usuarioDia.tratamiento }"
-                          disabled
+                          placeholder="${diagnosticonver.tratamiento }"
+                          
                         />
                       </td>
                       <td>
@@ -298,8 +304,8 @@
                           type="text"
                           name="operaciones"
                           id="diagnostico"
-                          placeholder="${usuarioDia.operaciones }"
-                          disabled
+                          placeholder="${diagnosticonver.operaciones }"
+                          
                         />
                       </td>
                       <td>
@@ -307,8 +313,8 @@
                           type="text"
                           name="enfermedades"
                           id="diagnostico"
-                          placeholder="${usuarioDia.enfermedades }"
-                          disabled
+                          placeholder="${diagnosticonver.enfermedades }"
+                          
                         />
                       </td>
                       <td>
@@ -317,7 +323,7 @@
                           type="submit"
                           class="btnMas"
                           value="No puedes editar estos campos solo lo puede rellenar un medico"
-                          disabled
+                          
                         />
                        </sec:authorize>
                       

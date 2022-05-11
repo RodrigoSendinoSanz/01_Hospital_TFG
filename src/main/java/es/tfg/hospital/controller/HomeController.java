@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.tfg.hospital.modelo.beans.Cita;
+import es.tfg.hospital.modelo.beans.Diagnostico;
+import es.tfg.hospital.modelo.beans.Informacion;
 import es.tfg.hospital.modelo.beans.Perfil;
 import es.tfg.hospital.modelo.beans.Usuario;
 import es.tfg.hospital.modelo.dao.IntCitaDao;
@@ -71,8 +73,8 @@ public class HomeController {
 		/*System.out.println("getmatpin login");
 		System.out.println(udao.buscarTodos());
 		System.out.println(udao.buscarUsuario("34728920w").toString());
-		System.out.println(pdao.buscarTodos());*/
-		System.out.println(pdao.buscarPerfil(1).toString());
+		System.out.println(pdao.buscarTodos());
+		System.out.println(pdao.buscarPerfil(1).toString());*/
 		
 		return "login";
 	}
@@ -99,6 +101,8 @@ public class HomeController {
 			misesion.setAttribute("autorizaciones", aut.getAuthorities());
 			misesion.setAttribute("icono", udao.buscarUsuario(aut.getName()).getImgurl());
 			misesion.setAttribute("password", udao.buscarUsuario(aut.getName()).getPassword());
+			misesion.setAttribute("dni", udao.buscarUsuario(aut.getName()).getDni());
+			misesion.setAttribute("nombre", udao.buscarUsuario(aut.getName()).getNombre());
 			model.addAttribute("dni", aut.getName());
 			model.addAttribute("dniCont", udao.buscarUsuario(aut.getName()).getDni());//dni para cambiarcont
 			System.out.println("procesar if");
@@ -122,6 +126,7 @@ public class HomeController {
 				model.addAttribute("citasListaMedico",citasListaMedico);
 				System.out.println(citasListaMedico.toString());
 				System.out.println("INFO:       /// "+aut.getAuthorities().toString());
+				misesion.setAttribute("citasListaMedico",citasListaMedico);
 			}else {
 				return "redirect:/";
 			}
@@ -146,8 +151,7 @@ public class HomeController {
 			return "index";
 		} else {
 			System.out.println("procesar else");
-			//List<Libro> lista = ldao.buscarNovedades();
-			//model.addAttribute("listaNovedades", lista);
+
 			model.addAttribute("error", "error");//NO LE LLEGA EL ERROR
 			return "/login";//IMPORTANTE NO MUESTAR LA ALETRA DEL EL ERROR
 		}
@@ -168,12 +172,32 @@ public class HomeController {
 	@GetMapping("/usuario")
 	public String mostrarUsuario(Model model) {
 
-		//List<Libro> lista = ldao.buscarTodos();
-
-		//model.addAttribute("listaLibros", lista);
-
 		return "usuario";
 	}
+	
+	@GetMapping("/verUsuario/{nombre}")
+	public String verUnUsuario(Model model,@PathVariable String nombre) {
+		System.out.println("entra usuario");
+		Usuario usuariover= new Usuario();
+		usuariover=udao.buscarUsuarioPorNombre(nombre);
+		model.addAttribute("usuariover", usuariover);
+		System.out.println("Pasa usuario");
+		String dniusu= usuariover.getDni();
+		Informacion infromacionver = new Informacion();
+		infromacionver=idao.buscarInformacion(dniusu);
+		model.addAttribute("infover", infromacionver);
+		System.out.println("Pasa informacion");
+
+		
+		Diagnostico diagnosticonver = new Diagnostico();
+		diagnosticonver=ddao.buscarDiagnostico(dniusu);
+		model.addAttribute("diagnosticonver", diagnosticonver);
+		System.out.println("Pasa diagnostico");
+		
+		return "usuarioVer";
+	}
+	
+
 
 	// Mostrando todos los Temas
 	@GetMapping("/cliente/temas")
@@ -440,12 +464,24 @@ public class HomeController {
 		//}
 
 	}
-	@GetMapping("/verUna")
-	public String mostrarCita(Model model) {
+	@GetMapping("/verUna/{id}")
+	public String mostrarCita(Model model,@PathVariable int id) {
+		Cita cita= new Cita();
+		cita=cdao.buscarUnaCita(id);
+		model.addAttribute("cita", cita);
+		
 		return "verUna";
 	}
 
-
+	@GetMapping("/editarUna/{id}")
+	public String mostrarEditar(Model model,@PathVariable int id) {
+		Cita cita= new Cita();
+		cita=cdao.buscarUnaCita(id);
+		model.addAttribute("cita", cita);
+		
+		return "editarUna";
+	}
+	
 	@GetMapping("/registro")
 	public String mostrarRegistro(Model model) {
 		return "registro";
@@ -505,11 +541,31 @@ public class HomeController {
 		return "medicinas";
 	}
 	
+	@GetMapping("/medicos")
+	public String mostrarMedicos(Model model) {
+		return "medicos";
+	}
+	
 	@GetMapping("/todas")
-	public String mostrarTodas(Model model) {
+	public String mostrarTodas(Model model,HttpSession misesion) {
+		model.addAttribute("citas", cdao.buscarCitas((String) misesion.getAttribute("dni")));
 		return "todas";
 	}
 	
+	@GetMapping("/todasMed")
+	public String buscarCitasPorMedico(Model model,HttpSession misesion) {
+		System.out.println("################ // "+ misesion.getAttribute("citasListaMedico"));
+		List<Cita> citasListaMedico= (List<Cita>) misesion.getAttribute("citasListaMedico");
+		model.addAttribute("citas",citasListaMedico);
+		return "todas";
+	}
+	
+	@GetMapping("/historialclinico")
+	public String mostrarHistorial(Model model,HttpSession misesion) {
+		model.addAttribute("historial", "Rellenar");
+		return "historial";
+	}
+
 	@GetMapping("/todoschat")
 	public String mostrarTodoschat(Model model) {
 		return "todoschat";
@@ -522,8 +578,6 @@ public class HomeController {
 
 	@GetMapping("/contrasena")
 	public String mostrarContrasena(Model model) {
-		System.out.println("accede a contrasena");
-		System.out.println("accede a contrasena");
 		return "contrasena";
 	}
 	
@@ -538,14 +592,17 @@ public class HomeController {
 //		System.out.println("-----Accede para cambiar la contraseña-----");
 //		System.out.println("-----Session -----"+ misesion.getAttribute("password"));
 //		System.out.println("-----cifrada actual-----" + contraseñaActualCifrada);
+		System.out.println("Dni aqui en teoria"+(String) misesion.getAttribute("dni"));
+		
 		if(Boolean.TRUE.equals(pwenco.matches(contraseñaActual, misesion.getAttribute("password").toString()))){
 
 			if(Boolean.TRUE.equals(nuevaContraseña.equals(contraseñaVerificada))){
 				System.out.println("accede");
+				System.out.println("Dni aqui en teoria"+(String) misesion.getAttribute("dni"));
 				String contraseñaVerificadaCifrada = pwenco.encode(contraseñaVerificada);
 				System.out.println("accedeasdadasd");
-				System.out.println("dnidnidnidndi "+ misesion.getAttribute("dniCont"));
-				udao.cambioContraseña(contraseñaVerificadaCifrada, misesion.getAttribute("dniCont").toString());
+				System.out.println("dnidnidnidndi "+ misesion.getAttribute("dni"));
+				udao.cambioContraseña(contraseñaVerificadaCifrada, misesion.getAttribute("dni").toString());
 				System.out.println("------------------------");
 				System.out.println("accede para cambiar la contraseña a " + contraseñaVerificadaCifrada);
 			}
