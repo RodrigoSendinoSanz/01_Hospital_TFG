@@ -58,18 +58,21 @@ public class HomeController {
 	@Autowired
 	private IntCitaDao cdao;
 
-//	@GetMapping("")
-//	public String acceso(HttpSession sess){
-//		if(sess.getAttribute("idSessCuent") == null) {//comprobamos si la session esta guardada el idSessCuent se crea en la linea 57
-//			return "redirect:/login";//si da nulo significa q no y lo metemos en el login
-//		}else {
-//			return"index";//de ser asi iniciamos 
-//		}
-//	}
+	@GetMapping("")
+	public String acceso(HttpSession misesion){
+		System.out.println("======accede al metodo====="+ misesion.getAttribute("dni"));
+		if(misesion.getAttribute("dni") == null) {//comprobamos si la session esta guardada el idSessCuent se crea en la linea 57
+			System.out.println("======accede al if====="+  misesion.getAttribute("dni"));
+			return "redirect:/login";//si da nulo significa q no y lo metemos en el login
+		}else {
+			return "redirect:/index";//de ser asi iniciamos 
+		}
+	}
 	// Mostrar el login. Se puede personalizar el login en formInicio
-	@GetMapping(value={"/","/login"})
+	@GetMapping(value={"/login"})
 	public String mostrarFormInicio(Model model) {
-		System.out.println(model.getAttribute("error"));
+		System.out.println("esto es el metodo mostrarFormInicio" + model.getAttribute("error"));
+		
 		/*System.out.println("getmatpin login");
 		System.out.println(udao.buscarTodos());
 		System.out.println(udao.buscarUsuario("34728920w").toString());
@@ -104,7 +107,6 @@ public class HomeController {
 			misesion.setAttribute("dni", udao.buscarUsuario(aut.getName()).getDni());
 			misesion.setAttribute("nombre", udao.buscarUsuario(aut.getName()).getNombre());
 			model.addAttribute("dni", aut.getName());
-			model.addAttribute("dniCont", udao.buscarUsuario(aut.getName()).getDni());//dni para cambiarcont
 			System.out.println("procesar if");
 			misesion.setAttribute("usuario", udao.buscarUsuario(aut.getName()));
 			misesion.setAttribute("usuarioInfo", idao.buscarInformacion(aut.getName()));
