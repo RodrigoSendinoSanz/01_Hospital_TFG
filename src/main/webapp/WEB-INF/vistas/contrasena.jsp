@@ -50,7 +50,7 @@
               </span>
             </a>
           </li>
-          <li>
+          <li class="hovered">
             <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
@@ -93,7 +93,7 @@
               <span class="title">Opciones</span>
             </a>
           </li>
-          <li class="hovered">
+          <li>
             <a href="/contrasena">
               <span class="icon">
                 <ion-icon name="lock-closed-outline"></ion-icon>
@@ -125,7 +125,7 @@
           </div>
           <div class="user">
             <a href="/usuario">
-              <img src="./img/user.jpg" />
+              <img src="${icono}" />
             </a>
           </div>
         </div>
@@ -140,7 +140,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <form action="/cambioContrasena" method="post">
+                  <form action="/cambioContraseña" method="post">
                       <input
                         type="text"
                         name="contraseñaActual"
@@ -157,7 +157,7 @@
                         type="text"
                         name="contraseñaVerificada"
                         id="contraseñaVerificada"
-                        placeholder="Repite la nueva contraseña"
+                        placeholder="Respite la nueva contraseña"
                       />
                       <input type="submit" class="btnMas" value="Cambiar Contraseña">
                   </form>

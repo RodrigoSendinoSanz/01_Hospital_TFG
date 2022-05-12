@@ -277,10 +277,10 @@
                  <c:forEach var="usu" items="${ListUsuCone }">
 						 <tr>
 			                  <td width="60px">
-			                    <div class="imgBx"><a href="/chat"><img src="${usu.imgurl}" alt="icono" /></a></div>
+			                    <div class="imgBx"><a href="/chat"><img src="${usu.imgurl }" alt="icono" /></a></div>
 			                  </td>
 			                  <td>
-			                    <h4>${usu.nombre} <br /><span>${usu.apellido}</span></h4>
+			                    <h4>${usu.nombre } <br /><span>${usu.apellido }</span></h4>
 			                  </td>
 		                </tr>
 				</c:forEach>
@@ -334,6 +334,9 @@
                     allDay: true,
                   });
                   // Ejecutar solo si viene de poner cita
+                  
+                  // PASAR UN MODEL DESDE PEDIR CITA ----------Ejecutar solo si viene de poner cita---------------
+                  
                   const Toast = Swal.mixin({
                     toast: true,
                     position: "top-end",
@@ -345,7 +348,7 @@
                       toast.addEventListener("mouseleave", Swal.resumeTimer);
                     },
                   });
-                  // Ejecutar solo si viene de poner cita
+                  
                   Toast.fire({
                     icon: "success",
                     title: "Se ha creado la cita",
@@ -438,6 +441,12 @@
 		</script>
       
       
+       <c:if test="${mensaje == 'correcto'}">
+        console.log("pasa por el if");
+         <script>
+         	Swal.fire("Guardado!", "", "success");
+	      </script>
+      </c:if>
       <c:if test="${infousu == 'rellenar'}">
          <script>
 	      Swal.fire({
@@ -457,7 +466,7 @@
       
             var noticias = document.querySelector("#noticias");
             var noticiasTitulo = document.querySelector(".titulonoticas");
-      /*---------- Descomentar para las noticias*/
+      /*---------- Descomentar para las noticias
             const options = {
               method: 'GET',
               url: 'https://free-news.p.rapidapi.com/v1/search',
@@ -467,7 +476,7 @@
                 'x-rapidapi-host': 'free-news.p.rapidapi.com'
               }
             };
-      /*----------- Descomentar para las noticias */
+      ----------- Descomentar para las noticias */
             axios.request(options).then(function (response) {
             console.log(response.data.articles);
             if(response.status == "error"){

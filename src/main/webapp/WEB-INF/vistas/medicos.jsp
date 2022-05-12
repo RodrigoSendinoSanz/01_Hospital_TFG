@@ -72,7 +72,7 @@
               </span>
             </a>
           </li>
-          <li>
+          <li class="hovered">
             <a href="/index">
               <span class="icon">
                 <ion-icon name="home-outline"></ion-icon>
@@ -91,7 +91,7 @@
             </a>
           </li>
           </sec:authorize>
-          <li class="hovered">
+          <li>
             <a href="/todoschat">
               <span class="icon">
                 <ion-icon name="chatbox-outline"></ion-icon>
@@ -151,7 +151,7 @@
           </div>
           <div class="user">
             <a href="/usuario">
-              <img src="./img/user.jpg" />
+              <img src="${icono}" />
             </a>
           </div>
         </div>

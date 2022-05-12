@@ -24,7 +24,7 @@
       }
       label input::placeholder{
             color: grey;
-        }
+       }
     </style>
   </head>
   <body>
@@ -132,55 +132,62 @@
                 <tbody>
                   <tr>
                     <form action="/modificarUsuario" id="from1" method="post">
-
+						<label for="DNI">DNI</label>
                         <input
                           type="text"
                           name="dni"
                           id="dni"
                           placeholder="${usuario.dni }"
                           value="${usuario.dni }"
+                          readonly  
                         />
-
+						<label for="email">Email</label>
                         <input
                           type="email"
                           name="email"
                           id="email"
                           placeholder="${usuario.email }"
+                          value="${usuario.email }"
                         />
-
+						<label for="nombre">Nombre</label>
                         <input
                           type="text"
                           name="nombre"
                           id="nombre"
                           placeholder="${usuario.nombre }"
+                          value="${usuario.nombre }"
                         />
-
+						<label for="apellido">Apellido</label>
                         <input
                           type="text"
                           name="apellido"
                           id="apaellido"
                           placeholder="${usuario.apellido }"
+                          value="${usuario.apellido }"
                         />
-
+						<label for="domicilio">Domicilio</label>
                         <input
                           type="text"
                           name="domicilio"
                           id="domicilio"
                           placeholder="${usuario.direccion }"
+                          value="${usuario.direccion }"
                         />
-
+						<label for="telefono">Telefono</label>
                         <input
                           type="number"
                           name="telefono"
                           id="telefono"
                           placeholder="${usuario.telefono }"
+                          value="${usuario.telefono }"
                         />
-
+						<label for="imgurl">Imagen URL</label>
                         <input
                           type="url"
-                          name="imagen"
-                          id="imagen"
+                          name="imgurl"
+                          id="imgurl"
                           placeholder="${usuario.imgurl }"
+                          value="${usuario.imgurl }"
                         />
 
                         <input
@@ -204,36 +211,36 @@
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <form action="" id="from2">
-                      <td>
+                    <form action="/modificarInformacion" id="from2" method="post">
+                    	<input id="dni" name="dni" type="hidden" value="${usuario.dni }"/>
+                    	<label for="peso">Peso</label>
                         <input
                           type="number"
                           name="peso"
                           id="peso"
                           min="15"
                           placeholder="${usuarioInfo.peso }"
+                          value="${usuarioInfo.peso }"
                         />
-                      </td>
-                      <td>
+                        <label for="altura">Altura</label>
                         <input
                           type="number"
                           name="altura"
                           id="altura"
                           placeholder="${usuarioInfo.altura }"
-                          
+                          value="${usuarioInfo.altura }"
                         />
-                      </td>
-                      <td>
+                        <label for="edad">Edad</label>
                         <input
                           type="number"
                           name="edad"
                           id="edad"
                           min="18"
                           placeholder="${usuarioInfo.edad }"
+                          value="${usuarioInfo.edad }"
                         />
-                      </td>
-                      <td>
-                        <ion-icon name="male-outline" id="icono"></ion-icon>
+                        <label for="sexo">Sexo</label>
+                        <ion-icon name="male-outline" id="sexo"></ion-icon>
                         <select name="sexo" id="select">
                           <option value="m"
                           <c:if test = "${usuarioInfo.sexo == 'm'}">
@@ -251,14 +258,11 @@
                           </c:if>
                           >Intersexual</option>
                         </select>
-                      </td>
-                      <td>
                         <input
                           type="submit"
                           class="btnMas"
                           value="Actualizar"
                         />
-                      </td>
                     </form>
                   </tr>
                 </tbody>
@@ -274,8 +278,10 @@
               <table>
                 <tbody>
                   <tr>
-                    <form action="" id="from3">
-                      <td>
+                  
+                  <sec:authorize access="hasAuthority('Paciente')">
+                  <form action="" id="from3">
+                        <label for="alergias">Alergias</label>
                         <input
                           type="text"
                           name="alergias"
@@ -283,8 +289,7 @@
                           placeholder="${usuarioDia.alergias }"
                           disabled
                         />
-                      </td>
-                      <td>
+                        <label for="tratamientos">Tratamientos</label>
                         <input
                           type="text"
                           name="tratamientos"
@@ -292,8 +297,7 @@
                           placeholder="${usuarioDia.tratamiento }"
                           disabled
                         />
-                      </td>
-                      <td>
+                        <label for="operaciones">Operaciones</label>
                         <input
                           type="text"
                           name="operaciones"
@@ -301,8 +305,7 @@
                           placeholder="${usuarioDia.operaciones }"
                           disabled
                         />
-                      </td>
-                      <td>
+                        <label for="enfermedades">Enfermedades</label>
                         <input
                           type="text"
                           name="enfermedades"
@@ -310,27 +313,59 @@
                           placeholder="${usuarioDia.enfermedades }"
                           disabled
                         />
-                      </td>
-                      <td>
-                      <sec:authorize access="hasAuthority('Paciente')">
+                        <input id="dni" name="dni" type="hidden" value="${usuario.dni }">
                         <input
                           type="submit"
                           class="btnMas"
                           value="No puedes editar estos campos solo lo puede rellenar un medico"
                           disabled
                         />
-                       </sec:authorize>
-                      
-                      <sec:authorize access="hasAuthority('Medico')">
+                         <!-- Mostrar  solo si viene siendo un medico (quitar el disabled) -->
+                    </form>
+                    </sec:authorize>
+                  
+                  
+                  
+                  
+                    <sec:authorize access="hasAuthority('Medico')">
+                    <form action="" id="from3">
+                        <label for="alergias">Alergias</label>
+                        <input
+                          type="text"
+                          name="alergias"
+                          id="diagnostico"
+                          placeholder="${usuarioDia.alergias }"
+                        />
+                        <label for="tratamientos">Tratamientos</label>
+                        <input
+                          type="text"
+                          name="tratamientos"
+                          id="diagnostico"
+                          placeholder="${usuarioDia.tratamiento }"
+                        />
+                        <label for="operaciones">Operaciones</label>
+                        <input
+                          type="text"
+                          name="operaciones"
+                          id="diagnostico"
+                          placeholder="${usuarioDia.operaciones }"
+                        />
+                        <label for="enfermedades">Enfermedades</label>
+                        <input
+                          type="text"
+                          name="enfermedades"
+                          id="diagnostico"
+                          placeholder="${usuarioDia.enfermedades }"
+                        />
                         <input
                           type="submit"
                           class="btnMas"
                           value="Actualizar"             
                         />
-                        </sec:authorize>
+
                          <!-- Mostrar  solo si viene siendo un medico (quitar el disabled) -->
-                      </td>
                     </form>
+                    </sec:authorize>
                   </tr>
                 </tbody>
               </table>
@@ -350,7 +385,12 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
-
+       <c:if test="${mensaje == 'incorreccto'}">
+        console.log("pasa por el if");
+         <script>
+         	Swal.fire("No guardado!", "", "error");
+	      </script>
+      </c:if>
     <script>
       let toggle = document.querySelector(".toggle");
       let navegation = document.querySelector(".navegation");
@@ -385,6 +425,7 @@
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             Swal.fire("Guardado!", "", "success");
+            document.querySelector("#from1").submit()
           } else if (result.isDenied) {
             Swal.fire("Los cambios no se han gurdado", "", "info");
           }
@@ -406,6 +447,7 @@
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             Swal.fire("Guardado!", "", "success");
+            document.querySelector("#from2").submit();
           } else if (result.isDenied) {
             Swal.fire("Los cambios no se han gurdado", "", "info");
           }
@@ -427,6 +469,7 @@
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             Swal.fire("Guardado!", "", "success");
+            document.querySelector("#from3").submit();
           } else if (result.isDenied) {
             Swal.fire("Los cambios no se han gurdado", "", "info");
           }
@@ -435,15 +478,15 @@
 
       /*Cambiar el atributo del nombre segun el valor de select*/
       let select = document.querySelector("#select");
-      let icono = document.querySelector("#icono");
+      let icono = document.querySelector("#sexo");
       let option = document.querySelector("option");
 
       select.onchange = function () {
-        if (this.value == "masculino") {
+        if (this.value == "m") {
           icono.setAttribute("name", "male-outline");
-        } else if (this.value == "femenino") {
+        } else if (this.value == "f") {
           icono.setAttribute("name", "female-outline");
-        } else if (this.value == "intersex") {
+        } else if (this.value == "x") {
           icono.setAttribute("name", "male-female-outline");
         }
       };

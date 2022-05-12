@@ -160,7 +160,7 @@
           </div>
           <div class="user">
             <a href="/usuario">
-              <img src="./img/user.jpg" />
+              <img src="${icono}" />
             </a>
           </div>
         </div>

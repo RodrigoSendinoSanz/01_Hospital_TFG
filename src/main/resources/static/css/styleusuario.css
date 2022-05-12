@@ -218,6 +218,7 @@ tr{
 #diagnostico:disabled{
     background: var(--white);
     color: var(--grey);
+    border-bottom: 2px solid #287bff;
 }
 
 .user:hover{
@@ -320,7 +321,6 @@ tr{
     font-size: 1.2rem;
     color: var(--black1);
     padding: 10px;
-    width: 80%;
     margin-bottom: 10px;
     border: none;
     border-bottom: 2px solid var(--blue);
@@ -349,7 +349,6 @@ tr{
     color: var(--white);
     border: 4px solid var(--black);
     text-decoration: none;
-    border-radius: 6px;
   }
   input:disabled:hover {
     position: relative;
@@ -367,6 +366,13 @@ tr{
     align-items: flex-start;
     flex-wrap: wrap;
     }
+
+	#sexo{
+	    width: 97%;
+	    color: white;
+	    background-color: #287bff;
+	    padding: 10px;
+	}
 
     @media screen and (max-width: 1600px) {
         table {

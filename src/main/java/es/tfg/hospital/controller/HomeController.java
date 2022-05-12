@@ -68,17 +68,10 @@ public class HomeController {
 			return "redirect:/index";//de ser asi iniciamos 
 		}
 	}
-	// Mostrar el login. Se puede personalizar el login en formInicio
+	
 	@GetMapping(value={"/login"})
 	public String mostrarFormInicio(Model model) {
-		System.out.println("esto es el metodo mostrarFormInicio" + model.getAttribute("error"));
-		
-		/*System.out.println("getmatpin login");
-		System.out.println(udao.buscarTodos());
-		System.out.println(udao.buscarUsuario("34728920w").toString());
-		System.out.println(pdao.buscarTodos());
-		System.out.println(pdao.buscarPerfil(1).toString());*/
-		
+
 		return "login";
 	}
 
@@ -490,9 +483,115 @@ public class HomeController {
 	}
 	
 	@PostMapping("/modificarUsuario")
-	public String modificarUsuario(Model model) {
-		return "redirect:/usuario";
+	public String modificarUsuario(RedirectAttributes ratt,Model model, @RequestParam("dni") String dni,
+			@RequestParam("email") String email,@RequestParam("nombre") String nombre,
+			@RequestParam("apellido") String apellido,@RequestParam("domicilio") String domicilio,
+			@RequestParam("telefono") String telefono,@RequestParam("imgurl") String imgurl) {
+		System.out.println("A ver que si entra a modificar");
+		Usuario usuario = udao.buscarUsuario(dni);
+		
+		if(dni=="") {
+			usuario.setEmail(usuario.getEmail());
+		}else {
+		usuario.setEmail(email);
+		}
+		if(nombre=="") {
+			usuario.setNombre(usuario.getNombre());
+		}else {
+			usuario.setNombre(nombre);
+		}
+		if(apellido=="") {
+			usuario.setApellido(usuario.getApellido());
+		}else {
+			usuario.setApellido(apellido);
+		}
+		if(domicilio=="") {
+			usuario.setDireccion(usuario.getDireccion());
+		}else {
+			usuario.setDireccion(domicilio);
+		}
+		if(telefono=="") {
+			usuario.setTelefono(usuario.getTelefono());
+		}else {
+			usuario.setTelefono(telefono);
+		}
+		if(imgurl=="") {
+			usuario.setImgurl(usuario.getImgurl());
+		}else {
+			usuario.setImgurl(imgurl);
+		}
+		System.out.println(usuario);
+		int result = udao.editarUsuario(usuario);
+
+		if (result == 0) {
+			ratt.addFlashAttribute("mensaje", "Ha fallado la edicion del usuario");
+			model.addAttribute("mensaje", "incorreccto");
+			System.out.println("Usuario Nooooo editado");
+			System.out.println(usuario);
+			return "redirect:/usuario";
+		} else {
+			model.addAttribute("mensaje", "correcto");
+			ratt.addFlashAttribute("mensaje", "correcto");//no se ven las alertas en el index
+			System.out.println("Usuario editado");
+			return "redirect:/index";
+		}
+		
 	}
+
+	@PostMapping("/modificarInformacion")
+	public String modificarInformacion(RedirectAttributes ratt,Model model, @RequestParam("peso") Integer peso,
+			@RequestParam("altura") String altura, @RequestParam("edad") Integer edad,@RequestParam("sexo") String sexo,
+			@RequestParam("dni") String dni) {
+
+		
+		/*
+		 * 
+		 * Este metodo tiene que insertar un objeto nuevo de tipo informacion si no encuentra buscanolo con el dni
+		 * y si encuentra un usuario editar la nueva informacion del mismo y guardarla
+		 * 
+		 * 
+		 * 
+		 * */
+		
+		
+		System.out.println("A ver que si entra a modificar"+dni);
+		Informacion informacion = idao.buscarInformacion(dni);
+		System.out.println("----Modificar Informacion----");
+		System.out.println(informacion);
+		
+			if(informacion==null){
+				Informacion informacionNuevo = new Informacion();
+				informacionNuevo.setAltura(altura);
+				informacionNuevo.setEdad(edad);
+				informacionNuevo.setPeso(peso);
+				informacionNuevo.setSexo(sexo);
+				informacionNuevo.setUsuario(udao.buscarUsuario(dni));
+				//idao.insertUno(informacionNuevo);
+				model.addAttribute("mensaje", "correcto");
+				ratt.addFlashAttribute("mensaje", "correcto");//no se ven las alertas en el index
+				System.out.println("Informacion editado");
+				idao.editarInformacion(informacionNuevo);
+
+
+				return "redirect:/index";
+			}		
+
+			informacion.setAltura(altura);
+			informacion.setEdad(edad);
+			informacion.setPeso(peso);
+			informacion.setSexo(sexo);
+			informacion.setUsuario(udao.buscarUsuario(dni));
+			//idao.insertUno(informacionNuevo);
+			model.addAttribute("mensaje", "correcto");
+			ratt.addFlashAttribute("mensaje", "correcto");//no se ven las alertas en el index
+			System.out.println("Informacion editado");
+			idao.editarInformacion(informacion);
+
+
+			return "redirect:/index";
+
+	}
+	
 
 	@PostMapping("/registro")
 	public String procesarRegistro(Model model, Usuario usuario) {
@@ -583,7 +682,7 @@ public class HomeController {
 		return "contrasena";
 	}
 	
-	@PostMapping("/cambioContrasena")
+	@PostMapping("/cambioContraseña")
 	public String cambioContraseña(Model model, HttpSession misesion, @RequestParam("contraseñaActual") String contraseñaActual, @RequestParam("nuevaContraseña") String nuevaContraseña, @RequestParam("contraseñaVerificada") String contraseñaVerificada, Usuario usario) {
 //	    String aaaaa = pwenco.encode("a");
 //	    String aa = pwenco.encode("a");

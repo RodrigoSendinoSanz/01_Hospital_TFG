@@ -118,7 +118,7 @@
           </div>
           <div class="user">
             <a href="/index">
-              <img src="./img/user.jpg" />
+              <img src="${icono}" />
             </a>
           </div>
         </div>
