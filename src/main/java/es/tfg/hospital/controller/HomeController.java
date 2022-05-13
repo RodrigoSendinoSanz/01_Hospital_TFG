@@ -59,41 +59,50 @@ public class HomeController {
 	private IntCitaDao cdao;
 	
 
+	/**
+	 * Comprobamos si la session del usuario esta guardada
+	 * @param misesion
+	 * @return accede al index en caso de tener la session iniciada 
+	 * /si no accederemos al login
+	 */
 	@GetMapping("")
 	public String acceso(HttpSession misesion){
-		System.out.println("======accede al metodo====="+ misesion.getAttribute("dni"));
 		if(misesion.getAttribute("dni") == null) {//comprobamos si la session esta guardada el idSessCuent se crea en la linea 57
-			System.out.println("======accede al if====="+  misesion.getAttribute("dni"));
 			return "redirect:/login";//si da nulo significa q no y lo metemos en el login
 		}else {
 			return "redirect:/index";//de ser asi iniciamos 
 		}
 	}
 	
+	/**
+	 * Acceso al login
+	 * @param model
+	 * @return login
+	 */
 	@GetMapping(value={"/login"})
 	public String mostrarFormInicio(Model model) {
-
 		return "login";
 	}
 
-	// Procesamos el login obteniendo el usuario
 
-	@GetMapping("/index")//no funciona!
+	/**
+	 * Acceso al index
+	 * @param aut
+	 * @param model
+	 * @param misesion
+	 * @return
+	 */
+	@GetMapping("/index")
 	public String procesarLogin(Authentication aut, Model model, HttpSession misesion) {
 		String rol =null;
 		
-		System.out.println("procesar login");
 		if (aut != null) {
-			System.out.println("usuario : " + aut.getName());
 			model.addAttribute("usuario", aut.getName());
-			System.out.println("procesar login");
 			
 			for (GrantedAuthority ele: aut.getAuthorities()) {
-				
 				rol=ele.getAuthority();
 			}
 		
-			System.out.println(aut.getAuthorities());
 			model.addAttribute("autorizaciones", aut.getAuthorities());
 			misesion.setAttribute("autorizaciones", aut.getAuthorities());
 			misesion.setAttribute("icono", udao.buscarUsuario(aut.getName()).getImgurl());
@@ -101,29 +110,24 @@ public class HomeController {
 			misesion.setAttribute("dni", udao.buscarUsuario(aut.getName()).getDni());
 			misesion.setAttribute("nombre", udao.buscarUsuario(aut.getName()).getNombre());
 			model.addAttribute("dni", aut.getName());
-			System.out.println("procesar if");
 			misesion.setAttribute("usuario", udao.buscarUsuario(aut.getName()));
 			misesion.setAttribute("usuarioInfo", idao.buscarInformacion(aut.getName()));
 			misesion.setAttribute("usuarioDia", ddao.buscarDiagnostico(aut.getName()));
 			udao.buscarUsuario(aut.getName()).setOnlineusu(1);
-			System.out.println(ddao.buscarDiagnostico(aut.getName()));
-			System.out.println(idao.buscarInformacion(aut.getName()));
 			
 			List<Usuario> ListUsuCone= udao.buscarConectados(udao.buscarUsuario(aut.getName()).getDni());
 			model.addAttribute("ListUsuCone",ListUsuCone);
-			
 			misesion.setAttribute("numeroMedicos", udao.contarMedicos());
-			
 			
 			if(rol.equalsIgnoreCase("Paciente")){
 				List<Cita> citasLista= cdao.buscarCitas((String) model.getAttribute("dni"));
 				model.addAttribute("citasLista",citasLista);
-				System.out.println("INFO:       /// "+aut.getAuthorities().toString());
+				System.out.println("INFO:       /// "+aut.getAuthorities().toString());//lo borro?
 			}else if (rol.equalsIgnoreCase("Medico")){
 				List<Cita> citasListaMedico= cdao.buscarCitasPorMedico((String) model.getAttribute("usuario"));
 				model.addAttribute("citasListaMedico",citasListaMedico);
 				System.out.println(citasListaMedico.toString());
-				System.out.println("INFO:       /// "+aut.getAuthorities().toString());
+				System.out.println("INFO:       /// "+aut.getAuthorities().toString());//lo borro?
 				misesion.setAttribute("citasListaMedico",citasListaMedico);
 			}else {
 				return "redirect:/";
@@ -160,7 +164,12 @@ public class HomeController {
 
 	}
 
-//	Ver detalles del libro
+	/**
+	 * Ver detalles del libro
+	 * @param model
+	 * @param isbn
+	 * @return
+	 */
 	@GetMapping("/verDetalle/{id}")
 	public String mostrarVerDetalleLibro(Model model, @PathVariable("id") long isbn) {
 		//Libro libro = ldao.buscarLibro(isbn);
@@ -170,13 +179,23 @@ public class HomeController {
 		return "/verDetalle";
 	}
 
-//Mostrando todos los libros	
+	/**
+	 * Mostrando todos los libros
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/usuario")
 	public String mostrarUsuario(Model model) {
 
 		return "usuario";
 	}
 	
+	/**
+	 * Mostrar 1 solo usaurio opteniendo su nombre
+	 * @param model
+	 * @param nombre
+	 * @return
+	 */
 	@GetMapping("/verUsuario/{nombre}")
 	public String verUnUsuario(Model model,@PathVariable String nombre) {
 		System.out.println("entra usuario");
@@ -201,7 +220,11 @@ public class HomeController {
 	
 
 
-	// Mostrando todos los Temas
+	/**
+	 * Mostrando todos los Temas
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/cliente/temas")
 	public String mostrarTemas(Model model) {
 
@@ -209,7 +232,12 @@ public class HomeController {
 		return "temasTodos";
 	}
 
-	// Mostrando uno de los Temas
+	/**
+	 * Mostrando uno de los Temas
+	 * @param model
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/cliente/tema/{idTema}")
 	public String mostrarlibrosTema(Model model, @PathVariable("idTema") int id) {
 		//model.addAttribute("tema", tdao.buscarTema(id));
@@ -217,7 +245,12 @@ public class HomeController {
 		return "verTema";
 	}
 
-	// Eliminar Libros
+	/**
+	 * Eliminar Libros
+	 * @param model
+	 * @param isbn
+	 * @return
+	 */
 	@GetMapping("/eliminar/{id}")
 	public String procEliminar(Model model, @PathVariable("id") long isbn) {
 
@@ -237,7 +270,6 @@ public class HomeController {
 		//model.addAttribute("libro", ldao.buscarLibro(isbn));
 		return "editarLibro";
 	}
-	
 	/*
 	@PostMapping("/editar")
 	public String procEditarLibro(RedirectAttributes ratt, @RequestParam("isbn") long isbn,
@@ -401,7 +433,10 @@ public class HomeController {
 		return "menuPrincipal";
 	}
 
-	// Dar de alta un tema
+	/**
+	 * Dar de alta un tema
+	 * @return
+	 */
 	@GetMapping("/admon/altaTema")
 	public String mostrarAltaTema() {
 
@@ -466,6 +501,12 @@ public class HomeController {
 		//}
 
 	}
+	/**
+	 * muestra una cita
+	 * @param model
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/verUna/{id}")
 	public String mostrarCita(Model model,@PathVariable int id) {
 		Cita cita= new Cita();
@@ -474,6 +515,13 @@ public class HomeController {
 		
 		return "verUna";
 	}
+	
+	/**
+	 * Get para editar una cita
+	 * @param model
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/editarUna/{id}")
 		public String mostrarEditar(Model model,@PathVariable int id) {
 		Cita cita= new Cita();
@@ -482,16 +530,25 @@ public class HomeController {
 		return "editarUna";
 		}
 	
-
+	/**
+	 * Post para editar una cita
+	 * @param model
+	 * @param redir
+	 * @param idCita
+	 * @param fechaCita
+	 * @param horaCita
+	 * @param estado
+	 * @param direccionCentrosalud
+	 * @param sintomas
+	 * @return
+	 */
 	@PostMapping("/editarUna")
-	public String mostrarEditar(Model model,@RequestParam("idCita") Integer idCita,
+	public String mostrarEditar(Model model, RedirectAttributes redir,@RequestParam("idCita") Integer idCita,
 			@RequestParam("fechaCita") Date fechaCita,@RequestParam("horaCita") String horaCita,
 			@RequestParam("estado") String estado,@RequestParam("direccionCentrosalud") String direccionCentrosalud,
 			@RequestParam("sintomas") String sintomas) {
 		Cita cita= new Cita();
 		cita=cdao.buscarUnaCita(idCita);
-		
-		
 		
 		if(horaCita=="") {
 			cita.setHoraCita(cita.getHoraCita());
@@ -509,12 +566,24 @@ public class HomeController {
 			cita.setDireccionCentrosalud(direccionCentrosalud);
 		}
 
+		int result = cdao.editarCita(cita);
 		
-		model.addAttribute("cita", cita);
-		
-		return "index";
+		if (result == 0) {
+			redir.addFlashAttribute("mensaje", "Ha fallado la edicion de la cita");
+			return "redirect:/";
+		} else {
+			redir.addFlashAttribute("mensaje", "La cita se edito correctamente");
+			return "redirect:/";
+		}
 	}
 	
+
+	/**
+	 * Cancela una cita
+	 * @param model
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/cancelarUna/{id}")
 	public String cancelarCita(Model model,@PathVariable int id) {
 		Cita cita= new Cita();
@@ -525,12 +594,28 @@ public class HomeController {
 		
 		return "redirect:/index";
 	}
-	
+	/**
+	 * acceso a registro
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/registro")
 	public String mostrarRegistro(Model model) {
 		return "registro";
 	}
-	
+	/**
+	 * modificar un usuario
+	 * @param ratt
+	 * @param model
+	 * @param dni
+	 * @param email
+	 * @param nombre
+	 * @param apellido
+	 * @param domicilio
+	 * @param telefono
+	 * @param imgurl
+	 * @return
+	 */
 	@PostMapping("/modificarUsuario")
 	public String modificarUsuario(RedirectAttributes ratt,Model model, @RequestParam("dni") String dni,
 			@RequestParam("email") String email,@RequestParam("nombre") String nombre,
@@ -739,41 +824,24 @@ public class HomeController {
 		return "contrasena";
 	}
 	
+	/**
+	 * Metodo en el que cambiaos la contraseña del Usiario
+	 * @param model
+	 * @param misesion
+	 * @param contraseñaActual
+	 * @param nuevaContraseña
+	 * @param contraseñaVerificada
+	 * @param usario
+	 * @return Nos devuelve a la pagina de contraseña
+	 */
 	@PostMapping("/cambioContraseña")
 	public String cambioContraseña(Model model, HttpSession misesion, @RequestParam("contraseñaActual") String contraseñaActual, @RequestParam("nuevaContraseña") String nuevaContraseña, @RequestParam("contraseñaVerificada") String contraseñaVerificada, Usuario usario) {
-//	    String aaaaa = pwenco.encode("a");
-//	    String aa = pwenco.encode("a");
-//	    Boolean desf  = pwenco.matches(contraseñaActual, misesion.getAttribute("password").toString());
-//		System.out.println("----aaaaa-----" + aaaaa);
-//		System.out.println("----aa-----" + aa);
-//		System.out.println("----decode-----" + desf);
-//		System.out.println("-----Accede para cambiar la contraseña-----");
-//		System.out.println("-----Session -----"+ misesion.getAttribute("password"));
-//		System.out.println("-----cifrada actual-----" + contraseñaActualCifrada);
-		System.out.println("Dni aqui en teoria"+(String) misesion.getAttribute("dni"));
-		
 		if(Boolean.TRUE.equals(pwenco.matches(contraseñaActual, misesion.getAttribute("password").toString()))){
-
 			if(Boolean.TRUE.equals(nuevaContraseña.equals(contraseñaVerificada))){
-				System.out.println("accede");
-				System.out.println("Dni aqui en teoria"+(String) misesion.getAttribute("dni"));
 				String contraseñaVerificadaCifrada = pwenco.encode(contraseñaVerificada);
-				System.out.println("accedeasdadasd");
-				System.out.println("dnidnidnidndi "+ misesion.getAttribute("dni"));
 				udao.cambioContraseña(contraseñaVerificadaCifrada, misesion.getAttribute("dni").toString());
-				System.out.println("------------------------");
-				System.out.println("accede para cambiar la contraseña a " + contraseñaVerificadaCifrada);
 			}
 		}
-//		String usuariocontra = misesion.
-//		String encriptado = pwenco.encode(usuariocontra);
-//		//recibir la contraseñaActual y comprobar que es correcta
-//		if(misesion.get)
-//		Comprobar que las nuevas contraseñas son correctas
-//		cambiar contraseñas
-//
-//		usuario.setPassword(encriptado);
-		
 		return "contrasena";
 	}
 	

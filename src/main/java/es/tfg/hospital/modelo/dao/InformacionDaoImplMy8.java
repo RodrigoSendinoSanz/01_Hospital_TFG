@@ -16,18 +16,27 @@ public class InformacionDaoImplMy8 implements IntInformacionDao{
 	@Autowired
 	private InformacionRepo infrepo;
 	
+	/**
+	 * devuelve la informacion del usuario solicitada a raiz del dni
+	 */
 	@Override
 	public Informacion buscarInformacion(String dni) {
 		
 		return infrepo.findInformacionbyUsuario(dni);
 	}
 
+	/**
+	 * devuelve la lista de la informacion del usuario
+	 */
 	@Override
 	public List<Informacion> buscarTodos() {
 		// TODO Auto-generated method stub
 		return infrepo.findAll();
 	}
 
+	/**
+	 * crea un nuevo registro de informacion
+	 */
 	@Override
 	public int insertUno(Informacion informacion) {
 		int filas = 0;
@@ -46,6 +55,9 @@ public class InformacionDaoImplMy8 implements IntInformacionDao{
 		return filas;
 	}
 
+	/**
+	 * edita el registro de informacion seleccionado
+	 */
 	@Override
 	public int editarInformacion(Informacion informacion) {
 
