@@ -189,7 +189,6 @@
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <form action="/verUna" id="form1" method ="post">
 
                         <h3>${cita.fechaCita }</h3>
 
@@ -204,17 +203,11 @@
 	                    <h3>${cita.nombreMedico }</h3>
 
 	                    <h3>${cita.nombrePaciente }</h3>
-
                   </tr>
                 </tbody>
               </table>
             </div>
-            <input
-             type="submit"
-             class="btnMas"
-             value="Cancelar"
-            />
-            </form>
+            <a href="/cancelarUna/${cita.idCita}" class="btnMas cancelar">Cancelar</a> 
           </div>
   		 <button id="btnCrearPdf">Guardar como PDF</button>
         </div>

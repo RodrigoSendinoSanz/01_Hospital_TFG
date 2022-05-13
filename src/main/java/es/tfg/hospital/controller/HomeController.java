@@ -57,6 +57,7 @@ public class HomeController {
 	
 	@Autowired
 	private IntCitaDao cdao;
+	
 
 	@GetMapping("")
 	public String acceso(HttpSession misesion){
@@ -108,10 +109,12 @@ public class HomeController {
 			System.out.println(ddao.buscarDiagnostico(aut.getName()));
 			System.out.println(idao.buscarInformacion(aut.getName()));
 			
-			List<Usuario> ListUsuCone= udao.buscarConectados();
+			List<Usuario> ListUsuCone= udao.buscarConectados(udao.buscarUsuario(aut.getName()).getDni());
 			model.addAttribute("ListUsuCone",ListUsuCone);
 			
-
+			misesion.setAttribute("numeroMedicos", udao.contarMedicos());
+			
+			
 			if(rol.equalsIgnoreCase("Paciente")){
 				List<Cita> citasLista= cdao.buscarCitas((String) model.getAttribute("dni"));
 				model.addAttribute("citasLista",citasLista);
@@ -133,6 +136,10 @@ public class HomeController {
 				model.addAttribute("infousu", "norellenar");
 				System.out.println("Infos Completos");
 			}
+			
+			Usuario usuario = udao.buscarUsuario(aut.getName());
+			usuario.setOnlineusu(1);
+			udao.editarUsuario(usuario);
 			
 			// Generamos la lista con las novedades respecto a los libros
 			//List<Libro> lista = ldao.buscarNovedades();
@@ -467,14 +474,56 @@ public class HomeController {
 		
 		return "verUna";
 	}
-
 	@GetMapping("/editarUna/{id}")
-	public String mostrarEditar(Model model,@PathVariable int id) {
+		public String mostrarEditar(Model model,@PathVariable int id) {
 		Cita cita= new Cita();
 		cita=cdao.buscarUnaCita(id);
 		model.addAttribute("cita", cita);
-		
 		return "editarUna";
+		}
+	
+
+	@PostMapping("/editarUna")
+	public String mostrarEditar(Model model,@RequestParam("idCita") Integer idCita,
+			@RequestParam("fechaCita") Date fechaCita,@RequestParam("horaCita") String horaCita,
+			@RequestParam("estado") String estado,@RequestParam("direccionCentrosalud") String direccionCentrosalud,
+			@RequestParam("sintomas") String sintomas) {
+		Cita cita= new Cita();
+		cita=cdao.buscarUnaCita(idCita);
+		
+		
+		
+		if(horaCita=="") {
+			cita.setHoraCita(cita.getHoraCita());
+		}else {
+			cita.setHoraCita(horaCita);
+		}
+		if(estado=="") {
+			cita.setEstado(cita.getEstado());
+		}else {
+			cita.setEstado(estado);
+		}
+		if(direccionCentrosalud=="") {
+			cita.setDireccionCentrosalud(cita.getDireccionCentrosalud());
+		}else {
+			cita.setDireccionCentrosalud(direccionCentrosalud);
+		}
+
+		
+		model.addAttribute("cita", cita);
+		
+		return "index";
+	}
+	
+	@GetMapping("/cancelarUna/{id}")
+	public String cancelarCita(Model model,@PathVariable int id) {
+		Cita cita= new Cita();
+		cita=cdao.buscarUnaCita(id);
+		cita.setEstado("Cancelado");
+		cdao.editarCita(cita);
+		model.addAttribute("cita", cita);
+		
+		return "redirect:/index";
 	}
 	
 	@GetMapping("/registro")
@@ -626,6 +675,11 @@ public class HomeController {
 		return "redirect:/";
 
 	}
+	@GetMapping("/pedircita")
+	public String mostrarPedirCita(Model model) {
+		System.out.println("entrar mostrar cita");
+		return "cita";
+	}
 
 	@GetMapping("/ayuda")
 	public String mostrarAyuda(Model model) {
@@ -634,6 +688,7 @@ public class HomeController {
 	
 	@GetMapping("/pacientes")
 	public String mostrarPacientes(Model model) {
+		model.addAttribute("listaPacientes",udao.buscarPacientes());
 		return "pacientes";
 	}
 	
@@ -643,7 +698,9 @@ public class HomeController {
 	}
 	
 	@GetMapping("/medicos")
-	public String mostrarMedicos(Model model) {
+	public String mostrarMedicos(Model model,HttpSession misesion) {
+		List<Usuario> listaMedicos= udao.buscarMedicos((String) misesion.getAttribute("dni"));
+		model.addAttribute("listaMedicos",listaMedicos);
 		return "medicos";
 	}
 	
@@ -729,14 +786,21 @@ public class HomeController {
 		return encriptado;
 
 	}
-
-	@GetMapping("/logout")//Aun que pongas la URL no pasa por aqui al salir
-	public String logout(HttpServletRequest request,HttpSession misesion) {
+	@GetMapping("/cerrar")
+	public String salirprueba(HttpServletRequest request,HttpSession misesion) {
 		System.out.println("Adios");
-
-		udao.buscarUsuario((String) misesion.getAttribute("dni")).setOnlineusu(0);
+		Usuario usuario = udao.buscarUsuario((String) misesion.getAttribute("dni"));
+		System.out.println(usuario);
+		usuario.setOnlineusu(0);
+		udao.editarUsuario(usuario);
+		System.out.println(usuario);
 		SecurityContextLogoutHandler logoutfandler = new SecurityContextLogoutHandler();
 		logoutfandler.logout(request, null, null);
+		return "redirect:/logout";
+	}
+
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request,HttpSession misesion) {
 		return "redirect:/login";
 	}
 

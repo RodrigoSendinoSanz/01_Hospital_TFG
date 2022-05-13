@@ -164,84 +164,24 @@
             </div>
             <table>
               <tbody>
+               <c:forEach var="ele" items="${listaMedicos }">
                 <tr>
                   <td width="60px">
                     <div class="imgBx">
                       <img
-                        src="https://empresas.blogthinkbig.com/wp-content/uploads/2019/11/Imagen3-245003649.jpg?w=800"
+                        src="${ele.imgurl }"
                         alt=""
                       />
                     </div>
                   </td>
-                  <td>
-                    <h4>[Nombre] <br /><span>[Tipo de usuario]</span></h4>
-                    <a href="./chat.html" class="btnMas">Escribir</a>
-                  </td>
+                  
+	                  <td>
+	                    <h4>${ele.nombre } ${ele.apellido } <br />
+	                    <span><c:if test="${ele.apellido =='1'}">Online</c:if><c:if test="${ele.apellido == '0'}">Offline</c:if></span></h4>
+	                    <a href="/chat/${ele.dni }" class="btnMas">Escribir</a>
+	                </td>
                 </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img2.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Jose <br /><span>España</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img3.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Xian <br /><span>UK</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img4.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Marcos <br /><span>Brasil</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img5.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Giorgina <br /><span>Lituania</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img6.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Andersen <br /><span>Suiza</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img7.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Maria <br /><span>EEUU</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img8.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Juan <br /><span>Suiza</span></h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="60px">
-                    <div class="imgBx"><img src="./img/img9.jpg" alt="" /></div>
-                  </td>
-                  <td>
-                    <h4>Sara <br /><span>España</span></h4>
-                  </td>
-                </tr>
+                </c:forEach> 
               </tbody>
             </table>
           </div>

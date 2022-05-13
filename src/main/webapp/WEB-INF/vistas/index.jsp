@@ -115,7 +115,7 @@
             </a>
           </li>
           <li>
-            <a href="/logout">
+            <a href="/cerrar">
               <span class="icon">
                 <ion-icon name="log-out-outline"></ion-icon>
               </span>
@@ -184,7 +184,7 @@
           <a href="/medicos">
             <div class="card">
               <div>
-                <div class="numbers">120</div>
+                <div class="numbers">${numeroMedicos }</div>
                 <div class="cardName">Médicos disponibles</div>
               </div>
               <div class="iconBox">
@@ -197,7 +197,9 @@
         <div class="infoheader">
           <div class="caja">
             <div id="calendar"></div>
-            <sec:authorize access="hasAuthority('Paciente')"><a href="/cita" class="btnCita">Pedir cita</a></sec:authorize>
+            <sec:authorize access="hasAuthority('Paciente')">
+            	<a href="/pedircita" class="btnCita">Pedir cita</a>
+            </sec:authorize>
           </div>
           <div class="caja">
             <p class="titulonoticas">Noticias:<br /></p>
@@ -257,7 +259,7 @@
 	                  <td>${ele.direccionCentrosalud}</td>
 	                  <td><span class="status ${ele.estado}">${ele.estado}</span></td>
 	                  <td>
-	                    <a href="/borraUna/${ele.idCita}" class="botones cancelar">Cancelar</a> 
+	                    <a href="/cancelarUna/${ele.idCita}" class="botones cancelar">Cancelar</a> 
 	                    <a href="/editarUna/${ele.idCita}" class="botones">Editar</a>
 	                  </td>
 	                </tr>
@@ -274,7 +276,7 @@
             </div>
             <table>
               <tbody>
-                 <c:forEach var="usu" items="${ListUsuCone }">
+                 <c:forEach var="usu" items="${ListUsuCone }"> 
 						 <tr>
 			                  <td width="60px">
 			                    <div class="imgBx"><a href="/chat"><img src="${usu.imgurl }" alt="icono" /></a></div>

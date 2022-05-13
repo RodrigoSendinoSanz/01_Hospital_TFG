@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.tfg.hospital.modelo.beans.Cita;
+import es.tfg.hospital.modelo.beans.Informacion;
 import es.tfg.hospital.modelo.repository.CitaRepo;
 
 
@@ -57,6 +58,26 @@ public class CitaDaoImplMy8 implements IntCitaDao{
 		return citarepo.findCitabyMedico(nombreMedico);
 	}
 
+	@Override
+	public int editarCita(Cita cita) {
 
+
+			int filas=0;
+			//Si no existe no lo añadimos
+			if (citarepo.findAll().indexOf(cita)==-1) {
+			return filas;	
+			//Si existe lo modificamos
+			}else {
+				try {
+					citarepo.save(cita);
+					filas=1;
+				}catch (Exception e) {
+					e.printStackTrace();
+					
+				}
+				return filas;
+			}
+		
+	}
 
 }

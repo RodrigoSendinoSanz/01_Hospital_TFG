@@ -10,4 +10,5 @@ public interface IntCitaDao {
 	int insertUna(Cita cita);
 	Cita buscarUnaCita(int idCita);
 	List<Cita> buscarCitasPorMedico(String dni);
+	int editarCita(Cita cita);
 }

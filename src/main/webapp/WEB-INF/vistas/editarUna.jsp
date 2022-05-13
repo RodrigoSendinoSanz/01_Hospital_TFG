@@ -137,7 +137,8 @@
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <form action="/editarUna" id="form1">
+                    <form action="/editarUna" id="form1" method ="post">
+                      <input id="idCita" name="idCita" type="hidden" value="${cita.idCita }"/>
                       <td>
                         <input
                         type="text"
@@ -176,10 +177,10 @@
                       </td>
                       <td>
                         <select name="estado" id="select">
-                          <option value="realizado">Realizado</option>
-                          <option value="cancelado">Cancelado</option>
-                          <option value="pendiente">Pendiente</option>
-                          <option value="enprogreso">En progreso</option>
+                          <option value="Realizado">Realizado</option>
+                          <option value="Cancelado">Cancelado</option>
+                          <option value="Pendiente">Pendiente</option>
+                          <option value="Enprogreso">Enprogreso</option>
                         </select>
                       </td>
                       <td>
@@ -235,17 +236,17 @@
         e.preventDefault();
 
         Swal.fire({
-          title: "¿Seguro que quieres cancelar esta cita?",
+          title: "¿Seguro que quieres editar esta cita?",
           showDenyButton: true,
-          confirmButtonText: "Cancelar",
+          confirmButtonText: "Editar",
           denyButtonText: `No cancelar`,
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            Swal.fire("Cita cancelada!", "", "success");
-            window.location.assign("./index.html");
+            Swal.fire("Cita Editada!", "", "success");
+            e.submit();
           } else if (result.isDenied) {
-            Swal.fire("La cita no se ha cancelado", "", "info");
+            Swal.fire("La cita no se ha editado", "", "info");
           }
         });
       });

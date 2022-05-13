@@ -56,12 +56,6 @@ public class UsuarioDaoImplMy8 implements IntUsuarioDao{
 	}
 
 	@Override
-	public List<Usuario> buscarConectados() {
-		// TODO Auto-generated method stub
-		return urepo.mostrarConectados();
-	}
-
-	@Override
 	public Usuario buscarUsuarioPorNombre(String nombre) {
 		// TODO Auto-generated method stub
 		return urepo.getByNombre(nombre);
@@ -80,6 +74,34 @@ public class UsuarioDaoImplMy8 implements IntUsuarioDao{
 				}
 				return filas;
 			}
+
+	@Override
+	public Integer contarMedicos() {
+		// TODO Auto-generated method stub
+		return urepo.contarMedicos();
+	}
+
+	@Override
+	public List<Usuario> buscarConectados(String dni) {
+		// TODO Auto-generated method stub
+		return urepo.buscarConectados(dni);
+	}
+
+
+
+
+	@Override
+	public List<Usuario> buscarPacientes() {
+		// TODO Auto-generated method stub
+		return urepo.mostrarPacientes();
+	}
+
+	@Override
+	public List<Usuario> buscarMedicos(String dni) {
+		// TODO Auto-generated method stub
+		return urepo.mostrarMedicos(dni);
+	}
+
 			
 
 	}

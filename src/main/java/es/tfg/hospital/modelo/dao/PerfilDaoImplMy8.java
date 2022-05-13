@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.tfg.hospital.modelo.beans.Perfil;
+import es.tfg.hospital.modelo.beans.Usuario;
 import es.tfg.hospital.modelo.repository.PerfilRepo;
 
 
@@ -47,4 +48,10 @@ public class PerfilDaoImplMy8 implements IntPerfilDao{
 		}
 		return filas;
 	}
+
+	/*@Override
+	public List<Usuario> buscarMedicos() {
+		// TODO Auto-generated method stub
+		return pfrepo.findMedicos();
+	}*/
 }
