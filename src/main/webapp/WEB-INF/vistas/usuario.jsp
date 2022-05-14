@@ -165,11 +165,11 @@
                           placeholder="${usuario.apellido }"
                           value="${usuario.apellido }"
                         />
-						<label for="domicilio">Domicilio</label>
+						<label for="direccion">Domicilio</label>
                         <input
                           type="text"
-                          name="domicilio"
-                          id="domicilio"
+                          name="direccion"
+                          id="direccion"
                           placeholder="${usuario.direccion }"
                           value="${usuario.direccion }"
                         />
@@ -190,11 +190,7 @@
                           value="${usuario.imgurl }"
                         />
 
-                        <input
-                          type="submit"
-                          class="btnMas"
-                          value="Actualizar"
-                        />
+                        <input type="submit" class="btnMas" value="Actualizar"/>
                     </form>
                   </tr>
                 </tbody>

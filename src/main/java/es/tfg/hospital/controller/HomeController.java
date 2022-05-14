@@ -186,7 +186,6 @@ public class HomeController {
 	 */
 	@GetMapping("/usuario")
 	public String mostrarUsuario(Model model) {
-
 		return "usuario";
 	}
 	
@@ -619,7 +618,7 @@ public class HomeController {
 	@PostMapping("/modificarUsuario")
 	public String modificarUsuario(RedirectAttributes ratt,Model model, @RequestParam("dni") String dni,
 			@RequestParam("email") String email,@RequestParam("nombre") String nombre,
-			@RequestParam("apellido") String apellido,@RequestParam("domicilio") String domicilio,
+			@RequestParam("apellido") String apellido,@RequestParam("direccion") String direccion,
 			@RequestParam("telefono") String telefono,@RequestParam("imgurl") String imgurl) {
 		System.out.println("A ver que si entra a modificar");
 		Usuario usuario = udao.buscarUsuario(dni);
@@ -639,10 +638,10 @@ public class HomeController {
 		}else {
 			usuario.setApellido(apellido);
 		}
-		if(domicilio=="") {
+		if(direccion=="") {
 			usuario.setDireccion(usuario.getDireccion());
 		}else {
-			usuario.setDireccion(domicilio);
+			usuario.setDireccion(direccion);
 		}
 		if(telefono=="") {
 			usuario.setTelefono(usuario.getTelefono());
@@ -803,36 +802,57 @@ public class HomeController {
 		return "todas";
 	}
 	
+	/**
+	 * nos devuelve la pagina de historial
+	 * @param model
+	 * @param misesion
+	 * @return
+	 */
 	@GetMapping("/historialclinico")
 	public String mostrarHistorial(Model model,HttpSession misesion) {
 		model.addAttribute("historial", "Rellenar");
 		return "historial";
 	}
 
+	/**
+	 * nos devuelve la pagina de todoschat
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/todoschat")
 	public String mostrarTodoschat(Model model) {
 		return "todoschat";
 	}
 
+	/**
+	 * nos devuelve la pagina de recuperarcontrasena
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/recuperarcontrasena")
 	public String mostrarRecuperarContrasena(Model model) {
 		return "recuperarcontrasena";
 	}
 
+	/**
+	 * nos devuelve la pagina de contrasena
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/contrasena")
 	public String mostrarContrasena(Model model) {
 		return "contrasena";
 	}
 	
 	/**
-	 * Metodo en el que cambiaos la contraseña del Usiario
+	 * cambiaos la contraseña del Usiario
 	 * @param model
 	 * @param misesion
 	 * @param contraseñaActual
 	 * @param nuevaContraseña
 	 * @param contraseñaVerificada
 	 * @param usario
-	 * @return Nos devuelve a la pagina de contraseña
+	 * @return Nos devuelve la pagina de contraseña
 	 */
 	@PostMapping("/cambioContraseña")
 	public String cambioContraseña(Model model, HttpSession misesion, @RequestParam("contraseñaActual") String contraseñaActual, @RequestParam("nuevaContraseña") String nuevaContraseña, @RequestParam("contraseñaVerificada") String contraseñaVerificada, Usuario usario) {
@@ -845,7 +865,10 @@ public class HomeController {
 		return "contrasena";
 	}
 	
-	//Para encriptar el password de usuario en la base de datos
+	/**
+	 * Para encriptar el password de usuario en la base de datos
+	 * @return
+	 */
 	@GetMapping("/pwd")
 	@ResponseBody
 	public String generarEncriptado() {
@@ -854,19 +877,28 @@ public class HomeController {
 		return encriptado;
 
 	}
+	/**
+	 * nos cierra la session del usuario
+	 * @param request
+	 * @param misesion
+	 * @return
+	 */
 	@GetMapping("/cerrar")
 	public String salirprueba(HttpServletRequest request,HttpSession misesion) {
-		System.out.println("Adios");
 		Usuario usuario = udao.buscarUsuario((String) misesion.getAttribute("dni"));
-		System.out.println(usuario);
 		usuario.setOnlineusu(0);
 		udao.editarUsuario(usuario);
-		System.out.println(usuario);
 		SecurityContextLogoutHandler logoutfandler = new SecurityContextLogoutHandler();
 		logoutfandler.logout(request, null, null);
 		return "redirect:/logout";
 	}
 
+	/**
+	 * nos redirige al login
+	 * @param request
+	 * @param misesion
+	 * @return
+	 */
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request,HttpSession misesion) {
 		return "redirect:/login";
