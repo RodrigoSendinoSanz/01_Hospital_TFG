@@ -759,7 +759,7 @@ public class HomeController {
 		return "redirect:/";
 
 	}
-	@GetMapping("/pedircita")
+	@GetMapping("/pedircita")
 	public String mostrarPedirCita(Model model) {
 		System.out.println("entrar mostrar cita");
 		return "cita";
