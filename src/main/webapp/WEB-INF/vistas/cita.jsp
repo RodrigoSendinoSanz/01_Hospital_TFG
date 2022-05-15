@@ -132,22 +132,25 @@
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <form action="./index.html" id="from1">
+                    <form action="/pedircita" id="from10" method="post">
+                    <input id="dni" name="dni" type="hidden" value="${usuario.dni}"/>
+                    <input id="nombre" name="nombre" type="hidden" value="${usuario.nombre}"/>
+                    <input id="estado" name="estado" type="hidden" value="Pendiente"/>
                       <td>
                         Fecha
-                      <label for="fecha">
+                      <label for="fechaCita">
                         <input
                         type="date"
-                        name="fecha"
-                        id="fecha"
+                        name="fechaCita"
+                        id="fechaCita"
                         placeholder="fecha"
                         required
                       />
                       </label>
                     </td>
                     <td>
-                      <label for="hora">Hora
-                          <select name="hora" required>
+                      <label for="horaCita">Hora
+                          <select name="horaCita" required>
                             <option value="08:30">8:30</option>
                             <option value="09:30">9:30</option>
                             <option value="10:30">9:30</option>
@@ -165,8 +168,8 @@
                         </label>
                     </td>
                     <td>
-                      <label for="direccion">Centro
-                          <select name="direccion" required>
+                      <label for="direccionCentrosalud">Centro
+                          <select name="direccionCentrosalud" required>
                             <option value="Direccion1">Direccion1</option>
                             <option value="Direccion2">Direccion2</option>
                             <option value="Direccion3">Direccion3</option>

@@ -62,20 +62,27 @@ public class InformacionDaoImplMy8 implements IntInformacionDao{
 	public int editarInformacion(Informacion informacion) {
 
 		int filas=0;
-		//Si no existe no lo añadimos
-		if (infrepo.findAll().indexOf(informacion)==-1) {
-		return filas;	
-		//Si existe lo modificamos
-		}else {
-			try {
-				infrepo.save(informacion);
-				filas=1;
-			}catch (Exception e) {
-				e.printStackTrace();
-				
-			}
-			return filas;
+		try {
+			infrepo.save(informacion);
+			filas=1;
+		}catch (Exception e) {
+			e.printStackTrace();
+			
 		}
+		return filas;
+		//Si no existe no lo añadimos
+//		if (infrepo.findAll().indexOf(informacion)==-1) {
+//		return filas;	
+//		//Si existe lo modificamos
+//		}else {
+//			try {
+//				infrepo.save(informacion);
+//				filas=1;
+//			}catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			return filas;
+//		}
 	}
 
 }

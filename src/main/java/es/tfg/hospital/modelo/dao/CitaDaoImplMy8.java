@@ -40,17 +40,13 @@ public class CitaDaoImplMy8 implements IntCitaDao{
 	@Override
 	public int insertUna(Cita cita) {
 		int filas = 0;
-		if(citarepo.findAll().contains(cita)) {
-			filas=2;
-		}else {
+
 		try {
 			citarepo.save(cita);
-			
 			filas=1;
-		} catch(Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
-		}
-			return filas;
+			
 		}
 		return filas;
 	}
@@ -80,19 +76,15 @@ public class CitaDaoImplMy8 implements IntCitaDao{
 	public int editarCita(Cita cita) {
 
 			int filas=0;
-			//Si no existe no lo añadimos
-			if (citarepo.findAll().indexOf(cita)==-1) {
-			return filas;	
-			//Si existe lo modificamos
-			}else {
-				try {
-					citarepo.save(cita);
-					filas=1;
-				}catch (Exception e) {
-					e.printStackTrace();
-				}
-				return filas;
+
+			try {
+				citarepo.save(cita);
+				filas=1;
+			}catch (Exception e) {
+				e.printStackTrace();
+				
 			}
+			return filas;
 		
 	}
 

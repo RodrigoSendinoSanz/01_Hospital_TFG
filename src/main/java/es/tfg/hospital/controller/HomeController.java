@@ -1,5 +1,7 @@
 package es.tfg.hospital.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -133,10 +136,10 @@ public class HomeController {
 				return "redirect:/";
 			}
 			
-			if(idao.buscarInformacion(aut.getName()) == null) {
+			if (idao.buscarInformacion(aut.getName()) == null) {
 				model.addAttribute("infousu", "rellenar");
 				System.out.println(" Infos Rellenar");
-			}else {
+			} else {
 				model.addAttribute("infousu", "norellenar");
 				System.out.println("Infos Completos");
 			}
@@ -157,7 +160,6 @@ public class HomeController {
 			return "index";
 		} else {
 			System.out.println("procesar else");
-
 			model.addAttribute("error", "error");//NO LE LLEGA EL ERROR
 			return "/login";//IMPORTANTE NO MUESTAR LA ALETRA DEL EL ERROR
 		}
@@ -529,8 +531,13 @@ public class HomeController {
 		return "editarUna";
 		}
 	
+	@GetMapping("/pedircita")
+	public String mostrarPedirCita(Model model) {
+		return "cita";
+	}
+
 	/**
-	 * Post para editar una cita
+	 * Post para pedir una cita
 	 * @param model
 	 * @param redir
 	 * @param idCita
@@ -541,41 +548,32 @@ public class HomeController {
 	 * @param sintomas
 	 * @return
 	 */
-	@PostMapping("/editarUna")
-	public String mostrarEditar(Model model, RedirectAttributes redir,@RequestParam("idCita") Integer idCita,
-			@RequestParam("fechaCita") Date fechaCita,@RequestParam("horaCita") String horaCita,
-			@RequestParam("estado") String estado,@RequestParam("direccionCentrosalud") String direccionCentrosalud,
-			@RequestParam("sintomas") String sintomas) {
+	@PostMapping("/pedircita")
+	public String pedircita(RedirectAttributes ratt, Model model, RedirectAttributes redir,	@RequestParam("fechaCita") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaCita,@RequestParam("horaCita") String horaCita,
+			@RequestParam("estado") String estado, @RequestParam("direccionCentrosalud") String direccionCentrosalud,
+			@RequestParam("sintomas") String sintomas, @RequestParam("dni") Usuario dni, @RequestParam("nombre") String nombre, @RequestParam("nombre_medico") String nombre_medico) {
 		Cita cita= new Cita();
-		cita=cdao.buscarUnaCita(idCita);
-		
-		if(horaCita=="") {
-			cita.setHoraCita(cita.getHoraCita());
-		}else {
-			cita.setHoraCita(horaCita);
-		}
-		if(estado=="") {
-			cita.setEstado(cita.getEstado());
-		}else {
-			cita.setEstado(estado);
-		}
-		if(direccionCentrosalud=="") {
-			cita.setDireccionCentrosalud(cita.getDireccionCentrosalud());
-		}else {
-			cita.setDireccionCentrosalud(direccionCentrosalud);
-		}
 
-		int result = cdao.editarCita(cita);
+		cita.setFechaCita(fechaCita);
+		cita.setHoraCita(horaCita);
+		cita.setDireccionCentrosalud(direccionCentrosalud);
+		cita.setSintomas(sintomas);
+		cita.setNombreMedico(nombre_medico);
+		cita.setNombrePaciente(nombre);
+		cita.setEstado(estado);
+		cita.setUsuario(dni);
 		
+		int result = cdao.insertUna(cita);
 		if (result == 0) {
-			redir.addFlashAttribute("mensaje", "Ha fallado la edicion de la cita");
-			return "redirect:/";
+			ratt.addFlashAttribute("mensaje", "Ha fallado la edicion del usuario");
+			model.addAttribute("mensaje", "incorreccto");
+			return "redirect:/pedircita";
 		} else {
-			redir.addFlashAttribute("mensaje", "La cita se edito correctamente");
-			return "redirect:/";
+			model.addAttribute("mensaje", "correcto");
+			ratt.addFlashAttribute("mensaje", "correcto");
+			return "redirect:/index";
 		}
 	}
-	
 
 	/**
 	 * Cancela una cita
@@ -593,15 +591,7 @@ public class HomeController {
 		
 		return "redirect:/index";
 	}
-	/**
-	 * acceso a registro
-	 * @param model
-	 * @return
-	 */
-	@GetMapping("/registro")
-	public String mostrarRegistro(Model model) {
-		return "registro";
-	}
+
 	/**
 	 * modificar un usuario
 	 * @param ratt
@@ -615,45 +605,20 @@ public class HomeController {
 	 * @param imgurl
 	 * @return
 	 */
-	@PostMapping("/modificarUsuario")
-	public String modificarUsuario(RedirectAttributes ratt,Model model, @RequestParam("dni") String dni,
+	@PostMapping("/modificarDatosUsuario")
+	public String modificarDatosUsuario(RedirectAttributes ratt,Model model, @RequestParam("dni") String dni,
 			@RequestParam("email") String email,@RequestParam("nombre") String nombre,
 			@RequestParam("apellido") String apellido,@RequestParam("direccion") String direccion,
 			@RequestParam("telefono") String telefono,@RequestParam("imgurl") String imgurl) {
-		System.out.println("A ver que si entra a modificar");
 		Usuario usuario = udao.buscarUsuario(dni);
 		
-		if(dni=="") {
-			usuario.setEmail(usuario.getEmail());
-		}else {
-		usuario.setEmail(email);
-		}
-		if(nombre=="") {
-			usuario.setNombre(usuario.getNombre());
-		}else {
-			usuario.setNombre(nombre);
-		}
-		if(apellido=="") {
-			usuario.setApellido(usuario.getApellido());
-		}else {
-			usuario.setApellido(apellido);
-		}
-		if(direccion=="") {
-			usuario.setDireccion(usuario.getDireccion());
-		}else {
-			usuario.setDireccion(direccion);
-		}
-		if(telefono=="") {
-			usuario.setTelefono(usuario.getTelefono());
-		}else {
-			usuario.setTelefono(telefono);
-		}
-		if(imgurl=="") {
-			usuario.setImgurl(usuario.getImgurl());
-		}else {
-			usuario.setImgurl(imgurl);
-		}
-		System.out.println(usuario);
+		usuario.setEmail(dni == "" ? usuario.getEmail() : email);
+		usuario.setNombre(nombre == "" ? usuario.getNombre() : nombre);
+		usuario.setApellido(apellido == "" ? usuario.getApellido() : apellido);
+		usuario.setDireccion(direccion == "" ? usuario.getDireccion() : direccion);
+		usuario.setTelefono(telefono == "" ? usuario.getTelefono() : telefono);
+		usuario.setImgurl(imgurl == "" ? usuario.getImgurl() : imgurl);
+
 		int result = udao.editarUsuario(usuario);
 
 		if (result == 0) {
@@ -668,67 +633,60 @@ public class HomeController {
 			System.out.println("Usuario editado");
 			return "redirect:/index";
 		}
-		
 	}
 
 	@PostMapping("/modificarInformacion")
 	public String modificarInformacion(RedirectAttributes ratt,Model model, @RequestParam("peso") Integer peso,
 			@RequestParam("altura") String altura, @RequestParam("edad") Integer edad,@RequestParam("sexo") String sexo,
 			@RequestParam("dni") String dni) {
-
-		
-		/*
-		 * 
-		 * Este metodo tiene que insertar un objeto nuevo de tipo informacion si no encuentra buscanolo con el dni
-		 * y si encuentra un usuario editar la nueva informacion del mismo y guardarla
-		 * 
-		 * 
-		 * 
-		 * */
-		
-		
-		System.out.println("A ver que si entra a modificar"+dni);
 		Informacion informacion = idao.buscarInformacion(dni);
-		System.out.println("----Modificar Informacion----");
-		System.out.println(informacion);
-		
 			if(informacion==null){
-				Informacion informacionNuevo = new Informacion();
-				informacionNuevo.setAltura(altura);
-				informacionNuevo.setEdad(edad);
-				informacionNuevo.setPeso(peso);
-				informacionNuevo.setSexo(sexo);
-				informacionNuevo.setUsuario(udao.buscarUsuario(dni));
-				//idao.insertUno(informacionNuevo);
-				model.addAttribute("mensaje", "correcto");
-				ratt.addFlashAttribute("mensaje", "correcto");//no se ven las alertas en el index
-				System.out.println("Informacion editado");
-				idao.editarInformacion(informacionNuevo);
+				Informacion informacionNuevo = new Informacion(udao.buscarUsuario(dni), altura, edad, peso, sexo);
+				
+				int result = idao.editarInformacion(informacionNuevo);
 
+				if (result == 0) {
+					ratt.addFlashAttribute("mensaje", "Ha fallado la edicion del usuario");
+					model.addAttribute("mensaje", "incorreccto");
+					return "redirect:/usuario";
+				} else {
+					model.addAttribute("mensaje", "correcto");
+					ratt.addFlashAttribute("mensaje", "correcto");//no se ven las alertas en el index
+					return "redirect:/index";
+				}
 
-				return "redirect:/index";
-			}		
+			}else {
+				informacion.setUsuario(udao.buscarUsuario(dni));
+				informacion.setAltura(altura);
+				informacion.setEdad(edad);
+				informacion.setPeso(peso);
+				informacion.setSexo(sexo);
+				int result = idao.editarInformacion(informacion);
 
-			informacion.setAltura(altura);
-			informacion.setEdad(edad);
-			informacion.setPeso(peso);
-			informacion.setSexo(sexo);
-			informacion.setUsuario(udao.buscarUsuario(dni));
-			//idao.insertUno(informacionNuevo);
-			model.addAttribute("mensaje", "correcto");
-			ratt.addFlashAttribute("mensaje", "correcto");//no se ven las alertas en el index
-			System.out.println("Informacion editado");
-			idao.editarInformacion(informacion);
-
-
-			return "redirect:/index";
-
+				if (result == 0) {
+					ratt.addFlashAttribute("mensaje", "Hubo un problema al añadir al informacion");
+					model.addAttribute("mensaje", "incorreccto");
+					return "redirect:/usuario";
+				} else {
+					model.addAttribute("mensaje", "La informacion se añadio exitosamente");
+					ratt.addFlashAttribute("mensaje", "correcto");//no se ven las alertas en el index
+					return "redirect:/index";
+				}
+			}
 	}
 	
-
+	/**
+	 * acceso a registro
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/registro")
+	public String mostrarRegistro(Model model) {
+		return "registro";
+	}
+	
 	@PostMapping("/registro")
 	public String procesarRegistro(Model model, Usuario usuario) {
-
 		// Crear usuario con contra cifrada
 		usuario.setEnabled(1);
 		String usuariocontra = usuario.getPassword();
@@ -758,11 +716,6 @@ public class HomeController {
 		}
 		return "redirect:/";
 
-	}
-	@GetMapping("/pedircita")
-	public String mostrarPedirCita(Model model) {
-		System.out.println("entrar mostrar cita");
-		return "cita";
 	}
 
 	@GetMapping("/ayuda")

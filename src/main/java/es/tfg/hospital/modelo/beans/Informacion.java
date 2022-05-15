@@ -33,6 +33,14 @@ public class Informacion implements Serializable {
 	public Informacion() {
 	}
 
+	public Informacion(Usuario usuario, String altura, int edad, int peso, String sexo) {
+		this.usuario = usuario;
+		this.altura = altura;
+		this.edad = edad;
+		this.peso = peso;
+		this.sexo = sexo;
+	}
+	
 	public int getIdInfo() {
 		return this.idInfo;
 	}

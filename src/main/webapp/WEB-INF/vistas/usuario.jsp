@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/img/logo.png" />
     <link rel="stylesheet" href="/css/styleusuario.css" />
+    <title>Hospital</title>
     <style>
       .search label ion-icon {
           position: absolute;
@@ -131,7 +132,7 @@
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <form action="/modificarUsuario" id="from1" method="post">
+                    <form action="/modificarDatosUsuario" id="from1" method="post">
 						<label for="DNI">DNI</label>
                         <input
                           type="text"
