@@ -51,6 +51,8 @@ public class Cita implements Serializable {
 	public Cita() {
 	}
 
+	
+	
 	public int getIdCita() {
 		return this.idCita;
 	}

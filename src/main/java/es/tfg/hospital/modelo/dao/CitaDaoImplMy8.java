@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import es.tfg.hospital.modelo.beans.Cita;
-import es.tfg.hospital.modelo.beans.Informacion;
 import es.tfg.hospital.modelo.repository.CitaRepo;
 
 
@@ -34,6 +32,11 @@ public class CitaDaoImplMy8 implements IntCitaDao{
 		return citarepo.findAll();
 	}
 
+	@Override
+	public List<Cita> buscarCitaPorNombre(String nombrePaciente) {
+		return citarepo.buscarCitaPorNombre(nombrePaciente);
+	}
+	
 	/**
 	 * Crea una nueva cita
 	 */

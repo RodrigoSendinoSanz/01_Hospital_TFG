@@ -181,6 +181,22 @@ public class HomeController {
 		return "/verDetalle";
 	}
 
+	@GetMapping("/buscarCitaPorNombre")
+	public String buscarCitaPorNombre(Model model) {
+		return "todas";
+	}
+	
+	@PostMapping("/buscarCitaPorNombre")
+	public String buscarCitaPorNombre(Model model, HttpSession misesion,@RequestParam("nombre") String nombre ) {
+		System.out.println("!!!!!!!!!!!!!!! "+ nombre);
+		System.out.println("========================  "+ cdao.buscarCitaPorNombre(nombre));
+		List<Cita> citasDelUsaurio= (List<Cita>) misesion.getAttribute("citasDelUsaurio");
+		model.addAttribute("citas",citasDelUsaurio);
+		return "todas";
+		
+		 
+	}
+	
 	/**
 	 * Mostrando todos los libros
 	 * @param model
@@ -705,12 +721,10 @@ public class HomeController {
 
 		if (usu == 0)
 			model.addAttribute("mensaje", "Usuario no insertado");
-
 		else if (usu == 2) {
 			model.addAttribute("mensaje", "Ya existe ese usuario");
 		} else {
 			model.addAttribute("mensaje", "Usuario dado de alta correctamente");
-
 			System.out.println(usuario.getPerfils());
 			System.out.println(new Date());
 		}

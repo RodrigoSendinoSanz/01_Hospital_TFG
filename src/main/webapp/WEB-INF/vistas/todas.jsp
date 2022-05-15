@@ -161,8 +161,8 @@
           </div>
           <div class="search">
             <label>
-              <form action="./verUna.html">
-                  <input type="text" placeholder="Busca tu cita aqui" />
+              <form action="/buscarCitaPorNombre">
+                  <input type="text" name="nombre" placeholder="Busca tu cita aqui" />
                   <ion-icon name="search-outline"></ion-icon>
                   <button type="submit" class="buscar">
                   </button>
@@ -185,15 +185,17 @@
             <table>
               <thead>
                 <tr>
-                  <td>Fecha</td>
-                  <td>Dirección</td>
-                  <td>Estado</td>
-                  <td>Información</td>
+                	<td>Nombre Paciente</td>
+	                <td>Fecha</td>
+	                <td>Dirección</td>
+	                <td>Estado</td>
+	                <td>Información</td>
                 </tr>
               </thead>
               <tbody>
-              <c:forEach var="ele" items="${citas }">
+              <c:forEach var="ele" items="${citas}">
                 <tr>
+                  <td>${ele.nombrePaciente}</td>
                   <td>${ele.fechaCita}</td>
                   <td>${ele.direccionCentrosalud}</td>
                   <td><span class="status ${ele.estado}">${ele.estado}</span></td>

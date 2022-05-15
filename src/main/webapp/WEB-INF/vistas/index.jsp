@@ -132,8 +132,8 @@
           </div>
           <div class="search">
             <label>
-              <form action="/verUna">
-                  <input type="text" placeholder="Busca tu cita aqui" />
+              <form action="/buscarCitaPorNombre" method="post">
+                  <input id="nombre" name="nombre" type="text" placeholder="Busca tu cita aqui" />
                   <ion-icon name="search-outline"></ion-icon>
                   <button type="submit" class="buscar">
                   </button>
