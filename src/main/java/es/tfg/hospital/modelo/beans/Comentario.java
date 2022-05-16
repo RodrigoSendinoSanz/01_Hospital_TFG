@@ -61,4 +61,11 @@ public class Comentario implements Serializable {
 		this.dni2 = dni2;
 	}
 
+	@Override
+	public String toString() {
+		return "Comentario [idCom=" + idCom + ", comentario=" + comentario + ", dni1=" + dni1 + ", dni2=" + dni2 + "]";
+	}
+
+	
+	
 }

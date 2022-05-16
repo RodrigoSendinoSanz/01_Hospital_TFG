@@ -325,7 +325,8 @@
                   
                   
                     <sec:authorize access="hasAuthority('Medico')">
-                    <form action="" id="from3">
+                    <form action="/modificarDiagnostico" id="from3" method="post">
+                    <input id="dni" name="dni" type="hidden" value="${usuario.dni }"/>
                         <label for="alergias">Alergias</label>
                         <input
                           type="text"

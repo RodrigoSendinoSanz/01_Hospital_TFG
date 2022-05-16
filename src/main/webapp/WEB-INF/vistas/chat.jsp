@@ -121,7 +121,7 @@
         <ul>
           <li>
             <a href="/index">
-              <span class="icon"><img src="./img/logo.png" /></span>
+              <span class="icon"><img src="../img/logo.png" /></span>
               <span class="title">
                 <h2>Hospital</h2>
               </span>
@@ -179,7 +179,7 @@
             </a>
           </li>
           <li>
-            <a href="/logout">
+            <a href="/cerrar">
               <span class="icon">
                 <ion-icon name="log-out-outline"></ion-icon>
               </span>
@@ -196,8 +196,8 @@
           </div>
           <div class="search">
             <label>
-              <form action="/verUna">
-                  <input type="text" placeholder="Busca tu cita aqui" />
+              <form action="/buscarCitaPorNombre" method="post">
+                  <input id="nombre" name="nombre" type="text" placeholder="Busca tu cita aqui" />
                   <ion-icon name="search-outline"></ion-icon>
                   <button type="submit" class="buscar">
                   </button>
@@ -219,18 +219,23 @@
             </div>
             <table>
               <tbody>
+              <c:forEach var="chat" items="${mostrarChat}">
+              
                 <div class="cajachat1">
-                  <p class="usuario">Juan:<br /></p>
-                  <div id="mensaje1">Prueba de chat</div>
+                  <p class="usuario">Envia ${chat.dni1}<br /></p>
+                  <p class="usuario">Recibe ${chat.dni2}<br /></p>
+                  <div id="mensaje1">${chat.comentario}</div>
                 </div>
-                <div class="cajachat2">
-                  <p class="usuario">Pepe:<br /></p>
-                  <div id="mensaje2">Prueba chat</div>
-                </div>
+                
+                
+                
+                </c:forEach>
                 <div class="search chat">
                   <label>
-                      <form action="">
-                        <input type="text" placeholder="Escribe aqui tu mensaje" class="cajatexto"/>
+                      <form action="/enviarMensaje" method="post">
+  						<input id="dni1chat" name="dni1chat" type="hidden" value="${dni1chat }"/>
+  						<input id="dni2chat" name="dni2chat" type="hidden" value="${dni2chat }"/>
+                        <input type="text" name="comentario" placeholder="Escribe aqui tu mensaje" class="cajatexto"/>
                         <input type="submit" class="btnblue cajatexto"></input>
                       </form>
                   </label>

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.tfg.hospital.modelo.beans.Cita;
+import es.tfg.hospital.modelo.beans.Comentario;
 import es.tfg.hospital.modelo.beans.Diagnostico;
 import es.tfg.hospital.modelo.beans.HistorialClinico;
 import es.tfg.hospital.modelo.beans.Informacion;
@@ -33,6 +34,7 @@ import es.tfg.hospital.modelo.beans.Medicina;
 import es.tfg.hospital.modelo.beans.Perfil;
 import es.tfg.hospital.modelo.beans.Usuario;
 import es.tfg.hospital.modelo.dao.IntCitaDao;
+import es.tfg.hospital.modelo.dao.IntComentarioDao;
 import es.tfg.hospital.modelo.dao.IntDiagnosticoDao;
 import es.tfg.hospital.modelo.dao.IntHistorialClinicoDao;
 import es.tfg.hospital.modelo.dao.IntInformacionDao;
@@ -66,12 +68,16 @@ public class HomeController {
 	private IntCitaDao cdao;
 	
 	@Autowired
+	private IntComentarioDao comendao;
+	
+	@Autowired
 	private IntMedicinaDao mdao;
 	
 	@Autowired
 	private IntHistorialClinicoDao hdao;
 	
 
+	
 	/**
 	 * Comprobamos si la session del usuario esta guardada
 	 * @param misesion
@@ -158,38 +164,15 @@ public class HomeController {
 			usuario.setOnlineusu(1);
 			udao.editarUsuario(usuario);
 			
-			// Generamos la lista con las novedades respecto a los libros
-			//List<Libro> lista = ldao.buscarNovedades();
-			//model.addAttribute("listaNovedades", lista);
-
-			//model.addAttribute("listaTemas", tdao.buscarTodos());
-			//ArrayList<Libro> listaCarrito = (ArrayList<Libro>) misesion.getAttribute("listaCarrito");
-
-			//misesion.setAttribute("listaCarrito", listaCarrito);
-			//misesion.setAttribute("nombreusuario", aut.getName());
 			return "index";
 		} else {
 			System.out.println("procesar else");
-			model.addAttribute("error", "error");//NO LE LLEGA EL ERROR
-			return "/login";//IMPORTANTE NO MUESTAR LA ALETRA DEL EL ERROR
+			model.addAttribute("error", "error");
+			return "/login";
 		}
 
 	}
 
-	/**
-	 * Ver detalles del libro
-	 * @param model
-	 * @param isbn
-	 * @return
-	 */
-	@GetMapping("/verDetalle/{id}")
-	public String mostrarVerDetalleLibro(Model model, @PathVariable("id") long isbn) {
-		//Libro libro = ldao.buscarLibro(isbn);
-
-		//model.addAttribute("libro", libro);
-
-		return "/verDetalle";
-	}
 
 	@GetMapping("/buscarCitaPorNombre")
 	public String buscarCitaPorNombre(Model model) {
@@ -241,289 +224,6 @@ public class HomeController {
 		return "usuarioVer";
 	}
 	
-
-
-	/**
-	 * Mostrando todos los Temas
-	 * @param model
-	 * @return
-	 */
-	@GetMapping("/cliente/temas")
-	public String mostrarTemas(Model model) {
-
-		//model.addAttribute("listaTemas", tdao.buscarTodos());
-		return "temasTodos";
-	}
-
-	/**
-	 * Mostrando uno de los Temas
-	 * @param model
-	 * @param id
-	 * @return
-	 */
-	@GetMapping("/cliente/tema/{idTema}")
-	public String mostrarlibrosTema(Model model, @PathVariable("idTema") int id) {
-		//model.addAttribute("tema", tdao.buscarTema(id));
-		//model.addAttribute("listaLibrosTema", ldao.buscarporTema(id));
-		return "verTema";
-	}
-
-	/**
-	 * Eliminar Libros
-	 * @param model
-	 * @param isbn
-	 * @return
-	 */
-	@GetMapping("/eliminar/{id}")
-	public String procEliminar(Model model, @PathVariable("id") long isbn) {
-
-		//long i = ldao.eliminarLibro(isbn);
-		//if (i == 0)
-			model.addAttribute("mensaje", "Libro no eliminado");
-		//else {
-//			Volvemos a traer la lista de novedades
-		//	model.addAttribute("listaNovedades", ldao.buscarNovedades());
-			//model.addAttribute("mensaje", "Libro eliminado");
-		//}
-		return "menuPrincipal";
-	}
-
-	@GetMapping("/editar/{id}")
-	public String editarLibro(Model model, @PathVariable("id") long isbn) {
-		//model.addAttribute("libro", ldao.buscarLibro(isbn));
-		return "editarLibro";
-	}
-	/*
-	@PostMapping("/editar")
-	public String procEditarLibro(RedirectAttributes ratt, @RequestParam("isbn") long isbn,
-			@RequestParam("titulo") String titulo,
-			@RequestParam("autor") String autor) {
-
-		Libro libro = ldao.buscarLibro(isbn);
-		libro.setTitulo(titulo);
-		libro.setAutor(autor);
-		libro.setPrecioUnitario(precioUnitario);
-		 
-		int result = ldao.editarLibro(libro);
-
-		if (result == 0) {
-			ratt.addFlashAttribute("mensaje", "Ha fallado la edicion del libro");
-			return "redirect:/";
-		} else {
-			ratt.addFlashAttribute("mensaje", "El libro se ha editado correctamente");
-			return "redirect:/";
-		}
-		
-	}
- 	*/
-	
-	@PostMapping("/cliente/buscar")
-	public String buscarLibro(Model model, @RequestParam("busquedalibro") String busquedalibro) {
-
-		//model.addAttribute("libro", ldao.buscarLibroTitulo(busquedalibro));
-		return "librosBusqueda";
-	}
-
-	@GetMapping("/addCarrito/{id}")
-	public String addCarrito(Model model, @PathVariable("id") long isbn, HttpSession misesion) {
-		/*
-		 Libro addlib = ldao.buscarLibro(isbn);
-
-		System.out.println(addlib);
-
-		System.out.println(misesion.getAttribute("nombreusuario"));
-		Pedido pedido = new Pedido(0,
-				udao.buscarUsuario((String) misesion.getAttribute("nombreusuario")).getDireccion(), "En carrito",
-				new Date(), null, udao.buscarUsuario((String) misesion.getAttribute("nombreusuario")));
-
-		if (misesion.getAttribute("pedidoCarrito") == null) {
-			LineasPedido lp = new LineasPedido(0, 1, new Date(), addlib.getPrecioUnitario(), addlib, pedido);
-
-			List<LineasPedido> listapedido = new ArrayList<>();
-			System.out.println("El isbn es " + isbn);
-			listapedido.add(lp);
-
-			pedido.setLineasPedidos(listapedido);
-
-			model.addAttribute("listaPedido", listapedido);
-			misesion.setAttribute("listaPedido", listapedido);
-			misesion.getAttribute("nombreusuario");
-			model.addAttribute("usuario", misesion.getAttribute("nombreusuario"));
-			model.addAttribute("autorizaciones", misesion.getAttribute("autorizaciones"));
-
-			pedao.insertUno(pedido);
-			int pedidocarrito = pedido.getIdPedido();
-			System.out.println("Este es el pedido " + pedido.toString());
-			misesion.setAttribute("pedidoCarrito", pedidocarrito);
-			lpdao.insertUno(lp);
-		} else {
-			LineasPedido lp = new LineasPedido(0, 1, new Date(), addlib.getPrecioUnitario(), addlib, pedido);
-
-			List<LineasPedido> listapedido = new ArrayList<>();
-
-			listapedido.add(lp);
-
-			pedido.setLineasPedidos(listapedido);
-			System.out.println(
-					"lpdao.buscarIdPedido(pedido.getIdPedido()) ==== " + lpdao.buscarIdPedido(pedido.getIdPedido()));
-			System.out.println("AUX:" + misesion.getAttribute("RegIdPedido"));
-			System.out.println(
-					"lpdaoAux   ====    " + lpdao.buscarIdPedido((int) misesion.getAttribute("pedidoCarrito")));
-			model.addAttribute("listaPedido", lpdao.buscarIdPedido((int) misesion.getAttribute("pedidoCarrito")));
-			misesion.setAttribute("listaPedido", listapedido);
-			misesion.getAttribute("nombreusuario");
-			model.addAttribute("usuario", misesion.getAttribute("nombreusuario"));
-			model.addAttribute("autorizaciones", misesion.getAttribute("autorizaciones"));
-			addlib.setIsbn(isbn);
-			pedido.setIdPedido((int) misesion.getAttribute("pedidoCarrito"));
-			addlib.setIsbn(isbn);
-			int pedidocarrito = pedido.getIdPedido();
-			misesion.setAttribute("pedidoCarrito", pedidocarrito);
-			lpdao.insertUno(lp);
-
-		}
-		 */
-		return "redirect:/verCarrito";
-
-	}
-
-	@GetMapping("/verCarrito")
-	public String verCarrito(Model model, HttpSession misesion) {
-
-		// ArrayList<Libro> carrito = (ArrayList<Libro>)
-		// misesion.getAttribute("listaCarrito");
-
-		// List<LineasPedido> listapedido = (List<LineasPedido>)
-		// misesion.getAttribute("listaPedido");
-		/*
-		if (misesion.getAttribute("pedidoCarrito") == null) {
-
-			return "verCarrito";
-		} else {
- 
-			model.addAttribute("listaPedido", lpdao.buscarIdPedido((int) misesion.getAttribute("pedidoCarrito")));
-			model.addAttribute("usuario", misesion.getAttribute("nombreusuario"));
-			return "verCarrito";
-			
-		}
-		*/
-		return "verCarrito";
-
-	}
-
-
-	@GetMapping("/cliente/comprar/{id}")
-	public String compraLibros(Model model, @PathVariable("id") int numOrden, HttpSession misesion) {
-		/*
-		misesion.getAttribute("listapedido");
-
-		int i = lpdao.editarLineasPedido(lpdao.buscarLineasPedido(numOrden));
-
-		if (i == 0)
-			model.addAttribute("mensaje", "Libro del carrito no eliminado");
-		else {
-//			Volvemos a traer la lista de novedades
-			model.addAttribute("listaNovedades", ldao.buscarNovedades());
-			model.addAttribute("mensaje", "Libro del carrito eliminado");
-			model.addAttribute("usuario", misesion.getAttribute("nombreusuario"));
-		}
-		 		*/
-		return "redirect:/";
-
-	}
-
-	@GetMapping("/eliminarDeCarrito/{id}")
-	public String procEliminarDeCarrito(Model model, @PathVariable("id") int numOrden, HttpSession misesion) {
-/*
-		misesion.getAttribute("listapedido");
-
-		lpdao.buscarLineasPedido(0);
-
-		List<LineasPedido> listapedido = (List<LineasPedido>) misesion.getAttribute("listaPedido");
-
-		int i = lpdao.eliminarPorNumeroOrden(numOrden);
-
-		if (i == 0)
-			model.addAttribute("mensaje", "Libro del carrito no eliminado");
-		else {
-//			Volvemos a traer la lista de novedades
-			model.addAttribute("listaNovedades", ldao.buscarNovedades());
-			model.addAttribute("mensaje", "Libro del carrito eliminado");
-			model.addAttribute("usuario", misesion.getAttribute("nombreusuario"));
-//			listapedido.remove(0);
-		}
-		*/
-		return "menuPrincipal";
-	}
-
-	/**
-	 * Dar de alta un tema
-	 * @return
-	 */
-	@GetMapping("/admon/altaTema")
-	public String mostrarAltaTema() {
-
-		return "altaTema";
-	}
-
-	@PostMapping("/admon/altaTema")
-	public String procesarAltaTema(Model model) {
-
-		/*int reg = tdao.insertUno(tema);
-
-		// Depende si el alta se realiza o no, vamos a mandar un mensaje a la barra de
-		// direcciones
-		// informando de lo que ha pasado.
-		if (reg == 0)
-			model.addAttribute("mensaje", "Tema no insertado");
-		else {
-			model.addAttribute("mensaje", "Tema dado de alta correctamente");
-		}*/
-		return "redirect:/";
-
-	}
-
-	@GetMapping("/admon/altaLibro")
-	public String mostrarAltaLibro(Model model) {
-		//model.addAttribute("listaTemas", tdao.buscarTodos());
-		return "altaLibro";
-	}
-
-	@PostMapping("/admon/altaLibro")
-	public String procesarAltaLibro(Model model,  Usuario usuario) {
-		/*
-		int lib = ldao.insertUno(libro);
-		// Depende si el alta se realiza o no, vamos a mandar un mensaje a la barra de
-		// direcciones
-		// informando de lo que ha pasado.
-
-		if (lib == 0)
-			model.addAttribute("mensaje", "Libro no insertado");
-		else if (lib == 2) {
-			model.addAttribute("mensaje", "Ya existe ese libro");
-		} else {
-			model.addAttribute("mensaje", "Libro dado de alta correctamente");
-		}
-		*/
-		return "redirect:/";
-
-	}
-
-	@GetMapping("/datos/{usuario}")
-	public String mostrarVerDetalleLibro(Model model, @PathVariable("usuario") String usuario, HttpSession misesion) {
-		/*
-		Usuario usuarioDatos = udao.buscarUsuario(usuario);
-		if (misesion.getAttribute("pedidoCarrito") == null) {
-			model.addAttribute("usuarioDatos", usuarioDatos);
-			return "verUsuario";
-		} else {
-			model.addAttribute("listaPedido", lpdao.buscarIdPedido((int) misesion.getAttribute("pedidoCarrito")));
-			model.addAttribute("usuarioDatos", usuarioDatos);
-		 */
-			return "verUsuario";
-		//}
-
-	}
 	/**
 	 * muestra una cita
 	 * @param model
@@ -563,7 +263,6 @@ public class HomeController {
 			@RequestParam("direccionCentrosalud") String direccionCentrosalud, @RequestParam("sintomas") String sintomas,
 			@RequestParam("estado") String estado, @RequestParam("nombreMed") String nombreMed) throws ParseException {
 		
-		System.out.println("oasdoaksdokadokaosdkaoskdoa///////////////////////////&&&&&&&&&&&&");
 		Cita cita= cdao.buscarUnaCita(Integer.parseInt(idCita));
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
 		Date fechaCitaDate = formato.parse(fechaCita);
@@ -573,10 +272,8 @@ public class HomeController {
 		cita.setSintomas(sintomas);
 		cita.setEstado(estado);
 		Medicina medicina= mdao.buscarUnaMedicina(nombreMed);
-		System.out.println("La cita modificada //////////////"+cita);
 		cdao.editarCita(cita);
 		HistorialClinico historialClinico = new HistorialClinico(idCita, estado, cita, medicina);
-		System.out.println("6546546546545465"+historialClinico);
 		int result = hdao.insertUna(historialClinico);
 		
 		if (result == 0) {
@@ -735,6 +432,46 @@ public class HomeController {
 			}
 	}
 	
+	
+	@PostMapping("/modificarDiagnostico")
+	public String modificarDiagnostico(RedirectAttributes ratt,Model model, @RequestParam("alergias") String alergias,
+			@RequestParam("tratamientos") String tratamientos, @RequestParam("operaciones") String operaciones,@RequestParam("enfermedades") String enfermedades,
+			@RequestParam("dni") String dni) {
+		Diagnostico diagnostico = ddao.buscarDiagnostico(dni);
+			if(diagnostico==null) {
+				Diagnostico diagnosticoC = new Diagnostico(alergias, enfermedades, operaciones, tratamientos, udao.buscarUsuario(dni));
+				
+				int result = ddao.insertUno(diagnosticoC);
+
+				if (result == 0) {
+					ratt.addFlashAttribute("mensaje", "Ha fallado la edicion del usuario");
+					model.addAttribute("mensaje", "incorreccto");
+					return "redirect:/usuario";
+				} else {
+					model.addAttribute("mensaje", "correcto");
+					ratt.addFlashAttribute("mensaje", "correcto");//no se ven las alertas en el index
+					return "redirect:/index";
+				}
+
+			}else {
+				diagnostico.setUsuario(udao.buscarUsuario(dni));
+				diagnostico.setAlergias(alergias);
+				diagnostico.setTratamiento(tratamientos);
+				diagnostico.setOperaciones(operaciones);
+				diagnostico.setEnfermedades(enfermedades);
+				int result = ddao.insertUno(diagnostico);
+
+				if (result == 0) {
+					ratt.addFlashAttribute("mensaje", "Hubo un problema al añadir al informacion");
+					model.addAttribute("mensaje", "incorreccto");
+					return "redirect:/usuario";
+				} else {
+					model.addAttribute("mensaje", "La informacion se añadio exitosamente");
+					ratt.addFlashAttribute("mensaje", "correcto");//no se ven las alertas en el index
+					return "redirect:/index";
+				}
+			}
+	}
 	/**
 	 * acceso a registro
 	 * @param model
@@ -800,6 +537,33 @@ public class HomeController {
 		model.addAttribute("listaMedicos",listaMedicos);
 		return "medicos";
 	}
+	
+	
+	@GetMapping("/chat/{dni2}")
+	public String mostrarchat(Model model,HttpSession misesion,@PathVariable String dni2) {
+		List<Comentario> mostrarChat= comendao.mostrarChat((String) misesion.getAttribute("dni"), dni2);
+		model.addAttribute("mostrarChat",mostrarChat);
+		model.addAttribute("dni1chat",(String)misesion.getAttribute("dni"));
+		model.addAttribute("dni2chat", dni2);
+		System.out.println(mostrarChat);
+		return "chat";
+	}
+	
+	@PostMapping("/enviarMensaje")
+	public String enviarmensaje(Model model,HttpSession misesion, @RequestParam("dni1chat") String dni1chat,
+			@RequestParam("dni2chat") String dni2chat,  @RequestParam("comentario") String comentario) {
+		List<Comentario> mostrarChat= comendao.mostrarChat((String) misesion.getAttribute("dni"), "789");
+		Comentario comentarioC = new Comentario();
+		comentarioC.setDni1(dni1chat);
+		comentarioC.setDni2(dni2chat);
+		comentarioC.setComentario(comentario);
+		System.out.println("Holaaaa /// "+comentarioC);
+		comendao.enviarComentario(comentarioC);
+
+		model.addAttribute("mostrarChat",mostrarChat);
+		return "chat";
+	}
+	
 	
 	@GetMapping("/todas")
 	public String mostrarTodas(Model model,HttpSession misesion) {

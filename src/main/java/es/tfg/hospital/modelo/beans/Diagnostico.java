@@ -33,6 +33,16 @@ public class Diagnostico implements Serializable {
 	public Diagnostico() {
 	}
 
+	public Diagnostico( String alergias, String enfermedades, String operaciones, String tratamiento,
+			Usuario usuario) {
+		this.alergias = alergias;
+		this.enfermedades = enfermedades;
+		this.operaciones = operaciones;
+		this.tratamiento = tratamiento;
+		this.usuario = usuario;
+	}
+
+
 	public int getIdDiag() {
 		return this.idDiag;
 	}

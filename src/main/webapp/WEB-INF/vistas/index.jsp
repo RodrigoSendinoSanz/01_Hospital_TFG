@@ -279,7 +279,7 @@
                  <c:forEach var="usu" items="${ListUsuCone}"> 
 						 <tr>
 			                  <td width="60px">
-			                    <div class="imgBx"><a href="/chat"><img src="${usu.imgurl }" alt="icono" /></a></div>
+			                    <div class="imgBx"><a href="/chat/${usu.dni }"><img src="${usu.imgurl }" alt="icono" /></a></div>
 			                  </td>
 			                  <td>
 			                    <h4>${usu.nombre } <br /><span>${usu.apellido }</span></h4>

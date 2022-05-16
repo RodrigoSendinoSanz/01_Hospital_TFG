@@ -210,7 +210,8 @@
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <form action="" id="from2">
+                    <form action="/modificarInformacion" id="from2" method="post">
+                      <input id="dni" name="dni" type="hidden" value="${usuariover.dni }"/>
                       <td>
                         <input
                           type="number"
@@ -280,7 +281,8 @@
               <table>
                 <tbody>
                   <tr>
-                    <form action="" id="from3">
+                    <form action="/modificarDiagnostico" id="from3" method="post">
+                      <input id="dni" name="dni" type="hidden" value="${usuariover.dni }"/>
                       <td>
                         <input
                           type="text"
@@ -375,69 +377,6 @@
         this.classList.add("hovered");
       }
       list.forEach((item) => item.addEventListener("mouseover", activeLink));
-
-      document.querySelector("#from1").addEventListener("submit", function (e) {
-        var form = this;
-
-        e.preventDefault();
-
-        Swal.fire({
-          title: "¿Quieres guardar los cambios?",
-          showDenyButton: true,
-          showCancelButton: true,
-          confirmButtonText: "Guardar",
-          denyButtonText: `No guardar`,
-        }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            Swal.fire("Guardado!", "", "success");
-          } else if (result.isDenied) {
-            Swal.fire("Los cambios no se han gurdado", "", "info");
-          }
-        });
-      });
-
-      document.querySelector("#from2").addEventListener("submit", function (e) {
-        var form = this;
-
-        e.preventDefault();
-
-        Swal.fire({
-          title: "¿Quieres guardar los cambios?",
-          showDenyButton: true,
-          showCancelButton: true,
-          confirmButtonText: "Guardar",
-          denyButtonText: `No guardar`,
-        }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            Swal.fire("Guardado!", "", "success");
-          } else if (result.isDenied) {
-            Swal.fire("Los cambios no se han gurdado", "", "info");
-          }
-        });
-      });
-
-      document.querySelector("#from3").addEventListener("submit", function (e) {
-        var form = this;
-
-        e.preventDefault();
-
-        Swal.fire({
-          title: "¿Quieres guardar los cambios?",
-          showDenyButton: true,
-          showCancelButton: true,
-          confirmButtonText: "Guardar",
-          denyButtonText: `No guardar`,
-        }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            Swal.fire("Guardado!", "", "success");
-          } else if (result.isDenied) {
-            Swal.fire("Los cambios no se han gurdado", "", "info");
-          }
-        });
-      });
 
       /*Cambiar el atributo del nombre segun el valor de select*/
       let select = document.querySelector("#select");
