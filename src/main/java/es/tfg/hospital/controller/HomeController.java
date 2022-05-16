@@ -188,9 +188,7 @@ public class HomeController {
 	
 	@PostMapping("/buscarCitaPorNombre")
 	public String buscarCitaPorNombre(Model model, HttpSession misesion,@RequestParam("nombre") String nombre ) {
-		System.out.println("!!!!!!!!!!!!!!! "+ nombre);
-		System.out.println("========================  "+ cdao.buscarCitaPorNombre(nombre));
-		List<Cita> citasDelUsaurio= (List<Cita>) misesion.getAttribute("citasDelUsaurio");
+		List<Cita> citasDelUsaurio= (List<Cita>) cdao.buscarCitaPorNombre(nombre);
 		model.addAttribute("citas",citasDelUsaurio);
 		return "todas";
 		

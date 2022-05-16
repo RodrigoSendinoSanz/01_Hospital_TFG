@@ -149,6 +149,15 @@ public class Cita implements Serializable {
 
 
 
+	@Override
+	public String toString() {
+		return "Cita [idCita=" + idCita + ", direccionCentrosalud=" + direccionCentrosalud + ", estado=" + estado
+				+ ", fechaCita=" + fechaCita + ", horaCita=" + horaCita + ", nombreMedico=" + nombreMedico
+				+ ", nombrePaciente=" + nombrePaciente + ", sintomas=" + sintomas + "]";
+	}
+
+
+
 	
 	
 }
