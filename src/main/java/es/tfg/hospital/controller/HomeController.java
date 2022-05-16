@@ -34,6 +34,7 @@ import es.tfg.hospital.modelo.beans.Perfil;
 import es.tfg.hospital.modelo.beans.Usuario;
 import es.tfg.hospital.modelo.dao.IntCitaDao;
 import es.tfg.hospital.modelo.dao.IntDiagnosticoDao;
+import es.tfg.hospital.modelo.dao.IntHistorialClinicoDao;
 import es.tfg.hospital.modelo.dao.IntInformacionDao;
 import es.tfg.hospital.modelo.dao.IntMedicinaDao;
 import es.tfg.hospital.modelo.dao.IntPerfilDao;
@@ -66,6 +67,9 @@ public class HomeController {
 	
 	@Autowired
 	private IntMedicinaDao mdao;
+	
+	@Autowired
+	private IntHistorialClinicoDao hdao;
 	
 
 	/**
@@ -548,7 +552,6 @@ public class HomeController {
 		
 		List<Medicina> medicinaLista = new ArrayList<Medicina>();
 		medicinaLista=mdao.buscarTodasMedicinas();
-		
 		model.addAttribute("cita", cita);
 		model.addAttribute("medicinaLista", medicinaLista);
 		return "editarUna";
@@ -566,17 +569,18 @@ public class HomeController {
 		cita.setSintomas(sintomas);
 		cita.setEstado(estado);
 		Medicina medicina= new Medicina();
+		System.out.println(cita);
+		cdao.editarCita(cita);
 		medicina.setNombreMed(nombreMed);
 		HistorialClinico historialClinico = new HistorialClinico(idCita, estado, cita, medicina);
+		System.out.println("6546546546545465"+historialClinico);
+		int result = hdao.insertUna(historialClinico);
 		
-		int result = cdao.insertUna(historialClinico);
 		if (result == 0) {
-			ratt.addFlashAttribute("mensaje", "Ha fallado la edicion del usuario");
 			model.addAttribute("mensaje", "incorreccto");
-			return "redirect:/pedircita";
+			return "redirect:/editarUna";
 		} else {
 			model.addAttribute("mensaje", "correcto");
-			ratt.addFlashAttribute("mensaje", "correcto");
 			return "redirect:/index";
 		}
 	}
@@ -814,10 +818,12 @@ public class HomeController {
 	 */
 	@GetMapping("/historialclinico")
 	public String mostrarHistorial(Model model,HttpSession misesion) {
-		model.addAttribute("historial", "Rellenar");
+		model.addAttribute("historial", hdao.buscarHistorialClinicoPordni((String) misesion.getAttribute("dni")));
 		return "historial";
 	}
 
+	
+	
 	/**
 	 * nos devuelve la pagina de todoschat
 	 * @param model

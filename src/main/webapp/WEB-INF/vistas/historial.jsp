@@ -195,8 +195,8 @@
                 </tr>
               </thead>
               <tbody>
-              <c:forEach var="ele" items="${historial }">
                 <tr>
+            	  <c:forEach var="ele" items="${historial}">
                   <td>${ele.cita.fechaCita }</td>
                   <td>${ele.cita.direccionCentrosalud }</td>
                   <td>${ele.cita.sintomas }</td>
@@ -204,8 +204,8 @@
                   <td>${ele.medicina.nombreMed }</td>
                   <td>${ele.medicina.tipo.descripcion }</td>
                   <td>${ele.instrucciones }</td>
+               		</c:forEach> 
                 </tr>
-               </c:forEach> 
               </tbody>
             </table>
           </div>
