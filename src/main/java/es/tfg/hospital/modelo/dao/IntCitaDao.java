@@ -6,7 +6,7 @@ import es.tfg.hospital.modelo.beans.Cita;
 
 public interface IntCitaDao {
 	List<Cita> buscarCitas(String dni);
-	List<Cita>buscarTodos();
+	List<Cita> buscarTodos();
 	int insertUna(Cita cita);
 	Cita buscarUnaCita(int idCita);
 	List<Cita> buscarCitasPorMedico(String dni);

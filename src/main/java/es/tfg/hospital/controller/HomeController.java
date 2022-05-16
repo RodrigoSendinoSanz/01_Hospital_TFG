@@ -28,11 +28,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.tfg.hospital.modelo.beans.Cita;
 import es.tfg.hospital.modelo.beans.Diagnostico;
 import es.tfg.hospital.modelo.beans.Informacion;
+import es.tfg.hospital.modelo.beans.Medicina;
 import es.tfg.hospital.modelo.beans.Perfil;
 import es.tfg.hospital.modelo.beans.Usuario;
 import es.tfg.hospital.modelo.dao.IntCitaDao;
 import es.tfg.hospital.modelo.dao.IntDiagnosticoDao;
 import es.tfg.hospital.modelo.dao.IntInformacionDao;
+import es.tfg.hospital.modelo.dao.IntMedicinaDao;
 import es.tfg.hospital.modelo.dao.IntPerfilDao;
 import es.tfg.hospital.modelo.dao.IntUsuarioDao;
 
@@ -60,6 +62,9 @@ public class HomeController {
 	
 	@Autowired
 	private IntCitaDao cdao;
+	
+	@Autowired
+	private IntMedicinaDao mdao;
 	
 
 	/**
@@ -541,7 +546,12 @@ public class HomeController {
 		public String mostrarEditar(Model model,@PathVariable int id) {
 		Cita cita= new Cita();
 		cita=cdao.buscarUnaCita(id);
+		
+		List<Medicina> medicinaLista = new ArrayList<Medicina>();
+		medicinaLista=mdao.buscarTodasMedicinas();
+		
 		model.addAttribute("cita", cita);
+		model.addAttribute("medicinaLista", medicinaLista);
 		return "editarUna";
 		}
 	

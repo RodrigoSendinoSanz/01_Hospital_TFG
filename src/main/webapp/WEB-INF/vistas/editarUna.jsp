@@ -184,10 +184,19 @@
                         </select>
                       </td>
                       <td>
+                        <select name="medicina" id="select">
+                          <c:forEach var="ele" items="${medicinaLista }">
+                          	<option value="${ele.nombreMed }">${ele.nombreMed }</option>
+                           </c:forEach>  
+                        </select>
+                      </td>
+                      
+                      
+                      <td>
                         <input
                           type="submit"
                           class="btnMas"
-                          value="Actualizar"
+                          value="Finalizar"
                         />
                       </td>
                     </form>
