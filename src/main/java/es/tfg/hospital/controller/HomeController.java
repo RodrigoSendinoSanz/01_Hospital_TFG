@@ -788,7 +788,9 @@ public class HomeController {
 	}
 	
 	@GetMapping("/medicinas")
-	public String mostrarMedicinas(Model model) {
+	public String mostrarMedicinas(Model model, HttpSession misesion) {
+		List<Medicina> listaMedicina= mdao.buscarMedicinasUsuario((String) misesion.getAttribute("dni"));
+		model.addAttribute("listaMedicina",listaMedicina);
 		return "medicinas";
 	}
 	

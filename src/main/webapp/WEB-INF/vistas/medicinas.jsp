@@ -182,13 +182,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Nombre</td>
-                  <td>12</td>
-                  <td>2022-06-12</td>
-                  <td>2023-04-24</td>
-                  <td>Nombre tipo</td>
-                </tr>
+              	<c:forEach var="ele" items="${listaMedicina}">
+	                <tr>
+	                  <td>${ele.nombreMed}</td>
+	                  <td>${ele.cantidad}</td>
+	                  <td>${ele.fechaInicio}</td>
+	                  <td>${ele.fechaFin}</td>
+	                  <td>${ele.tipo.descripcion}</td>
+	                </tr>
+                </c:forEach>
               </tbody>
             </table>
           </div>

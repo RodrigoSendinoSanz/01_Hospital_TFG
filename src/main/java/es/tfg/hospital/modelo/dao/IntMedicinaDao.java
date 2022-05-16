@@ -9,4 +9,5 @@ public interface IntMedicinaDao {
 
 	List<Medicina> buscarTodasMedicinas();
 	Medicina buscarUnaMedicina(String nombreMed);
+	List<Medicina> buscarMedicinasUsuario(String dni);
 }

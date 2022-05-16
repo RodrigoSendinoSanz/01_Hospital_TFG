@@ -25,6 +25,11 @@ public class MedicinaDaoImplMy8 implements IntMedicinaDao {
 		// TODO Auto-generated method stub
 		return medirepo.buscarUnaMedicina(nombreMed);
 	}
+
+	@Override
+	public List<Medicina> buscarMedicinasUsuario(String dni) {
+		return medirepo.buscarMedicinasUsuario(dni);
+	}
 	
 	
 }
