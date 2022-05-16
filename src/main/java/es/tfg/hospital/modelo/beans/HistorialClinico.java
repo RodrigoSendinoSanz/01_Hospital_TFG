@@ -35,6 +35,15 @@ public class HistorialClinico implements Serializable {
 
 	public HistorialClinico() {
 	}
+	
+	public HistorialClinico(String desCitahis, String instrucciones, Cita cita, Medicina medicina) {
+		this.desCitahis = desCitahis;
+		this.instrucciones = instrucciones;
+		this.cita = cita;
+		this.medicina = medicina;
+	}
+
+
 
 	public int getIdHistorial() {
 		return this.idHistorial;

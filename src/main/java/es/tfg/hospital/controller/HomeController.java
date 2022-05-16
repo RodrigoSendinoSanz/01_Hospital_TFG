@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.tfg.hospital.modelo.beans.Cita;
 import es.tfg.hospital.modelo.beans.Diagnostico;
+import es.tfg.hospital.modelo.beans.HistorialClinico;
 import es.tfg.hospital.modelo.beans.Informacion;
 import es.tfg.hospital.modelo.beans.Medicina;
 import es.tfg.hospital.modelo.beans.Perfil;
@@ -196,8 +197,6 @@ public class HomeController {
 		List<Cita> citasDelUsaurio= (List<Cita>) cdao.buscarCitaPorNombre(nombre);
 		model.addAttribute("citas",citasDelUsaurio);
 		return "todas";
-		
-		 
 	}
 	
 	/**
@@ -555,8 +554,37 @@ public class HomeController {
 		return "editarUna";
 		}
 	
+	@PostMapping("/editarUna")
+	public String editarUna(Model model, @RequestParam("idCita") String idCita,
+			@RequestParam("fechaCita") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaCita,
+			@RequestParam("horaCita") String horaCita, @RequestParam("direccionCentrosalud") String direccionCentrosalud, 
+			@RequestParam("sintomas") String sintomas, @RequestParam("estado") String estado, @RequestParam("nombreMed") String nombreMed) {
+		Cita cita= new Cita();
+		cita.setFechaCita(fechaCita);
+		cita.setHoraCita(horaCita);
+		cita.setDireccionCentrosalud(direccionCentrosalud);
+		cita.setSintomas(sintomas);
+		cita.setEstado(estado);
+		Medicina medicina= new Medicina();
+		medicina.setNombreMed(nombreMed);
+		HistorialClinico historialClinico = new HistorialClinico(idCita, estado, cita, medicina);
+		
+		int result = cdao.insertUna(historialClinico);
+		if (result == 0) {
+			ratt.addFlashAttribute("mensaje", "Ha fallado la edicion del usuario");
+			model.addAttribute("mensaje", "incorreccto");
+			return "redirect:/pedircita";
+		} else {
+			model.addAttribute("mensaje", "correcto");
+			ratt.addFlashAttribute("mensaje", "correcto");
+			return "redirect:/index";
+		}
+	}
+	
 	@GetMapping("/pedircita")
 	public String mostrarPedirCita(Model model) {
+		List<Usuario> listaDeMedicos = new ArrayList<Usuario>(udao.listaMedicos());
+		model.addAttribute("listaDeMedicos",listaDeMedicos);
 		return "cita";
 	}
 
@@ -586,6 +614,7 @@ public class HomeController {
 		cita.setNombrePaciente(nombre);
 		cita.setEstado(estado);
 		cita.setUsuario(dni);
+		
 		
 		int result = cdao.insertUna(cita);
 		if (result == 0) {

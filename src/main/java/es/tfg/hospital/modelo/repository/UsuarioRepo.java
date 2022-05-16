@@ -21,6 +21,9 @@ public interface UsuarioRepo extends JpaRepository<Usuario, String>{
 	@Query("select u from Usuario u inner join u.perfils p where p.idPerfil=2 and u.dni != ?1")
 	List<Usuario> mostrarMedicos(String dni);
 	
+	@Query("select u from Usuario u inner join u.perfils p where p.idPerfil=2")
+	List<Usuario> listaMedicos();
+	
 	@Query("select u from Usuario u inner join u.perfils p where p.idPerfil=1")
 	List<Usuario> mostrarPacientes();
 	

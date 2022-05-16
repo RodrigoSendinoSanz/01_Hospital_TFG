@@ -130,7 +130,11 @@ public class UsuarioDaoImplMy8 implements IntUsuarioDao{
 		return urepo.mostrarMedicos(dni);
 	}
 
-			
+	@Override
+	public List<Usuario> listaMedicos() {
+		// TODO Auto-generated method stub
+		return urepo.listaMedicos();
+	}
 
 	}
 

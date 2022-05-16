@@ -15,6 +15,7 @@ public interface IntUsuarioDao {
 	List<Usuario>buscarMedicos(String dni);
 	List<Usuario> buscarConectados(String dni);
 	List<Usuario> buscarPacientes();
+	List<Usuario> listaMedicos();
 	Integer contarMedicos();
 	int insertUno(Usuario usuario);
 	public void cambioContraseña(String nuevaContraseña, String id);

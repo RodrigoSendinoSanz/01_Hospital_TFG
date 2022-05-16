@@ -189,9 +189,9 @@
                       <td>
                         <label for="nombre_medico">Médico
                           <select name="nombre_medico" required>
-                            <option value="med123">Médico bien</option>
-                            <option value="Medico1">Médico 2</option>
-                            <option value="Medico2">Médico 3</option>
+	                        <c:forEach var="m" items="${listaDeMedicos}">
+                          		<option value="${m.nombre}">${m.nombre}</option>
+                            </c:forEach> 
                           </select>
                         </label>
                       </td>

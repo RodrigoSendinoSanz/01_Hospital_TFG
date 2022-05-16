@@ -276,7 +276,7 @@
             </div>
             <table>
               <tbody>
-                 <c:forEach var="usu" items="${ListUsuCone }"> 
+                 <c:forEach var="usu" items="${ListUsuCone}"> 
 						 <tr>
 			                  <td width="60px">
 			                    <div class="imgBx"><a href="/chat"><img src="${usu.imgurl }" alt="icono" /></a></div>
@@ -286,7 +286,6 @@
 			                  </td>
 		                </tr>
 				</c:forEach>
-                
               </tbody>
             </table>
           </div>
