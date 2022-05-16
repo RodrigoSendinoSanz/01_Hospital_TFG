@@ -559,19 +559,22 @@ public class HomeController {
 	
 	@PostMapping("/editarUna")
 	public String editarUna(Model model, @RequestParam("idCita") String idCita,
-			@RequestParam("fechaCita") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaCita,
-			@RequestParam("horaCita") String horaCita, @RequestParam("direccionCentrosalud") String direccionCentrosalud, 
-			@RequestParam("sintomas") String sintomas, @RequestParam("estado") String estado, @RequestParam("nombreMed") String nombreMed) {
-		Cita cita= new Cita();
-		cita.setFechaCita(fechaCita);
+			@RequestParam("fechaCita") String fechaCita,@RequestParam("horaCita") String horaCita, 
+			@RequestParam("direccionCentrosalud") String direccionCentrosalud, @RequestParam("sintomas") String sintomas,
+			@RequestParam("estado") String estado, @RequestParam("nombreMed") String nombreMed) throws ParseException {
+		
+		System.out.println("oasdoaksdokadokaosdkaoskdoa///////////////////////////&&&&&&&&&&&&");
+		Cita cita= cdao.buscarUnaCita(Integer.parseInt(idCita));
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+		Date fechaCitaDate = formato.parse(fechaCita);
 		cita.setHoraCita(horaCita);
+		cita.setFechaCita(fechaCitaDate);
 		cita.setDireccionCentrosalud(direccionCentrosalud);
 		cita.setSintomas(sintomas);
 		cita.setEstado(estado);
-		Medicina medicina= new Medicina();
-		System.out.println(cita);
+		Medicina medicina= mdao.buscarUnaMedicina(nombreMed);
+		System.out.println("La cita modificada //////////////"+cita);
 		cdao.editarCita(cita);
-		medicina.setNombreMed(nombreMed);
 		HistorialClinico historialClinico = new HistorialClinico(idCita, estado, cita, medicina);
 		System.out.println("6546546546545465"+historialClinico);
 		int result = hdao.insertUna(historialClinico);

@@ -142,8 +142,8 @@
                       <td>
                         <input
                         type="text"
-                        name="fecha"
-                        id="fecha"
+                        name="fechaCita"
+                        id="fechaCita"
                         placeholder="${cita.fechaCita }"
                         value="${cita.fechaCita }"
                         />
@@ -151,8 +151,8 @@
                       <td>
                         <input
                         type="text"
-                        name="hora"
-                        id="hora"
+                        name="horaCita"
+                        id="horaCita"
                         placeholder="${cita.horaCita }"
                         value="${cita.horaCita }"
                         />
@@ -160,8 +160,8 @@
                       <td>
                         <input
                         type="text"
-                        name="direccion"
-                        id="direccion"
+                        name="direccionCentrosalud"
+                        id="direccionCentrosalud"
                         placeholder="${cita.direccionCentrosalud }"
                         value="${cita.direccionCentrosalud }"
                         />
@@ -184,7 +184,7 @@
                         </select>
                       </td>
                       <td>
-                        <select name="medicina" id="select">
+                        <select name="nombreMed" id="select">
                           <c:forEach var="ele" items="${medicinaLista }">
                           	<option value="${ele.nombreMed }">${ele.nombreMed }</option>
                            </c:forEach>  
@@ -239,7 +239,7 @@
       }
       list.forEach((item) => item.addEventListener("mouseover", activeLink));
 
-      document.querySelector("#form1").addEventListener("submit", function (e) {
+      /*document.querySelector("#form1").addEventListener("submit", function (e) {
         var form = this;
 
         e.preventDefault();
@@ -250,30 +250,18 @@
           confirmButtonText: "Editar",
           denyButtonText: `No cancelar`,
         }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
+          /* Read more about isConfirmed, isDenied below 
           if (result.isConfirmed) {
             Swal.fire("Cita Editada!", "", "success");
-            e.submit();
+            document.querySelector("#from1").submit();
           } else if (result.isDenied) {
             Swal.fire("La cita no se ha editado", "", "info");
           }
         });
-      });
+      });*/
 
-      /*Cambiar el atributo del nombre segun el valor de select*/
-      let select = document.querySelector("#select");
-      let icono = document.querySelector("#icono");
-      let option = document.querySelector("option");
 
-      select.onchange = function () {
-        if (this.value == "masculino") {
-          icono.setAttribute("name", "male-outline");
-        } else if (this.value == "femenino") {
-          icono.setAttribute("name", "female-outline");
-        } else if (this.value == "intersex") {
-          icono.setAttribute("name", "male-female-outline");
-        }
-      };
+ 
     </script>
   </body>
 </html>

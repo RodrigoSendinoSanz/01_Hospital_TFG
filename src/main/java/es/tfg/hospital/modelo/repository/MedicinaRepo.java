@@ -13,4 +13,6 @@ public interface MedicinaRepo  extends JpaRepository<Medicina, Integer> {
 	@Query("select m from Medicina m")
 	List<Medicina> todasMedicinas();
 	
+	@Query("select m from Medicina m where nombreMed = ?1")
+	Medicina buscarUnaMedicina(String nombreMed);
 }
