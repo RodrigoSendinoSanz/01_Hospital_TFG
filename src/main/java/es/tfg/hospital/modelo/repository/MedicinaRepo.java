@@ -15,6 +15,9 @@ public interface MedicinaRepo  extends JpaRepository<Medicina, Integer> {
 	Medicina buscarUnaMedicina(String nombreMed);
 	
 		
-	@Query("select m from Medicina m inner join HistorialClinico h ON m.codMed = h.medicina.codMed inner join Cita c ON c.usuario.dni = ?1")
+	
+	
+	
+	@Query("SELECT m FROM Medicina m WHERE m.codMed IN (SELECT h.medicina.codMed FROM HistorialClinico h WHERE h.cita.idCita IN ( SELECT c.idCita FROM Cita c WHERE c.usuario.dni = ?1)) AND ACTIVO ='SI'")
 	public List<Medicina> buscarMedicinasUsuario(String dni);
 }

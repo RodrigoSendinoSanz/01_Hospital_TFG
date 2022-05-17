@@ -449,6 +449,7 @@ public class HomeController {
 					return "redirect:/usuario";
 				} else {
 					model.addAttribute("mensaje", "correcto");
+					System.out.println("Bien 1");
 					ratt.addFlashAttribute("mensaje", "correcto");//no se ven las alertas en el index
 					return "redirect:/index";
 				}
@@ -459,14 +460,16 @@ public class HomeController {
 				diagnostico.setTratamiento(tratamientos);
 				diagnostico.setOperaciones(operaciones);
 				diagnostico.setEnfermedades(enfermedades);
-				int result = ddao.insertUno(diagnostico);
-
+				System.out.println(diagnostico);
+				int result = ddao.editarDiagnostico(diagnostico);
+				System.out.println(result);
 				if (result == 0) {
 					ratt.addFlashAttribute("mensaje", "Hubo un problema al añadir al informacion");
 					model.addAttribute("mensaje", "incorreccto");
 					return "redirect:/usuario";
 				} else {
 					model.addAttribute("mensaje", "La informacion se añadio exitosamente");
+					System.out.println("Bien 2");
 					ratt.addFlashAttribute("mensaje", "correcto");//no se ven las alertas en el index
 					return "redirect:/index";
 				}
@@ -599,7 +602,9 @@ public class HomeController {
 	 * @return
 	 */
 	@GetMapping("/todoschat")
-	public String mostrarTodoschat(Model model) {
+	public String mostrarTodoschat(Model model,HttpSession misesion) {
+		List<Usuario> ListUsuCone= udao.buscarConectados((String) misesion.getAttribute("dni"));
+		model.addAttribute("ListUsuCone",ListUsuCone);
 		return "todoschat";
 	}
 

@@ -467,7 +467,7 @@
       
             var noticias = document.querySelector("#noticias");
             var noticiasTitulo = document.querySelector(".titulonoticas");
-      /*---------- Descomentar para las noticias
+
             const options = {
               method: 'GET',
               url: 'https://free-news.p.rapidapi.com/v1/search',
@@ -477,7 +477,7 @@
                 'x-rapidapi-host': 'free-news.p.rapidapi.com'
               }
             };
-      ----------- Descomentar para las noticias */
+
             axios.request(options).then(function (response) {
             console.log(response.data.articles);
             if(response.status == "error"){

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.tfg.hospital.modelo.beans.Diagnostico;
+import es.tfg.hospital.modelo.beans.Informacion;
 import es.tfg.hospital.modelo.repository.DiagnosticoRepo;
 
 @Service
@@ -52,4 +53,19 @@ public class DiagnosticoDaoImplMy8 implements IntDiagnosticoDao{
 		return filas;
 	}
 
+	
+	@Override
+	public int editarDiagnostico(Diagnostico diagnostico) {
+
+		int filas=0;
+		try {
+			diarepo.save(diagnostico);
+			filas=1;
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return filas;
+
+	}
 }
