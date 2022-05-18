@@ -43,14 +43,10 @@ import es.tfg.hospital.modelo.dao.IntPerfilDao;
 import es.tfg.hospital.modelo.dao.IntUsuarioDao;
 
 @Controller
-//@RequestMapping("/pruebas")
 public class HomeController {
 
 	@Autowired
 	private PasswordEncoder pwenco;
-
-	//@Autowired
-	//private IntLibroDao ldao;
 	
 	@Autowired
 	private IntUsuarioDao udao;
