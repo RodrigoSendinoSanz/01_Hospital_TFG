@@ -151,6 +151,7 @@ Las guías de estilo, también denominadas libros de estilo, hacen referencia en
 Tipografia: 'Poppins', sans-serif;
 font-size: 2em
 font-weight: 500
+
 **Estilo de cajas:**
 border-radius: 20px
 box-shadow: 0 7px 25px rgb(0 0 0 / 8%)
