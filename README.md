@@ -200,7 +200,7 @@ Tambien podemos utilizar Heroku como esplicamos en el pdf
 ## MemoriaTFG
 
 <a heref="https://github.com/RodrigoSendinoSanz/01_Hospital_TFG/tree/main/MemoriaTFG">Ir a la memoría</a>
-<a href="https://github.com/RodrigoSendinoSanz/01_Hospital_TFG/tree/main/MemoriaTFG">[PDF]</a>
+<a href="https://github.com/RodrigoSendinoSanz/01_Hospital_TFG/blob/main/MemoriaTFG/Trabajo%20fin%20de%20grado2022-Ignacio%20Viseras%20Riego%20-%20Rodrigo%20Sendino%20Sanz.pdf">[PDF]</a>
 
 
 Creado por/Created by: 
