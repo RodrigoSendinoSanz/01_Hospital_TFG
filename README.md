@@ -197,19 +197,8 @@ Tambien podemos utilizar Heroku como esplicamos en el pdf
 ----------
 
 
-## Conclusiones
-Rellenar
-----------
+## <a heref="https://github.com/RodrigoSendinoSanz/01_Hospital_TFG/tree/main/MemoriaTFG">MemoriaTFG</a>
 
-
-## Bibliografía
-Rellenar
-----------
-
-
-# Anexos
-Rellenar
-----------
 
 
 
