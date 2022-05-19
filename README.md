@@ -200,6 +200,7 @@ Tambien podemos utilizar Heroku como esplicamos en el pdf
 ## MemoriaTFG
 
 <a heref="https://github.com/RodrigoSendinoSanz/01_Hospital_TFG/tree/main/MemoriaTFG">Ir a la memoría</a>
+<a href="https://github.com/RodrigoSendinoSanz/01_Hospital_TFG/tree/main/MemoriaTFG">[PDF]</a>
 
 
 Creado por/Created by: 
