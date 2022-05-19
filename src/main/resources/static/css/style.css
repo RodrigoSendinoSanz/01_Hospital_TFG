@@ -637,6 +637,7 @@ article{
         left: initial;
         color: var(--white)
     }
+	
 }
 
 @media (max-width: 480px){
@@ -649,7 +650,9 @@ article{
         overflow: hidden;
         cursor: pointer;
     }
-    
+    .infoheader .caja {
+    	width: 70%;
+    }
 
 }
 
