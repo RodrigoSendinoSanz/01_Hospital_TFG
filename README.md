@@ -125,7 +125,7 @@ JavaScript es el lenguaje de programación encargado de dotar de mayor interacti
 ## Fases del Proyecto
 Esta sección expondremos los diferentes ciclos que ha tenido el proyecto:
 
-#### Idea
+#### La idea
 El equipo, después de pensar varias ideas para realizar su trabajo fin de grado (TFG). Nos surgen algunas ideas, las cuales eran montar un blog donde usuario intercambien información sobre diversos temas o una web de un restaurante de comida. Después de meditarlo optamos por realizar un proyecto que auné estos conceptos y sea algo actual, por lo que se opto por realizar una aplicación web de gestión medica.
 #### Casos de Uso 
 El diagrama de casos de uso es una forma de diagrama de comportamiento en lenguaje de modelado unificado (UML, del inglés Unified Modelling Language), con la que se representan procesos empresariales, así como sistemas y procesos de programación orientada a objetos.
